@@ -8,6 +8,7 @@ import i18n from './i18n/i18n'; // 国际化
 
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
+import "./assets/css/base.css";
 Vue.use(Element)
 
 Vue.config.productionTip = false

@@ -45,6 +45,18 @@ const router = new VueRouter({
                 component: () =>
                     import("@/views/listPage"),
             },
+            {
+                path: "cart",
+                name:"cart",
+                component: () =>
+                    import("@/views/cart")
+            },
+            {
+                path: "my",
+                name:"my",
+                component: () =>
+                    import("@/views/login")
+            },
         ]
     },
     // 分类内部
@@ -63,15 +75,16 @@ const router = new VueRouter({
     // },
     
     // 购物车
-    {
-        path: "/cart",
-        meta: {
-            // private: true,
-            showTab: true
-        },
-        component: () =>
-            import("@/views/cart/index.vue")
-    },
+    // {
+    //     path: "/cart",
+    //     name:"cart",
+    //     meta: {
+    //         // private: true,
+    //         showTab: true
+    //     },
+    //     component: () =>
+    //         import("@/views/cart")
+    // },
     // // 订单页
     // {
     //     path: "/order",
