@@ -145,7 +145,7 @@ export default {
       document.title =
         // localStorage.getItem("sid") + " " + this.$lang["高级商城"];
         localStorage.getItem("sid") + " " + '高级商城';
-      // this.updateStoreInf();
+      this.updateStoreInf();
     }
   },
   mounted() {

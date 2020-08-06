@@ -43,6 +43,7 @@
 </template>
 
 <script>
+
 import MMenu from './menu.vue'
 export default {
   name: 'headerc',
@@ -55,7 +56,11 @@ export default {
       isShow:false
     }
   },
+  mounted(){
+    
+  },
   methods:{
+    
     changeShow(parms){
       // console.log(parms)
       this.isShow = false;

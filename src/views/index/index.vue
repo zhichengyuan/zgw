@@ -1,13 +1,13 @@
 <template>
   <div class="index">
       <div class="rotaton-wrapper">
-        <Rotation/>
+        <Rotation :swiperList="$store.state.swiperList"/>
       </div>
       <div class="activity-wrapper">
         <Activity/>
       </div>
       <div class="activity-wrapper">
-        <product-list/>
+        <product-list :commodity="commodity"/>
       </div>
   </div>
 </template>
@@ -25,6 +25,11 @@ export default {
     Activity,
     ProductList
   },
+  data(){
+    return{
+      commodity: { listtype: "" },
+    }
+  }
   
 }
 </script>

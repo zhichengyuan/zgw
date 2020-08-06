@@ -1,8 +1,9 @@
 <template>
   <div class="layout">
-      <header-bar></header-bar>
+      <div class="header-wrapper">
+        <header-bar></header-bar>
+      </div>
       <div class="wrapper">
-        
         <router-view/>
       </div>
       <footer-c/>
@@ -22,11 +23,17 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+  .header-wrapper{
+    position: fixed;
+    top:0;
+    width: 100%;
+    z-index: 888;
+  }
   .layout{
     .wrapper{
       width: 90%;
       margin:0 auto;
-      
+      margin-top:64px;
     }
   }
 </style>

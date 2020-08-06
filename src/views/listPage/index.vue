@@ -1,7 +1,7 @@
 <template>
   <div class="classly">
       <el-row class="tac" :gutter="20">
-        <el-col :span="5">
+        <!-- <el-col :span="5">
           <h5>当前分类</h5>
           <el-menu
             default-active="2"
@@ -32,10 +32,10 @@
               <span slot="title">导航四</span>
             </el-menu-item>
           </el-menu>
-        </el-col>
-        <el-col class="" :span="19">
+        </el-col> -->
+        <el-col class="">
           <div class="product">
-              <product-list/>
+              <product-list :commodity="commodity" :title="title"/>
           </div>
         </el-col>
       </el-row>
@@ -47,14 +47,36 @@ import ProductList from '../../components/ProductList'
 export default {
   name: 'listpage',
   components: {
-  
     ProductList
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('路由守卫',to);
+    // this.commodity = to.query;
+    
+    let obj = {
+      code : to.query.code,
+      listtype : to.query.listtype
+    }
+    this.commodity= obj
+    console.log('新的请求',this.commodity);
+    next();
   },
   data(){
     return{
-
+      commodity: {},
+      title:this.$route.query.title
     }
   },
+  created(){
+    console.log('路由',this.$route.query);
+    let obj = {
+      code : this.$route.query.code,
+      listtype : this.$route.query.listtype
+    }
+    this.commodity= obj
+    // this.commodity= this.$route.query;
+  },
+  
   methods:{
     handleOpen(key, keyPath) {
       console.log(key, keyPath);

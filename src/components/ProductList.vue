@@ -1,45 +1,121 @@
 <template>
   <div class="productList">
-    <h2 class="title">*推荐商品</h2>
+    <h2 class="title">*{{title}}</h2>
     <el-row :gutter="20">
-        <el-col :span="4" v-for="(o) in number" :key="o">
+        <el-col :span="4" v-for="(o) in list" :key="o._id">
             <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+            <img :src="$imgpath(o.pic)" class="image">
             <div style="padding: 14px;">
-                <span>好吃的汉堡</span>
+                <span>{{o.price}}</span>
                 <div class="bottom clearfix">
-                <time class="time">{{ currentDate }}</time>
+                <time class="time">{{ o.name }}</time>
                 </div>
             </div>
             </el-card>
         </el-col>
     </el-row>
     <div class="button">
-        <el-button v-if="moreProduct == false" type="primary" plain round @click="more">显示更多<i class="el-icon-bottom el-icon--right"></i></el-button>
+        <el-button v-if="finished == false" type="primary" plain round @click="more" :loading="loading">显示更多<i class="el-icon-bottom el-icon--right"></i></el-button>
         <span v-else>没有更多了</span>
     </div>
   </div>
 </template>
 
 <script>
+import { fetchCommodityList } from "@/api/apis";
 export default {
   name: 'productList',
-  
+  props: {
+        commodity: {
+        type: Object,
+            default: () => {
+                return {};
+            }
+        },
+        title: {
+        type: String,
+            default: () => {
+                return '推荐商品';
+            }
+        }
+    },
   data () {
     return {
         currentDate: new Date(),
         number:10,
         moreProduct:false,
+
+        //imgUrlPath: ImgUrlPath.ImgUrlPath,
+        offset: 100,
+        pagesize: 10,
+        pagenum: 1,
+        total: 0,
+        dataList: [],
+        list:[],
+        loading: false,
+        finished: false,
+        refreshing: false
+        // curtime: new Date().getTime()
     }
   },
+  created(){
+      console.log(this.commodity);
+  },
+  mounted(){
+      this.getList();
+  },
+  watch: {
+    commodity(newV,oldV) {
+        this.onRefresh();
+      } 
+      // commodity(newV,oldV) {
+      //   this.commodity = newV;
+      //   console.log('新条件',this.commodity)
+      // } 
+    },
   methods:{
       more(){
-          if(this.number == 30){
-              this.moreProduct = 'ture'
-              return
-          }
-          this.number +=5;
-      }
+          this.pagenum ++
+          this.getList();
+      },
+      onRefresh() {
+        this.pagenum = 1;
+        this.finished = false;
+        
+        this.getList();
+        this.refreshing = false;
+        
+      },
+      // 获取数据
+      getList() {
+          let that = this;
+        this.loading = true;
+        this.$request.fetchCommodityList(  
+          this.commodity.listtype,
+          this.commodity.code,
+          this.pagesize,
+          this.pagenum
+        )
+          .then(res => {
+            console.log('商品',res);
+                that.loading = false;
+            if (res.code == 0) {
+              if(this.pagenum == 1) {
+                this.list = res.data.items;
+              }else {
+                this.list = this.list.concat(res.data.items);
+              }
+              this.dataList = this.list;
+              this.total = res.data.total;
+              if (this.dataList.length >= this.total) {
+                this.finished = true;
+              }
+            }
+
+          }).catch(()=>{
+            this.finished = true;
+          });
+      },
   }
 }
 </script>
