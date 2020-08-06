@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import api from '@/api/apis'
+console.log(api);
 Vue.use(Vuex)
     // 引入本地存储的方法
 export default new Vuex.Store({

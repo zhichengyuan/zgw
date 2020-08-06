@@ -13,9 +13,11 @@
 </template>
 
 <script>
+
 import Rotation from '../../components/Rotation'
 import Activity from '../../components/Activity'
 import ProductList from '../../components/ProductList'
+
 export default {
   name: 'index',
   components: {
@@ -23,6 +25,7 @@ export default {
     Activity,
     ProductList
   },
+  
 }
 </script>
 

@@ -154,6 +154,13 @@ let getUser = () => {
         data: {}
     })
 }
+// export function getUser() {
+//     return arequest.create({
+//         url: "user/info",
+//         method: "post",
+//         data: {}
+//     })
+// }
 
 // 登陆 1
 let login = (data) => {
@@ -284,7 +291,10 @@ let imgpath = (imgid) => {
 
     return config.ImgUrlPath + imgid
 }
-export default {
+
+
+
+export default{
     dbReq,
     getStoreInfo,
     // getSwiper,

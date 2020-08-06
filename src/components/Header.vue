@@ -3,7 +3,10 @@
     <div class="header">
       <el-row class="content">
         <el-col class="box logo" :span="3"><h2>logo</h2></el-col>
-        <el-col class="box class icon" :span="2"><span></span></el-col>
+        <el-col class="box class icon" :span="2">
+          <span v-if="!isShow" @click="bindTrigger"></span>
+          <span class="fork" v-else @click="bindTrigger"></span>
+        </el-col>
         <el-col class="box" :span="13">
           <el-input
             placeholder="请输入内容"
@@ -31,15 +34,35 @@
         </el-col>
       </el-row>
     </div>
+    <el-row v-show="isShow">
+          <el-col :span="5">
+              <m-menu @handCahnge="changeShow"/>
+          </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
+import MMenu from './menu.vue'
 export default {
   name: 'headerc',
+  components:{
+        MMenu,
+  },
   data(){
     return {
-      value:''
+      value:'',
+      isShow:false
+    }
+  },
+  methods:{
+    changeShow(parms){
+      // console.log(parms)
+      this.isShow = false;
+    },
+    bindTrigger(){
+      this.isShow = !this.isShow
+      // console.log(this.isShow);
     }
   }
 }
@@ -113,6 +136,10 @@ export default {
               width: 40px;
               height: 40px;
               background: url('../assets/imgs/san.png') no-repeat center center;
+              background-size: 100%;
+            }
+            .fork{
+              background: url('../assets/imgs/fork.png') no-repeat center center;
               background-size: 100%;
             }
             
