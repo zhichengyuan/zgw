@@ -6,11 +6,11 @@ import guard from './guard'
 import Layout from '@/layout'
 const router = new VueRouter({
 
-    routes: [{
-        path: "/login",
-        name: "login",
-        component: () =>
-            import("@/views/login")
+  routes: [{
+      path: "/login",
+      name: "login",
+      component: () =>
+        import("@/views/login")
     },
     // 首页
     // {
@@ -23,41 +23,51 @@ const router = new VueRouter({
     //         import("@/components/HelloWorld")
     // },
     {
-        path: '/',
-        component: Layout,
-        redirect: '/home',
-        children: [{
-                path: 'home',
-                name: 'home',
-                component: () =>
-                    import ('@/views/index'),
-            },{
-                // 分类内部
-                path: "listPage",
-                name: "listPage",
-                params: {
-                    type: '',
-                    code: ''
-                },
-                // meta: {
-                //     showTab: true
-                // },
-                component: () =>
-                    import("@/views/listPage"),
-            },
-            {
-                path: "cart",
-                name:"cart",
-                component: () =>
-                    import("@/views/cart")
-            },
-            {
-                path: "my",
-                name:"my",
-                component: () =>
-                    import("@/views/login")
-            },
-        ]
+      path: '/',
+      component: Layout,
+      redirect: '/home',
+      children: [{
+          path: 'home',
+          name: 'home',
+          component: () =>
+            import('@/views/index'),
+        }, {
+          // 分类内部
+          path: "listPage",
+          name: "listPage",
+          params: {
+            type: '',
+            code: ''
+          },
+          // meta: {
+          //     showTab: true
+          // },
+          component: () =>
+            import("@/views/listPage"),
+        },
+        {
+          path: "cart",
+          name: "cart",
+          component: () =>
+            import("@/views/cart")
+        },
+        {
+          path: "my",
+          name: "my",
+          component: () =>
+            import("@/views/login")
+        },
+        // 详情页
+        {
+          path: "product",
+          name: 'Product',
+          meta: {
+            showTab: false
+          },
+          component: () =>
+            import("@/views/productDetail/index.vue"),
+        },
+      ]
     },
     // 分类内部
     // {
@@ -73,7 +83,7 @@ const router = new VueRouter({
     //     component: () =>
     //         import("@/views/listPage/index.vue"),
     // },
-    
+
     // 购物车
     // {
     //     path: "/cart",
@@ -143,16 +153,7 @@ const router = new VueRouter({
     //     component: () =>
     //         import("@/views/service/index.vue"),
     // },
-    // // 详情页
-    // {
-    //     path: "/product/:id",
-    //     name: 'Product',
-    //     meta: {
-    //         showTab: false
-    //     },
-    //     component: () =>
-    //         import("@/views/product/index.vue"),
-    // },
+
     // //搜索页
     // {
     //     path: "/search",
@@ -171,15 +172,15 @@ const router = new VueRouter({
     //     component: () =>
     //         import("@/views/my/setting.vue")
     // }
-    ],
-    // scrollBehavior(to, from, savedPosition) { return { x: 0, y: 0 } }
+  ],
+  // scrollBehavior(to, from, savedPosition) { return { x: 0, y: 0 } }
 })
 // 路由跳转检查
 // router.beforeEach(guard.beforeEach)
 // router.afterEach(guard.afterEach)
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
-   return originalPush.call(this, location).catch(err => err)
+  return originalPush.call(this, location).catch(err => err)
 }
 
 export default router
