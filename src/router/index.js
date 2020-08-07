@@ -61,11 +61,20 @@ const router = new VueRouter({
         {
           path: "product",
           name: 'Product',
-          meta: {
-            showTab: false
-          },
           component: () =>
             import("@/views/productDetail/index.vue"),
+        },
+        // 订单页
+        {
+          path: "/order",
+          component: () =>
+            import("@/views/order/index.vue")
+        },
+        // //个人订单列表页
+        {
+          path: "/orderList",
+          component: () =>
+            import("@/views/orderList/index.vue")
         },
       ]
     },
