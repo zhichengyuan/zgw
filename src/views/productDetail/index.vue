@@ -66,7 +66,7 @@
             <el-row>
               <!-- 左边 -->
               <div class="card-left">
-                <el-col :span="14">
+                <el-col :span="10">
                   <div class="grid-content">
                     <el-row>
                       <!-- 放大图 -->
@@ -121,7 +121,7 @@
               </div>
               <!-- 右边 -->
               <div class="card-right">
-                <el-col :span="10">
+                <el-col :span="14">
                   <div class="grid-content">
                     <div class="price">
                       <div class="cost">
@@ -369,6 +369,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card-right .grid-content{
+  padding-left: 50px;
+}
+/deep/ .magnifier-box img{
+  height: 100%;
+}
 .el-carousel__item img {
   color: #475669;
   opacity: 0.75;
@@ -458,6 +464,7 @@ export default {
                 z-index: 2;
                 width: 80%;
                 margin: 0 auto;
+                padding-top: 30px;
                 .product-pic {
                   display: block;
                   padding: 0 0 16px;
