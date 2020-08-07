@@ -61,10 +61,6 @@ const router = new VueRouter({
         {
           path: "product/:id",
           name: 'Product',
-<<<<<<< HEAD
-          
-=======
->>>>>>> 86630951a0577917186fbb4d105d21f8a4ac59d7
           component: () =>
             import("@/views/productDetail/index.vue"),
         },

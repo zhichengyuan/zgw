@@ -30,6 +30,7 @@
                   <el-table-column label="物流编号" prop="logNum"></el-table-column>
                   <el-table-column label="物流方式" prop="logPath"></el-table-column>
                   <el-table-column label="收货地址" prop="shopName"></el-table-column>
+                  <el-table-column label="订单状态" prop="orderStatus"></el-table-column>
                 </el-table>
               </div>
             </el-tab-pane>
@@ -54,8 +55,8 @@ export default {
         {
           logNum: "125401011",
           logPath: "顺丰快递",
-          shopName: "shopvill",
-
+          shopName: "俄罗斯莫斯科",
+          orderStatus:"待发货",
           tableData: [
             {
               img:
