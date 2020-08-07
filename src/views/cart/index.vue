@@ -25,9 +25,9 @@
                       <p class="product-code">商品编号  {{item.skucode}}</p>
                       <p class="num">
                         <span>数量</span>
-                        <el-button icon="el-icon-minus" circle></el-button>
-                        <el-input v-model="item.productNumber" placeholder="1"></el-input>
-                        <el-button icon="el-icon-plus" circle></el-button>
+                        <el-button icon="el-icon-minus" circle @click="onChangeNum(item,'reduce')"></el-button>
+                        <el-input v-model.number="item.productNumber" min="0" @input="changNum" placeholder=""></el-input>
+                        <el-button icon="el-icon-plus" circle @click="onChangeNum(item,'add')"></el-button>
                       </p>
                     </el-col>
                     <el-col class="price" :span="6">
@@ -36,33 +36,7 @@
                     </el-col>
                   </el-col>
                 </el-row>
-                <el-row class="product-list">
-                  <el-col :span="24" class="order">
-                    <el-col class="check" :span="1">
-                      <el-checkbox v-model="checked"></el-checkbox>
-                    </el-col>
-                    <el-col class="img" :span="5">
-                      <img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg" alt="">
-                    </el-col>
-                    <el-col class="product" :span="12">
-                      <p class="name">AUSSIE//修复奇迹，牛仔裤</p>
-                      <p class="product-code">商品编号  2554870</p>
-                      <p class="num">
-                        <span>数量</span>
-                        <el-button icon="el-icon-minus" circle></el-button>
-                        <el-input v-model="input" placeholder="1"></el-input>
-                        <el-button icon="el-icon-plus" circle></el-button>
-                      </p>
-                    </el-col>
-                    <el-col class="price" :span="6">
-                       <span>总价：8912₽</span>
-                       <span class="delete">删除</span>
-                    </el-col>
-                  </el-col>
-                  <!-- <el-col :span="24" class="delete">
-                     
-                  </el-col> -->
-                </el-row>
+               
                 <!-- <ul class="product-list">
                   <li class="list">
                     <div class="order">
@@ -111,7 +85,7 @@
                   <span>运费</span>
                   <span>0₽</span>
                 </p>
-                <div><el-button type="primary" round>提交订单</el-button></div>
+                <div><span >删除</span><el-checkbox v-model="isCheckAll"  @change="checkAll(true)">全选</el-checkbox><el-button type="primary" round>提交订单</el-button></div>
               </div>
              
             </div>
@@ -127,6 +101,7 @@ export default {
   name: "cart",
   data(){
     return {
+      isCheckAll: false,
       input:0,
       checked:false
     }
@@ -135,6 +110,21 @@ export default {
     this.onClickRight()
   },
   methods:{
+    onChangeNum(item,type) {
+      // console.log(item,type);
+      if(type == 'add'){
+        item.productNumber ++
+      }else {
+        item.productNumber --
+      }
+      // console.log(item)
+      // this.$store.state.cartList[index]
+      this.$store.dispatch("updateCart", item);
+    },
+    changNum(v){
+      console.log(v)
+    },
+    //删除商品
     onClickRight() {
       let removeList = [];
       let list = this.$store.state.cartList;
@@ -143,6 +133,13 @@ export default {
         if (cart.isChecked == true) removeList.push(cart);
       });
       if (removeList.length > 0) this.$store.dispatch("removeCart", removeList);
+    },
+    // 全选
+    checkAll() {
+      this.isCheckAll != this.isCheckAll;
+      this.$store.state.cartList.forEach((item, index) => {
+        item.isChecked = this.isCheckAll;
+      });
     }
   }
 };
