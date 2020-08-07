@@ -66,7 +66,7 @@
             <el-row>
               <!-- 左边 -->
               <div class="card-left">
-                <el-col :span="10">
+                <el-col :span="14">
                   <div class="grid-content">
                     <el-row>
                       <!-- 放大图 -->
@@ -121,13 +121,26 @@
               </div>
               <!-- 右边 -->
               <div class="card-right">
-                <el-col :span="14">
+                <el-col :span="10">
                   <div class="grid-content">
                     <div class="price">
                       <div class="cost">
                         <div class="inner-price">
-                          <span class="final-price">2995₽</span>
-                          <span class="old-price">5990₽</span>
+                          <span class="final-price" v-if="skuPrice != ''">{{ skuPrice }}₽</span>
+
+                          <!-- <div class="skuPrice" v-if="items.price">{{item.price}}</div> -->
+                          
+                          <span class="final-price" v-if="skuPrice == '' && $store.state.getrole.length == '0'">{{ product.price }}₽</span>
+                          <span class="final-price" v-if="skuPrice == '' && $store.state.getrole[0] == 'b'">{{ product.bradePrice }}₽</span>
+                          <span class="final-price" v-if="skuPrice == '' && $store.state.getrole[0] == 'c'">{{ product.price }}₽</span>
+                         
+                          <!-- <span class="final-price">2995₽</span> -->
+                          <!-- <span class="old-price">5990₽</span> -->
+                          <div class="skuNum" v-if="skuStock>0">{{'库存'+'：'+skuStock}}</div>
+                          <!-- {{stock}} -->
+                          <div class="skuNum" v-else-if="stock">{{'库存' +stock + '件'}}</div>
+                          <div class="skuNum" v-else>{{'库存' +product.stock + '件'}}</div>
+                          <div class="pitch" v-if="text">{{'已选'+'：' + text}}</div>
                         </div>
                       </div>
                     </div>
@@ -137,41 +150,16 @@
                     </div>
                     <div class="sku-select">
                       <ul>
-                        <li class="pro-specifi">
-                          <a href="#">标签一</a>
+                        <li class="pro-specifi" v-for="(item,index) in skuDataList" @click="getSkus(index)" :key="index">
+                          <!-- {{Object.values(item.attributeList)}} -->
+                          <a  v-for="(item,index) in Object.values(item.attributeList)" :key="index">{{item}}</a>
                         </li>
-                        <li class="pro-specifi">
-                          <a href="#">标签一</a>
-                        </li>
-                        <li class="pro-specifi">
-                          <a href="#">标签一</a>
-                        </li>
-                        <li class="pro-specifi">
-                          <a href="#">标签一</a>
-                        </li>
-                        <li class="pro-specifi">
-                          <a href="#">标签一</a>
-                        </li>
-                        <li class="pro-specifi">
-                          <a href="#">标签一</a>
-                        </li>
-                        <li class="pro-specifi">
-                          <a href="#">标签一</a>
-                        </li>
-                        <li class="pro-specifi">
-                          <a href="#">标签一</a>
-                        </li>
-                        <li class="pro-specifi">
-                          <a href="#">标签一</a>
-                        </li>
-                        <li class="pro-specifi">
-                          <a href="#">标签一</a>
-                        </li>
+                        
                       </ul>
                     </div>
                     <div class="addCart">
                       <div class="cart-btn">
-                        <el-button class="add-btn">加入购物车</el-button>
+                        <el-button class="add-btn" @click="submitCartItem">加入购物车</el-button>
                       </div>
                     </div>
                   </div>
@@ -191,6 +179,7 @@
 
 <script>
 import PicZoom from "vue-piczoom";
+import { getProduct, getProductBysn,imgpath,getSkulist } from "@/api/apis";
 export default {
   name: "login",
   components: { PicZoom },
@@ -199,18 +188,181 @@ export default {
       value: 3.7,
       currentIndex: 0,
       active:'',
+      product:{},//商品数据
+      skuDataList:[],//sku的数据
+      stock:0,//全部的库存
+      skuStock: 0, //sku库存
+      skuPrice:'',//sku价格
+      selectedSku: null, //传入购物车数据
+      text:'',
       img:['https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg',"https://img2.wbstatic.net/big/new/12990000/12998540-1.jpg","https://img1.wbstatic.net/big/new/12500000/12502409-2.jpg","https://img1.wbstatic.net/big/new/12500000/12502409-3.jpg"],
       // img:['https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg',]
     };
   },
   created(){
-    this.active = this.img[0]
+    this.active = this.img[0];
+    console.log('路由参数',this.$route.params);
+    this.getProducts();
+    
   },
   mounted() {},
   methods: {
     selectPic(index) {
       this.active = this.img[index];
       this.currentIndex = index;
+    },
+    // 获取商品
+    getProducts() {
+      this.$request.getProduct(this.$route.params.id).then(res => {
+        console.log(res);
+        let imgs = res.data.albumPics;
+        this.img = this.editPic(imgs);
+        this.active=this.img[0];
+        this.product = res.data;
+        this.getSkulist();
+      });
+    },
+    //编辑图片路径
+    editPic(arr){
+      let imgs = []
+      for(let i = 0;i<arr.length;i++){
+        imgs.push(this.$imgpath(arr[i]))
+      }
+      return imgs;
+    },
+    // 获取sku
+    getSkulist() {
+      console.log(this.product.productSn);
+      this.$request
+        .getSkulist(this.product.productSn, this.$store.state.sid)
+        .then((res) => {
+          if (res.code == 0) {
+            console.log("res",res)
+            // this.defaultSkuImg = this.product.albumPics[0]; //?
+            this.skuDataList = res.data.items;
+            this.stock = 0;
+            this.skuDataList.forEach((item) => {
+              this.stock += parseInt(item.skunum);
+            });
+          }
+
+          // if (res.data.items) {
+          //   this.skuData = res.data.items;
+          //   // skus.forEach((sku, index) => {
+          //   //   if (Object.values(sku.attributeList).length == 0) {
+          //   //     datas.splice(index, 1);
+          //   //   }
+          //   // });
+
+          //   // this.skuData = datas;
+          //   this.skuData.forEach(item => {
+          //     this.stock += parseInt(item.skunum);
+          //   });
+          // } else {
+          //   this.skuData = null;
+          //   this.stock = this.items.stock;
+          // }
+        });
+    },
+    // 选择sku规格
+    getSkus(index) {
+      let sku = this.skuDataList[index];
+      console.log(sku);
+      // console.log(this.$imgpath(sku.pic));
+      this.active = this.$imgpath(sku.pic)
+      this.$store.state.getrole;
+      if (this.$store.state.getrole[0] == "b") {
+        sku.skuprice = sku.skuBradePrice;
+      }
+      // console.log("sku", sku);
+
+      this.colorIndex = index;
+      this.selectedSku = sku;
+      this.skuPrice = sku.skuprice;
+      this.changeSkuImg = sku.pic;
+      this.skuStock = sku.skunum;
+      this.text = Object.values(sku.attributeList).join("-");
+      this.selectedSku.productNumber = this.productNumber;
+      
+    },
+    submitCartItem() {
+      if (this.skuDataList.length == 0) {
+        const noneSku = {
+          selectStock: this.product.stock,
+          attributeList: {},
+          productId: this.product._id,
+          categoryNameRu: this.product.categoryNameRu,
+          categoryName: this.product.categoryName,
+          skuprice: this.product.price,
+          productNumber: this.noSelectNum,
+          pic: this.product.albumPics[0],
+          name: this.product.name,
+          runame: this.product.runame,
+          isChecked: false,
+          productSn: this.product.productSn,
+          skucode: this.product.productSn,
+          skuImg: this.product.albumPics[0],
+        };
+        // console.log(noneSku);
+
+        // this.$store.dispatch("addCart", noneSku);
+        // this.$toast.success(this.$lang["添加成功"]);
+
+        this.show = false;
+        this.colorIndex = "";
+      } else {
+        if (!this.selectedSku) {
+          //whm?
+          this.$message({
+            message: '请选择商品规格',
+            type: 'warning'
+          });
+          // this.$toast({
+          //   // this.$message('这是一条消息提示');
+          //   message: this.$lang["请选择商品规格"],
+          // });
+        } else {
+          let sku = this.selectedSku;
+          console.log(sku);
+
+          const localInfo = {
+            selectStock: sku.skunum,
+            attributeList: sku.attributeList,
+            productId: this.product._id,
+            categoryNameRu: this.product.categoryNameRu,
+            categoryName: this.product.categoryName,
+            skuprice: this.skuPrice,
+            // productNumber: sku.productNumber,
+            productNumber: 1,
+            skuImg: this.product.albumPics[0],
+            pic: sku.pic,
+            name: this.product.name,
+            runame: this.product.runame,
+            isChecked: false,
+            productSn: sku.productSn,
+            skuplace: sku.skuplace,
+            skucode: sku.skucode,
+          };
+          // console.log(localInfo);
+
+          this.$store.dispatch("addCart", localInfo);
+
+          // this.$store.dispatch("loadCartList")
+
+          // console.log(this.$store.state.cartInfo);
+
+          // this.$toast.success(this.$lang["添加成功"]);
+          this.$message({
+            message: '恭喜你，这是一条成功消息',
+            type: 'success'
+          });
+          this.show = false;
+          this.colorIndex = "";
+          // this.skuPrice = "";
+          this.skuStock = 0;
+          this.selectedSku = null;
+        }
+      }
     },
   },
 };

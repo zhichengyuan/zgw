@@ -24,12 +24,10 @@
           
         </el-col>
         <el-col class="box class " :span="2">
-          <router-link to="cart">
-            <div class="tu-box">
+            <div class="tu-box" @click="bindTabbar('cart')">
               <span class="person cart"></span>
               <span>购物车</span>
             </div>
-          </router-link>  
           
         </el-col>
       </el-row>
@@ -60,7 +58,9 @@ export default {
     
   },
   methods:{
-    
+    bindTabbar(name){
+      this.$router.push({ name: name});
+    },
     changeShow(parms){
       // console.log(parms)
       this.isShow = false;

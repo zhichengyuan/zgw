@@ -3,15 +3,17 @@
     <h2 class="title">*{{title}}</h2>
     <el-row :gutter="20">
         <el-col :span="4" v-for="(o) in list" :key="o._id">
-            <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
-            <img :src="$imgpath(o.pic)" class="image">
-            <div style="padding: 14px;">
-                <span>{{o.price}}</span>
-                <div class="bottom clearfix">
-                <time class="time">{{ o.name }}</time>
+            <div @click="toDetail(o)">
+              <el-card shadow="hover"   :body-style="{ padding: '5px',borderRadius:'20px' }">
+                <img :src="$imgpath(o.pic)" class="image">
+                <div style="padding: 14px;">
+                    <span>{{o.price}}</span>
+                    <div class="bottom clearfix">
+                    <time class="time">{{ o.name }}</time>
+                    </div>
                 </div>
+              </el-card>
             </div>
-            </el-card>
         </el-col>
     </el-row>
     <div class="button">
@@ -74,6 +76,14 @@ export default {
       // } 
     },
   methods:{
+      //跳转详情页面
+      toDetail(item){
+        console.log(item);
+        this.$router.push({
+              path: "/product/" + item._id,
+              // query: { listtype: "category", code: cat.id,title:cat.name },
+          });
+      },
       more(){
           this.pagenum ++
           this.getList();

@@ -11,7 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import "./assets/css/base.css";
 Vue.use(Element)
 import Request from '@/api/apis';
-Vue.prototype.$request = Request;
+Vue.prototype.$request = Request; 
 Vue.prototype.$imgpath = Request.imgpath;
 
 Vue.config.productionTip = false

@@ -288,7 +288,6 @@ let ImgID = (url) => {
 
 }
 let imgpath = (imgid) => {
-
     return config.ImgUrlPath + imgid
 }
 

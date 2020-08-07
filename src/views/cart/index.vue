@@ -12,26 +12,26 @@
             <div class="grid-content bg-purple">
               <!-- 左侧商品内容 -->
               <div class="left-product">
-                <el-row class="product-list">
+                <el-row class="product-list" v-for="(item,index) in $store.state.cartList" :key="index">
                   <el-col :span="24" class="order">
                     <el-col class="check" :span="1">
-                      <el-checkbox v-model="checked"></el-checkbox>
+                      <el-checkbox v-model="item.isChecked"></el-checkbox>
                     </el-col>
                     <el-col class="img" :span="5">
-                      <img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg" alt="">
+                      <img :src="$imgpath(item.pic)" alt="">
                     </el-col>
                     <el-col class="product" :span="12">
-                      <p class="name">AUSSIE//修复奇迹，牛仔裤</p>
-                      <p class="product-code">商品编号  2554870</p>
+                      <p class="name">{{item.name}}</p>
+                      <p class="product-code">商品编号  {{item.skucode}}</p>
                       <p class="num">
                         <span>数量</span>
                         <el-button icon="el-icon-minus" circle></el-button>
-                        <el-input v-model="input" placeholder="1"></el-input>
+                        <el-input v-model="item.productNumber" placeholder="1"></el-input>
                         <el-button icon="el-icon-plus" circle></el-button>
                       </p>
                     </el-col>
                     <el-col class="price" :span="6">
-                       <span>总价：8912₽</span>
+                       <span>总价：{{item.skuprice}}₽</span>
                        <span class="delete">删除</span>
                     </el-col>
                   </el-col>
@@ -129,6 +129,20 @@ export default {
     return {
       input:0,
       checked:false
+    }
+  },
+  created(){
+    this.onClickRight()
+  },
+  methods:{
+    onClickRight() {
+      let removeList = [];
+      let list = this.$store.state.cartList;
+
+      this.$store.state.cartList.forEach(cart => {
+        if (cart.isChecked == true) removeList.push(cart);
+      });
+      if (removeList.length > 0) this.$store.dispatch("removeCart", removeList);
     }
   }
 };

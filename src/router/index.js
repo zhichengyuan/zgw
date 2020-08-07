@@ -59,11 +59,9 @@ const router = new VueRouter({
         },
         // 详情页
         {
-          path: "product",
+          path: "product/:id",
           name: 'Product',
-          meta: {
-            showTab: false
-          },
+          
           component: () =>
             import("@/views/productDetail/index.vue"),
         },
