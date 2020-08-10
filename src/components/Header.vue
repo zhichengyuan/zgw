@@ -14,14 +14,6 @@
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
           </el-input>
         </el-col>
-<<<<<<< HEAD
-        <el-col class="box class " :span="3">
-            <div class="tu-box" @click="bindTabbar('my')">
-              <span class="person"></span>
-              <span>个人中心</span>
-            </div>
-          
-=======
         <el-col class="box class" :span="3">
           <router-link to="my">
             <el-dropdown class="tu-box" v-if="true">
@@ -33,7 +25,6 @@
               </el-dropdown-menu>
             </el-dropdown>
           </router-link>
->>>>>>> 9cffa7e50ba0e51727235ab8ca80fbcab70a47e6
         </el-col>
         <el-col class="box class" :span="2">
           <div class="tu-box" @click="bindTabbar('cart')">
