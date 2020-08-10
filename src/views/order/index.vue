@@ -43,7 +43,7 @@
             <span>总金额：</span>
             <span>{{orderBuffer.totalPrice}}₽</span>
           </div>
-          <el-button>待支付结算</el-button>
+          <el-button @click="onSubmit">待支付结算</el-button>
         </div>
       </div>
     </div>
@@ -55,6 +55,8 @@ export default {
   name: "order",
   data() {
     return {
+      pay: "",
+      transPrice: 0,
       shopData: [
         {
           shopAdress: "俄罗斯",
@@ -106,7 +108,39 @@ export default {
     this.orderBuffer=orderProduct||this.$store.state.orderBuffer
     console.log(this.orderBuffer);
   },
-  methods: {},
+  inject:['loadCartList'] ,
+  methods: {
+    onSubmit() {
+      console.log(this.orderBuffer.payment)
+      if(this.orderBuffer.payment==undefined){
+          // this.orderBuffer.payment=this.$lang["赊账"]
+          this.orderBuffer.payment="赊账"
+      }
+      const newOrderBuffer={
+        totalPrice:this.orderBuffer.totalPrice.toFixed(2),
+        productPrice:this.orderBuffer.totalPrice.toFixed(2),
+        transPrice:this.transPrice,
+        productList:this.orderBuffer.productList,
+        payment:'赊账'
+      }
+      console.log(newOrderBuffer);
+      this.$request.order(newOrderBuffer).then(res => {
+        if (res.code == 0) {
+          this.loadCartList();
+          //this.$store.dispatch("loadCartList")
+          let orderId = res.data._id;
+          this.$message({
+            message: '订单已提交',
+            type: 'success'
+          });
+          // this.$toast({
+          //   message: this.$lang["订单已提交"]
+          // });
+          // this.$router.push("/orderDetail/" + res.data._id);
+        }
+      });
+    }
+  },
 };
 </script>
 

@@ -15,16 +15,15 @@
           </el-input>
         </el-col>
         <el-col class="box class" :span="3">
-          <router-link to="my">
             <el-dropdown class="tu-box" v-if="true">
               <span class="person"></span>
               <span>个人中心</span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click="toMyInfo">修改个人信息</el-dropdown-item>
+                <el-dropdown-item @click="toMyInfo('MyInfo')">修改个人信息</el-dropdown-item>
+                <el-dropdown-item @click="toMyInfo('orderList')">订单列表</el-dropdown-item>
                 <el-dropdown-item>退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-          </router-link>
         </el-col>
         <el-col class="box class" :span="2">
           <div class="tu-box" @click="bindTabbar('cart')">
@@ -62,8 +61,9 @@ export default {
        this.$router.push({path:"/"})
     },
     // 跳转到修改个人信息
-    toMyInfo(){
-      this.$router.push({name:MyInfo})
+    toMyInfo(name){
+      console.log(name);
+      this.$router.push({name:name})
     },
     bindTabbar(name) {
       this.$router.push({ name: name });

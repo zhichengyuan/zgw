@@ -10,18 +10,18 @@
           <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="所有订单" name="0">
               <div class="orde-detail">
-                <el-table :data="shopData" style="width: 100%">
+                <el-table :data="orderList" style="width: 100%">
                   <el-table-column type="expand">
                     <template slot-scope="scope">
-                      <el-table :data="scope.row.tableData" style="width: 100%">
+                      <el-table :data="scope.row.productList" style="width: 100%">
                         <el-table-column prop="img" label="商品主图" width="100">
                           <template slot-scope="scope">
-                            <img :src="scope.row.img" alt />
+                            <img :src="$imgpath(scope.row.pic)" alt />
                           </template>
                         </el-table-column>
                         <el-table-column prop="name" label="商品名称"></el-table-column>
-                        <el-table-column prop="price" label="单价"></el-table-column>
-                        <el-table-column prop="num" label="数量"></el-table-column>
+                        <el-table-column prop="skuprice" label="单价"></el-table-column>
+                        <el-table-column prop="productNumber" label="数量"></el-table-column>
                         <el-table-column prop="transPrice" label="运费"></el-table-column>
                         <el-table-column prop="totalPrice" label="总金额"></el-table-column>
                       </el-table>
@@ -50,6 +50,13 @@ export default {
   name: "orderList",
   data() {
     return {
+      list: [],
+      orderList: [],
+      status: "-1",
+      orderall: [],
+      activeName: -1,
+      orderId: "",
+      activeNames: ["1"],
       activeName: "0",
       shopData: [
         {
@@ -96,10 +103,117 @@ export default {
       ],
     };
   },
+  created(){
+    this.getData();
+    this.getOrderList();
+  },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
     },
+    attribute(item) {
+
+      let name = Object.values(item)
+      return name
+    },
+    // 取消订单
+    cancle(item) {
+      item.status = '4'
+      // const infoCancel = {
+      //   _id: item._id,
+      //   status: '4'
+      // }
+
+      this.$request.orderCancel(item).then(res => {
+        if (res.code == 0) {
+          this.getOrderList();
+        }
+
+      })
+
+      // if(item.warehousId){
+      //   var obj = {
+      //     _id: item.warehousId,
+      //     status: '4'
+      //   }
+      //   console.log(obj);
+      //   this.$request.receiptSave(obj).then(res => {
+      //     console.log('成功了',res);
+      //   })
+      // }
+      // console.log('dddddd',infoCancel)
+      // this.$request.order(infoCancel).then(res => {
+      //   if (res.code == 0) {
+      //     this.getOrderList();
+      //   }
+
+      // })
+
+    },
+    // 订单已收货
+    finished(item) {
+      const infoFinsh = {
+        _id: item._id,
+        status: '3'
+      }
+      if(item.warehousId){
+        var objFinsh = {
+          _id: item.warehousId,
+          status: '3'
+        }
+        this.$request.receiptSave(objFinsh).then(res => {
+        })
+      }
+      this.$request.order(infoFinsh).then(res => {
+        if (res.code == 0) {
+          this.getOrderList();
+        }
+
+      })
+    },
+    orderStatus(status) {
+      switch (status) {
+        case "0":
+          return this.$lang["待付款"];
+          break;
+        case "1":
+          return this.$lang["待发货"];
+          break;
+        case "2":
+          return this.$lang["待收货"];
+          break;
+        case "3":
+          return this.$lang["完成收货"];
+          break;
+        case "4":
+          return this.$lang["已取消"];
+          break;
+      }
+    },
+    getOrderList() {
+      var status = {
+        status: this.status
+      };
+      this.$request.orderList(this.status).then(res => {
+        if (res.code == 0) {
+          console.log(res);
+          this.orderList = res.data.items;
+        }
+
+      });
+    },
+    onClick(name) {
+      this.status = name;
+      this.getOrderList();
+    },
+    //点击左侧按钮跳转到上一级
+    onClickLeft() {
+      this.$router.back(-1);
+    },
+    //从vuex中获取订单状态数据
+    getData() {
+      this.list.push(...this.$store.state.odList);
+    }
   },
 };
 </script>
