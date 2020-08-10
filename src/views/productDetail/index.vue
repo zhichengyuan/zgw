@@ -104,7 +104,7 @@
                                 <el-carousel-item v-for="(item,index) in img" :key="index">
                                   <div @click="selectPic(index)">
                                     <img
-                                      :class="{'current':index==currentIndex}"
+                                      :class="{'currentIndex':index==currentIndex}"
                                       :src="item"
                                       alt
                                     />
@@ -129,11 +129,20 @@
                           <span class="final-price" v-if="skuPrice != ''">{{ skuPrice }}₽</span>
 
                           <!-- <div class="skuPrice" v-if="items.price">{{item.price}}</div> -->
-                          
-                          <span class="final-price" v-if="skuPrice == '' && $store.state.getrole.length == '0'">{{ product.price }}₽</span>
-                          <span class="final-price" v-if="skuPrice == '' && $store.state.getrole[0] == 'b'">{{ product.bradePrice }}₽</span>
-                          <span class="final-price" v-if="skuPrice == '' && $store.state.getrole[0] == 'c'">{{ product.price }}₽</span>
-                         
+
+                          <span
+                            class="final-price"
+                            v-if="skuPrice == '' && $store.state.getrole.length == '0'"
+                          >{{ product.price }}₽</span>
+                          <span
+                            class="final-price"
+                            v-if="skuPrice == '' && $store.state.getrole[0] == 'b'"
+                          >{{ product.bradePrice }}₽</span>
+                          <span
+                            class="final-price"
+                            v-if="skuPrice == '' && $store.state.getrole[0] == 'c'"
+                          >{{ product.price }}₽</span>
+
                           <!-- <span class="final-price">2995₽</span> -->
                           <!-- <span class="old-price">5990₽</span> -->
                           <div class="skuNum" v-if="skuStock>0">{{'库存'+'：'+skuStock}}</div>
@@ -150,11 +159,19 @@
                     </div>
                     <div class="sku-select">
                       <ul>
-                        <li class="pro-specifi" v-for="(item,index) in skuDataList" @click="getSkus(index)" :key="index">
+                        <li
+                          class="pro-specifi"
+                          v-for="(item,index) in skuDataList"
+                          @click="getSkus(index)"
+                          :key="index"
+                          :class="{'current':index==current}"
+                        >
                           <!-- {{Object.values(item.attributeList)}} -->
-                          <a  v-for="(item,index) in Object.values(item.attributeList)" :key="index">{{item}}</a>
+                          <a
+                            v-for="(item,index) in Object.values(item.attributeList)"
+                            :key="index"
+                          >{{item}}</a>
                         </li>
-                        
                       </ul>
                     </div>
                     <div class="addCart">
@@ -179,31 +196,36 @@
 
 <script>
 import PicZoom from "vue-piczoom";
-import { getProduct, getProductBysn,imgpath,getSkulist } from "@/api/apis";
+import { getProduct, getProductBysn, imgpath, getSkulist } from "@/api/apis";
 export default {
   name: "login",
   components: { PicZoom },
   data() {
     return {
+      current: 0,
       value: 3.7,
       currentIndex: 0,
-      active:'',
-      product:{},//商品数据
-      skuDataList:[],//sku的数据
-      stock:0,//全部的库存
+      active: "",
+      product: {}, //商品数据
+      skuDataList: [], //sku的数据
+      stock: 0, //全部的库存
       skuStock: 0, //sku库存
-      skuPrice:'',//sku价格
+      skuPrice: "", //sku价格
       selectedSku: null, //传入购物车数据
-      text:'',
-      img:['https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg',"https://img2.wbstatic.net/big/new/12990000/12998540-1.jpg","https://img1.wbstatic.net/big/new/12500000/12502409-2.jpg","https://img1.wbstatic.net/big/new/12500000/12502409-3.jpg"],
+      text: "",
+      img: [
+        "https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg",
+        "https://img2.wbstatic.net/big/new/12990000/12998540-1.jpg",
+        "https://img1.wbstatic.net/big/new/12500000/12502409-2.jpg",
+        "https://img1.wbstatic.net/big/new/12500000/12502409-3.jpg",
+      ],
       // img:['https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg',]
     };
   },
-  created(){
+  created() {
     this.active = this.img[0];
-    console.log('路由参数',this.$route.params);
+    console.log("路由参数", this.$route.params);
     this.getProducts();
-    
   },
   mounted() {},
   methods: {
@@ -213,20 +235,20 @@ export default {
     },
     // 获取商品
     getProducts() {
-      this.$request.getProduct(this.$route.params.id).then(res => {
+      this.$request.getProduct(this.$route.params.id).then((res) => {
         console.log(res);
         let imgs = res.data.albumPics;
         this.img = this.editPic(imgs);
-        this.active=this.img[0];
+        this.active = this.img[0];
         this.product = res.data;
         this.getSkulist();
       });
     },
     //编辑图片路径
-    editPic(arr){
-      let imgs = []
-      for(let i = 0;i<arr.length;i++){
-        imgs.push(this.$imgpath(arr[i]))
+    editPic(arr) {
+      let imgs = [];
+      for (let i = 0; i < arr.length; i++) {
+        imgs.push(this.$imgpath(arr[i]));
       }
       return imgs;
     },
@@ -237,7 +259,7 @@ export default {
         .getSkulist(this.product.productSn, this.$store.state.sid)
         .then((res) => {
           if (res.code == 0) {
-            console.log("res",res)
+            console.log("res", res);
             // this.defaultSkuImg = this.product.albumPics[0]; //?
             this.skuDataList = res.data.items;
             this.stock = 0;
@@ -266,10 +288,11 @@ export default {
     },
     // 选择sku规格
     getSkus(index) {
+      this.current = index;
       let sku = this.skuDataList[index];
       console.log(sku);
       // console.log(this.$imgpath(sku.pic));
-      this.active = this.$imgpath(sku.pic)
+      this.active = this.$imgpath(sku.pic);
       this.$store.state.getrole;
       if (this.$store.state.getrole[0] == "b") {
         sku.skuprice = sku.skuBradePrice;
@@ -283,7 +306,6 @@ export default {
       this.skuStock = sku.skunum;
       this.text = Object.values(sku.attributeList).join("-");
       this.selectedSku.productNumber = this.productNumber;
-      
     },
     submitCartItem() {
       if (this.skuDataList.length == 0) {
@@ -314,8 +336,8 @@ export default {
         if (!this.selectedSku) {
           //whm?
           this.$message({
-            message: '请选择商品规格',
-            type: 'warning'
+            message: "请选择商品规格",
+            type: "warning",
           });
           // this.$toast({
           //   // this.$message('这是一条消息提示');
@@ -353,8 +375,8 @@ export default {
 
           // this.$toast.success(this.$lang["添加成功"]);
           this.$message({
-            message: '恭喜你，这是一条成功消息',
-            type: 'success'
+            message: "恭喜你，这是一条成功消息",
+            type: "success",
           });
           this.show = false;
           this.colorIndex = "";
@@ -369,10 +391,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-right .grid-content{
+.card-right .grid-content {
   padding-left: 50px;
 }
-/deep/ .magnifier-box img{
+/deep/ .magnifier-box img {
   height: 100%;
 }
 .el-carousel__item img {
@@ -380,14 +402,10 @@ export default {
   opacity: 0.75;
   margin: 0 75px;
   width: 75px;
-  &.current {
+  &.currentIndex {
     border: 2px solid #ff9000;
   }
 }
-
-// .current {
-//   border: 2px solid #ff9000;
-// }
 
 .min-content {
   position: relative;
@@ -562,6 +580,9 @@ export default {
                 padding: 10px;
                 position: relative;
                 text-align: center;
+                &.current {
+                  border: 2px solid #ff9000;
+                }
               }
             }
             .addCart {

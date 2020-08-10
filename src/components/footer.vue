@@ -59,7 +59,6 @@ export default {
 
 <style lang="scss" scoped>
 .footer {
-  position: relative;
   margin-top: 50px;
   background-color: #ff9000;
   .wrapper-fo {

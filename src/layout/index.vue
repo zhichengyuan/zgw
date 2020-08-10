@@ -30,10 +30,12 @@ export default {
     z-index: 888;
   }
   .layout{
+    position: relative;
     .wrapper{
       width: 90%;
       margin:0 auto;
       margin-top:64px;
+
     }
   }
 </style>

@@ -15,12 +15,13 @@
           </el-input>
         </el-col>
         <el-col class="box class" :span="3">
-          <router-link to="my">
-            <el-dropdown class="tu-box" v-if="true">
+          <router-link to="/my">
+            <el-dropdown class="tu-box" @command="handleCommand">
               <span class="person"></span>
               <span>个人中心</span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click="toMyInfo">修改个人信息</el-dropdown-item>
+                <el-dropdown-item  command="orderList">查看个人订单</el-dropdown-item>
+                <el-dropdown-item  command="myInfo">修改个人信息</el-dropdown-item>
                 <el-dropdown-item>退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -57,6 +58,15 @@ export default {
   },
   mounted() {},
   methods: {
+    handleCommand(command) {
+        this.$router.push({name:command})
+      },
+    // 查看订单页
+    toOrderList(){
+      console.log(1)
+      this.$router.push({name:myInfo})
+      
+    },
     // 跳转到首页
     toHome(){
        this.$router.push({path:"/"})
@@ -64,6 +74,7 @@ export default {
     // 跳转到修改个人信息
     toMyInfo(){
       this.$router.push({name:MyInfo})
+      console.log(1)
     },
     bindTabbar(name) {
       this.$router.push({ name: name });
@@ -124,6 +135,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        cursor: pointer;
         .person {
           width: 30px;
           height: 30px;
