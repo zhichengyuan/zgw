@@ -121,7 +121,7 @@
               </div>
               <!-- 右边 -->
               <div class="card-right">
-                <el-col :span="14">
+                <el-col :span="12" :offset="2">
                   <div class="grid-content">
                     <div class="price">
                       <div class="cost">

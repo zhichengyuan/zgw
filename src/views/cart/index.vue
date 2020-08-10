@@ -1,9 +1,15 @@
 <template>
   <div>
     <!-- 还未加入购物车 -->
-    <div class="empty" v-if="false">
+    <div class="empty" v-if="$store.state.cartList.length == 0">
       <h2>您的购物车还没有东西</h2>
-      <span>篮子正在等待装满。祝您购物愉快！</span>
+      <span>篮子正在等待装满。祝您购物愉快！<el-button @click="$router.push('/')">去逛逛</el-button></span>
+    </div>
+    <div class="logToast">
+      <div v-if="! $store.state.token">
+        <span>登陆后可同步购物车商品</span>
+        <el-button @click="$router.push('/my')">去登陆</el-button>
+      </div>
     </div>
     <div class="cart-part">
       <div class="cart-content">
@@ -15,7 +21,7 @@
                 <el-row class="product-list" v-for="(item,index) in $store.state.cartList" :key="index">
                   <el-col :span="24" class="order">
                     <el-col class="check" :span="1">
-                      <el-checkbox v-model="item.isChecked"></el-checkbox>
+                      <el-checkbox v-model="item.isChecked" @change="onChangeCheck"></el-checkbox>
                     </el-col>
                     <el-col class="img" :span="5">
                       <img :src="$imgpath(item.pic)" alt="">
@@ -25,14 +31,13 @@
                       <p class="product-code">商品编号  {{item.skucode}}</p>
                       <p class="num">
                         <span>数量</span>
-                        <el-button icon="el-icon-minus" circle @click="onChangeNum(item,'reduce')"></el-button>
+                        <el-button icon="el-icon-minus" :disabled="item.productNumber <=1" circle @click="onChangeNum(item,'reduce')"></el-button>
                         <el-input v-model.number="item.productNumber" min="0" @input="changNum" placeholder=""></el-input>
                         <el-button icon="el-icon-plus" circle @click="onChangeNum(item,'add')"></el-button>
                       </p>
                     </el-col>
                     <el-col class="price" :span="6">
-                       <span>总价：{{item.skuprice}}₽</span>
-                       <span class="delete">删除</span>
+                       <span>单价：{{item.skuprice}}₽</span>
                     </el-col>
                   </el-col>
                 </el-row>
@@ -75,17 +80,21 @@
               <div class="right-price">
                 <p>
                   <span>总金额</span>
-                  <span>8912₽</span>
+                  <span>{{sumPrice}}₽</span>
                 </p>
                 <p>
                   <span>数量</span>
-                  <span>2</span>
+                  <span>{{sumProductNumber}}</span>
                 </p>
                 <p>
                   <span>运费</span>
                   <span>0₽</span>
                 </p>
-                <div><span >删除</span><el-checkbox v-model="isCheckAll"  @change="checkAll(true)">全选</el-checkbox><el-button type="primary" round>提交订单</el-button></div>
+                <div>
+                  <span @click="onClickRight">删除</span>
+                  <el-checkbox v-model="isCheckAll"  @change="checkAll(true)">全选</el-checkbox>
+                  <el-button type="primary" round @click="onSubmit">提交订单</el-button>
+                </div>
               </div>
              
             </div>
@@ -103,13 +112,57 @@ export default {
     return {
       isCheckAll: false,
       input:0,
-      checked:false
+      checked:false,
+      sumPrice:0,
+      sumProductNumber:0
     }
   },
   created(){
-    this.onClickRight()
+    // this.onClickRight()
+  },
+  computed: {
+    // calcTotalPrice() {
+    //   //每次遍历商品之前对总金额进行清零
+    //   let isCheckAll = true;
+    //   this.sumPrice = 0;
+    //   this.$store.state.cartList.forEach((item, index) => {
+    //     if (item.isChecked == true) {
+    //       this.sumPrice += item.skuprice * item.productNumber;
+    //     } else {
+    //       isCheckAll = false;
+    //     }
+    //   });
+    //   this.isCheckAll = isCheckAll;
+    //   console.log(this.sumPrice);
+    //   return this.sumPrice;
+
+    // }
   },
   methods:{
+    //计算
+    calcTotalPrice() {
+      //每次遍历商品之前对总金额进行清零
+      let isCheckAll = true;
+      this.sumProductNumber = 0;
+      this.sumPrice = 0;
+      this.$store.state.cartList.forEach((item, index) => {
+        if (item.isChecked == true) {
+          this.sumPrice += item.skuprice * item.productNumber;
+          this.sumProductNumber += item.productNumber
+        } else {
+          isCheckAll = false;
+        }
+      });
+      this.isCheckAll = isCheckAll;
+      console.log(this.sumPrice);
+      return this.sumPrice;
+
+    },
+    //是否选中
+    onChangeCheck(){
+      this.calcTotalPrice();
+    },
+    //改变数量
     onChangeNum(item,type) {
       // console.log(item,type);
       if(type == 'add'){
@@ -117,30 +170,81 @@ export default {
       }else {
         item.productNumber --
       }
-      // console.log(item)
-      // this.$store.state.cartList[index]
+      if(item.productNumber == 0 ) {
+        console.log('我执行了')
+        // item.isChecked = true;
+      }
+      
       this.$store.dispatch("updateCart", item);
+      // this.onClickRight();
+      this.calcTotalPrice();
+      
     },
     changNum(v){
       console.log(v)
     },
     //删除商品
     onClickRight() {
+      console.log('我要被删除');
       let removeList = [];
       let list = this.$store.state.cartList;
 
       this.$store.state.cartList.forEach(cart => {
-        if (cart.isChecked == true) removeList.push(cart);
+        if (cart.isChecked == true ) removeList.push(cart);
       });
+      console.log(removeList);
       if (removeList.length > 0) this.$store.dispatch("removeCart", removeList);
     },
     // 全选
     checkAll() {
+      
       this.isCheckAll != this.isCheckAll;
       this.$store.state.cartList.forEach((item, index) => {
         item.isChecked = this.isCheckAll;
       });
-    }
+      this.calcTotalPrice();
+    },
+    // 确认订单
+    onSubmit() {
+      let selectedList = [];
+      this.$store.state.cartList.forEach((item, index) => {
+        if (item.isChecked == true) {
+          selectedList.push(item);
+        }
+      });
+      if (selectedList.length == 0) {
+        this.$message({
+          message: '请选择要购买的商品',
+          type: 'warning'
+        });
+        // this.$toast({
+        //   message: `${this.$lang["请选择要购买的商品"]}`
+        // });
+        return;
+      }
+
+      if (this.$store.state.token == null) {
+        this.$router.push("/my");
+        return;
+      }
+      console.log(selectedList)
+
+      this.$request.orderConfirm(selectedList).then(res => {
+        if (res.code == 0) {
+          console.log('创建成功');
+          this.$store.commit("orderBuffer", res.data);
+          this.$router.push("/order");
+        } else {
+          this.$message({
+            message: '订单创建失败',
+            type: 'warning'
+          });
+          // this.$toast({
+          //   message: `${this.$lang["订单创建失败"]}`
+          // });
+        }
+      });
+    },
   }
 };
 </script>

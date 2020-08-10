@@ -9,18 +9,26 @@
         <div class="orde-detail">
           <el-table :data="shopData" style="width: 100%">
             <el-table-column type="expand">
-              <template slot-scope="scope">
-                <el-table :data="scope.row.tableData" style="width: 100%">
+              <template >
+                <el-table :data="orderBuffer.productList" style="width: 100%">
                   <el-table-column prop="img" label="商品主图" width="100">
                     <template slot-scope="scope">
-                      <img :src="scope.row.img" alt />
+                      <img  :src="$imgpath(scope.row.pic)" alt />
                     </template>
                   </el-table-column>
                   <el-table-column prop="name" label="商品名称" ></el-table-column>
-                  <el-table-column prop="price" label="单价"></el-table-column>
-                  <el-table-column prop="num" label="数量"></el-table-column>
-                  <el-table-column prop="transPrice" label="运费"></el-table-column>
-                  <el-table-column prop="totalPrice" label="总金额"></el-table-column>
+                  <el-table-column prop="skuprice" label="单价"></el-table-column>
+                  <el-table-column prop="productNumber" label="数量"></el-table-column>
+                  <el-table-column prop="transPrice" label="运费">
+                    <template >
+                      <div>货物需要运输费用，请与服务人员联系  Tel:0123456789</div>
+                    </template>
+                  </el-table-column>
+                  <el-table-column prop="totalPrice" label="总金额">
+                    <template slot-scope="scope">
+                      <div>{{scope.row.skuprice * scope.row.productNumber}}₽</div>
+                    </template>
+                  </el-table-column>
                 </el-table>
               </template>
             </el-table-column>
@@ -33,7 +41,7 @@
         <div class="payment">
           <div class="totalPrice">
             <span>总金额：</span>
-            <span>8912₽</span>
+            <span>{{orderBuffer.totalPrice}}₽</span>
           </div>
           <el-button>待支付结算</el-button>
         </div>
@@ -90,9 +98,14 @@ export default {
           ],
         }
       ],
+      orderBuffer:{},
     };
   },
-
+  mounted(){
+    const orderProduct=JSON.parse(localStorage.getItem('orderBuffer'))
+    this.orderBuffer=orderProduct||this.$store.state.orderBuffer
+    console.log(this.orderBuffer);
+  },
   methods: {},
 };
 </script>

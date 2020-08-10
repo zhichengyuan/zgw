@@ -15,12 +15,10 @@
           </el-input>
         </el-col>
         <el-col class="box class " :span="3">
-          <router-link to="my">
-            <div class="tu-box">
+            <div class="tu-box" @click="bindTabbar('my')">
               <span class="person"></span>
               <span>个人中心</span>
             </div>
-          </router-link> 
           
         </el-col>
         <el-col class="box class " :span="2">

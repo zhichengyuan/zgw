@@ -121,6 +121,7 @@ export default {
       },
     };
   },
+  inject:['loadCartList'] ,
   methods: {
     change(index) {
       this.currentIndex = index;
@@ -129,6 +130,44 @@ export default {
       this.$refs[loginForm].validate((valid) => {
         if (valid) {
           alert("loginForm!");
+          this.$request
+            .login({ username: this.loginForm.loginName, password: this.loginForm.loginPass })
+            .then(res => {
+              if (res.code == 0) {
+                this.$store.commit("setToken", res.data.token);
+                this.$store.dispatch("syncUpdateUserInfo");
+                this.loadCartList()
+                //this.$store.dispatch("loadCartList");
+                this.$message({
+                  message: '登录成功',
+                  type: 'success'
+                });
+                // this.$toast({
+                //   message: `${this.$lang["登录成功"]}`
+                // });
+                //if (this.flag) {
+                //  this.$router.push("/");
+                //}
+                //else {
+                this.$router.back(-1);
+                // }
+
+                // if (localStorage.getItem("cartInfo")) {
+                //   let localCart = JSON.parse(localStorage.getItem("cartInfo"));
+
+                //   localCart.forEach(item => {
+                //     this.$store.commit("saveCartList",item)
+                //   });
+
+                // }
+
+                // console.log(this.$store.state.cartInfo);
+              } else {
+                this.$toast({
+                  message: `${this.$lang["用户名或密码错误"]}`
+                });
+              }
+            });
         } else {
           console.log("error loginForm!!");
           return false;
