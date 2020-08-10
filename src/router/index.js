@@ -67,14 +67,23 @@ const router = new VueRouter({
         // 订单页
         {
           path: "/order",
+          name:"order",
           component: () =>
+         
             import("@/views/order/index.vue")
         },
         // //个人订单列表页
         {
           path: "/orderList",
+          name:"orderList",
           component: () =>
             import("@/views/orderList/index.vue")
+        },
+        {
+          path: "/myInfo",
+          name:"myInfo",
+          component: () =>
+            import("@/views/my/index.vue")
         },
       ]
     },

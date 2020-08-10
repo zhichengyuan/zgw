@@ -199,7 +199,7 @@ export default {
       max-width: 1500px;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
-      padding: 0 30px;
+      padding: 40px 30px 0;
       margin: 0 auto;
       .sign {
         color: #000;
