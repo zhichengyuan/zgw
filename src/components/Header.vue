@@ -3,7 +3,7 @@
     <div class="header">
       <el-row class="content">
         <el-col class="box logo" :span="3">
-          <h2 @click="toHome">logo</h2>
+          <h2 @click="bindTabbar('home')">logo</h2>
         </el-col>
         <el-col class="box class icon" :span="2">
           <span v-if="!isShow" @click="bindTrigger"></span>
@@ -21,7 +21,8 @@
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="orderList">查看个人订单</el-dropdown-item>
               <el-dropdown-item command="myInfo">修改个人信息</el-dropdown-item>
-              <el-dropdown-item>退出登录</el-dropdown-item>
+              <el-dropdown-item v-if="!$store.state.token" command="my">登录</el-dropdown-item>
+              <el-dropdown-item v-if="$store.state.token" command="my">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
@@ -30,7 +31,7 @@
             <span class="person cart"></span>
             <span>购物车</span>
             <!-- 小徽标 -->
-            <div class="roundLogo">0</div>
+            <div class="roundLogo">{{calcproductNumber}}</div>
           </div>
         </el-col>
       </el-row>
@@ -54,19 +55,51 @@ export default {
     return {
       value: "",
       isShow: false,
+      productNumber:0
     };
   },
+  computed:{
+    calcproductNumber() {
+      //每次遍历商品之前对总金额进行清零
+      this.productNumber = 0;
+      this.$store.state.cartList.forEach((item,index) => {
+        this.productNumber += item.productNumber;
+      })
+      
+      return this.productNumber;
+ 
+    }
+  },
   mounted() {},
+  created(){
+    // this.getProductNumber();
+  },
   methods: {
     handleCommand(command) {
-      this.$router.push({ name: command });
+      if(command == 'my'){
+        if(this.$store.state.token) {
+          this.logout();
+          return;
+        }
+      }
+        this.bindTabbar(command)
+      
+      
+      // this.$router.push({ name: command });
     },
-    // 跳转到首页
-    toHome() {
-      this.$router.push({ path: "/" });
-    },
+    
     bindTabbar(name) {
-      this.$router.push({ name: name });
+      console.log(this.$store.state.token);
+      if(name == 'orderList' || name == 'myInfo') {
+        if(!this.$store.state.token) {
+          this.$router.push({ name: 'my' });
+        }else{
+          this.$router.push({ name: name });
+        }
+      }else{
+        this.$router.push({ name: name });
+      }
+      
     },
     changeShow(parms) {
       // console.log(parms)
@@ -76,6 +109,35 @@ export default {
       this.isShow = !this.isShow;
       // console.log(this.isShow);
     },
+    //退出登录
+    logout() {
+      localStorage.removeItem("token");
+      this.$store.commit("removeCart", this.$store.state.cartList);
+      localStorage.removeItem("cartlist");
+      
+
+      this.nicname = "";
+      this.passWord = "";
+      this.$message({
+          message: "已退出",
+          type: "success",
+        });
+      // this.$toast({
+      //   message: `${this.$lang["已退出"]}`
+      // });
+      this.$store.commit("clear")
+      this.$router.replace("/my");
+      // this.isRouterAlive = false;
+      // this.$nextTick(function() {
+      //   this.isRouterAlive = true;
+      // });
+      //location.reload();
+    },
+    getProductNumber(){
+      this.$store.state.cartList.forEach((item,index) => {
+        this.productNumber += item.productNumber;
+      })
+    }
   },
 };
 </script>

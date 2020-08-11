@@ -54,6 +54,7 @@ export default {
   },
   methods: {
     cancleOrder(parms){
+      console.log(parms);
       this.getOrderList();
     },
     handleClick(tab, event) {

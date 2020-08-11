@@ -4,21 +4,21 @@
       <div class="detail">
         <div class="detail-container">
           <!-- 产品分类路径 面包屑 -->
-          <div class="classPath">
+          <!-- <div class="classPath">
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
               <el-breadcrumb-item>活动管理</el-breadcrumb-item>
               <el-breadcrumb-item>活动列表</el-breadcrumb-item>
               <el-breadcrumb-item>活动详情</el-breadcrumb-item>
             </el-breadcrumb>
-          </div>
+          </div> -->
           <!-- 商品名字-->
           <div class="pro-name">
             <!-- 名字 -->
             <el-row>
               <el-col :span="12">
                 <div class="grid-content">
-                  <span class="brand">ASICS / GEL-CONTEND 6 TWIST运动鞋</span>
+                  <span class="brand">{{product.name}}</span>
                 </div>
               </el-col>
               <el-col :span="12">
@@ -187,6 +187,11 @@
           <!-- 产品详情 -->
           <div class="pro-detail">
             <h1 style="text-align:center;font-weight:700;margin-top:100px">详情内容</h1>
+           
+            <div v-if="product.detailMobileHtml" class="container" v-html="getMobile()"></div>
+            <div v-else style="text-align:center;">{{'暂无数据'}}</div>
+
+            
           </div>
         </div>
       </div>
@@ -212,6 +217,7 @@ export default {
       skuStock: 0, //sku库存
       skuPrice: "", //sku价格
       selectedSku: null, //传入购物车数据
+      detailMobileHtml:'',
       text: "",
       img: [
         "https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg",
@@ -226,12 +232,26 @@ export default {
     this.active = this.img[0];
     console.log("路由参数", this.$route.params);
     this.getProducts();
+    // this.getMobile();
   },
   mounted() {},
   methods: {
     selectPic(index) {
       this.active = this.img[index];
       this.currentIndex = index;
+    },
+    getMobile() {
+      let html = this.product.detailMobileHtml.replace(
+        RegExp("<img ", "g"),
+        "<img style='width:100%'"
+      );
+      html = html.replace(
+        RegExp('src="', "g"),
+        'src="' + this.$request.imgpath("")
+      );
+      console.log(html);
+      // this.detailMobileHtml = html;
+      return html;
     },
     // 获取商品
     getProducts() {
