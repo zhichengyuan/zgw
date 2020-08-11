@@ -72,7 +72,7 @@
                       <!-- 放大图 -->
                       <el-col :span="24">
                         <div class="grid-content container_3d">
-                          <pic-zoom :url="active" :scale="2" />
+                          <pic-zoom :url="active" :scale="3" />
                         </div>
                       </el-col>
                       <!-- 小图 -->

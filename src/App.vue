@@ -167,11 +167,11 @@ export default {
 <style>
 .mouse-cover-canvas {
  background: rgb(255, 255, 255);
-  left: 734px!important;
+  left: 831px!important;
   top: 280px!important;
 }
 .mouse-cover{
-  width: 75px!important;
-  height: 75px!important;
+  /* width: 75px!important;
+  height: 75px!important; */
 }
 </style>
