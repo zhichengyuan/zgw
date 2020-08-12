@@ -10,7 +10,7 @@
           <span class="fork" v-else @click="bindTrigger"></span>
         </el-col>
         <el-col class="box" :span="13">
-          <el-input placeholder="请输入内容" v-model="value">
+          <el-input placeholder="请输入内容" @input="searchChange" v-model.lazy="value">
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
           </el-input>
         </el-col>
@@ -75,6 +75,15 @@ export default {
     // this.getProductNumber();
   },
   methods: {
+    searchChange(v){
+      console.log(v);
+      if(v == '') {
+        this.$router.push({name:'home'});
+      }else {
+        this.$router.push(`/search/${v}`);
+      }
+      
+    },
     handleCommand(command) {
       if(command == 'my'){
         if(this.$store.state.token) {

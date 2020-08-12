@@ -85,6 +85,12 @@ const router = new VueRouter({
           component: () =>
             import("@/views/my/index.vue")
         },
+        {
+          path: "/search/:search",
+          name:"search",
+          component: () =>
+            import("@/views/search/index.vue")
+        },
       ]
     },
     // 分类内部

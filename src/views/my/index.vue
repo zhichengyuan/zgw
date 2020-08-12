@@ -14,7 +14,7 @@
                 class="demo-ruleForm"
               >
                 <el-form-item label="用户名" prop="name">
-                  <el-input v-model="ruleForm.name"></el-input>
+                  <el-input v-model="ruleForm.name" disabled></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="pass">
                   <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
@@ -52,18 +52,46 @@ export default {
       },
     };
   },
+  created(){
+    this.ruleForm.name = this.$store.state.username;
+  },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          // alert("submit!");
+          this.onClickRight();
         } else {
           console.log("error submit!!");
           return false;
         }
       });
     },
+     // 点击保存  保存个人信息--w
+    onClickRight() {
+      let userinfo = {
+        nickname: this.nickname
+      };
+      userinfo.password = this.ruleForm.pass;
+      // if (this.isDisabled != true) {
+      //   userinfo.password = this.ruleForm.pass;
+      // }
+      this.$request.userSave(userinfo).then(res => {
+        if (res.code == 0) {
+         
+            localStorage.removeItem("token");
+            this.$message({
+              message: "请重新登陆",
+              type: "success",
+            });
+        
+            this.$router.push("/login");
+          
+        }
+      });
+    },
   },
+ 
 };
 </script>
 

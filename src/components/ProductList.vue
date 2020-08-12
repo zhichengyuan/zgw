@@ -1,21 +1,7 @@
 <template>
   <div class="productList">
     <h2 class="title">*{{title}}</h2>
-    <el-row :gutter="20">
-        <el-col :span="4" v-for="(o) in list" :key="o._id">
-            <div @click="toDetail(o)">
-              <el-card shadow="hover"   :body-style="{ padding: '5px',borderRadius:'20px' }">
-                <img :src="$imgpath(o.pic)" class="image">
-                <div style="padding: 14px;">
-                    <span>{{o.price}}</span>
-                    <div class="bottom clearfix">
-                    <time class="time">{{ o.name }}</time>
-                    </div>
-                </div>
-              </el-card>
-            </div>
-        </el-col>
-    </el-row>
+    <product :productArr="list"></product>
     <div class="button">
         <el-button v-if="finished == false" type="primary" plain round @click="more" :loading="loading">显示更多<i class="el-icon-bottom el-icon--right"></i></el-button>
         <span v-else>没有更多了</span>
@@ -25,8 +11,12 @@
 
 <script>
 import { fetchCommodityList } from "@/api/apis";
+import Product from './Product'
 export default {
   name: 'productList',
+  components: {
+      Product
+    },
   props: {
         commodity: {
         type: Object,
@@ -49,7 +39,7 @@ export default {
 
         //imgUrlPath: ImgUrlPath.ImgUrlPath,
         offset: 100,
-        pagesize: 10,
+        pagesize: 12,
         pagenum: 1,
         total: 0,
         dataList: [],
@@ -134,6 +124,9 @@ export default {
 <style lang="scss" scoped>
 .productList{
     padding-bottom: 50px;
+    .buttom-margin{
+      margin-bottom: 20px;
+    }
     .button{
         display: block;
         width: 100%;
@@ -159,6 +152,10 @@ export default {
 .time {
 font-size: 13px;
 color: #999;
+width: 100%;
+white-space: nowrap;
+text-overflow: ellipsis;
+overflow: hidden;
 }
 
 .bottom {
