@@ -13,7 +13,7 @@ if(localStorage.getItem('switchingLanguage')){
         locale1 = localStorage.getItem('language');
     }else {
         // console.log('当前语言');
-        locale1 = 'cn'
+        locale1 = 'ru'
     }
 }
 

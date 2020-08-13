@@ -4,23 +4,23 @@
     <div class="list-wrapper">
       <div class="list-content">
         <!-- theme -->
-        <h2>个人订单列表</h2>
+        <h2>{{$t('message.个人订单列表')}}</h2>
         <!-- 订单列表 -->
         <div class="list">
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="所有订单" name="-1">
+            <el-tab-pane :label="$t('message.所有订单')" name="-1">
               <order-detail :orderList="orderList" @cancleOrder="cancleOrder"></order-detail>
             </el-tab-pane>
-            <el-tab-pane label="待发货" name="1">
+            <el-tab-pane :label="$t('message.待发货')" name="1">
               <order-detail :orderList="orderList"></order-detail>
             </el-tab-pane>
-            <el-tab-pane label="待收货" name="2">
+            <el-tab-pane :label="$t('message.待收货')" name="2">
               <order-detail :orderList="orderList"></order-detail>
             </el-tab-pane>
-            <el-tab-pane label="已收货" name="3">
+            <el-tab-pane :label="$t('message.已收货')" name="3">
               <order-detail :orderList="orderList"></order-detail>
             </el-tab-pane>
-            <el-tab-pane label="已取消" name="4">
+            <el-tab-pane :label="$t('message.已取消')" name="4">
               <order-detail :orderList="orderList"></order-detail>
             </el-tab-pane>
           </el-tabs>

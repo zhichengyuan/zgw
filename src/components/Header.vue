@@ -10,26 +10,26 @@
           <span class="fork" v-else @click="bindTrigger"></span>
         </el-col>
         <el-col class="box" :span="13">
-          <el-input placeholder="请输入内容" @input="searchChange" v-model.lazy="value">
+          <el-input :placheholder="$t('message.请输入内容')" @input="searchChange" v-model.lazy="value">
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
           </el-input>
         </el-col>
         <el-col class="box class" :span="3">
           <el-dropdown class="tu-box" @command="handleCommand">
             <span class="person"></span>
-            <span>个人中心</span>
+            <span>{{$t("message.个人中心")}}</span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="orderList">查看个人订单</el-dropdown-item>
-              <el-dropdown-item command="myInfo">修改个人信息</el-dropdown-item>
-              <el-dropdown-item v-if="!$store.state.token" command="my">登录</el-dropdown-item>
-              <el-dropdown-item v-if="$store.state.token" command="my">退出登录</el-dropdown-item>
+              <el-dropdown-item command="orderList">{{$t("message.查看个人订单")}}</el-dropdown-item>
+              <el-dropdown-item command="myInfo">{{$t("message.修改个人信息")}}</el-dropdown-item>
+              <el-dropdown-item v-if="!$store.state.token" command="my">{{$t("message.登录")}}    </el-dropdown-item>
+              <el-dropdown-item v-if="$store.state.token" command="my">{{$t("message.退出登录")}}</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
         <el-col class="box class" :span="2">
           <div class="tu-box" @click="bindTabbar('cart')">
             <span class="person cart"></span>
-            <span>购物车</span>
+            <span>{{$t("message.购物车")}}</span>
             <!-- 小徽标 -->
             <div class="roundLogo">{{calcproductNumber}}</div>
           </div>
@@ -128,7 +128,7 @@ export default {
       this.nicname = "";
       this.passWord = "";
       this.$message({
-          message: "已退出",
+          message: "this.$t('message.已退出')",
           type: "success",
         });
       // this.$toast({

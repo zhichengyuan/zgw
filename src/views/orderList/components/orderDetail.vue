@@ -4,55 +4,55 @@
             <el-table-column type="expand">
             <template slot-scope="scope">
                 <el-table :data="scope.row.productList" style="width: 100%">
-                <el-table-column prop="img" label="商品主图" width="100">
+                <el-table-column prop="img" :label="$t('message.商品主图')" width="100">
                     <template slot-scope="scope">
                     <img :src="$imgpath(scope.row.pic)" alt />
                     </template>
                 </el-table-column>
-                <el-table-column prop="name" label="商品名称"></el-table-column>
-                <el-table-column prop="skuprice" label="单价"></el-table-column>
-                <el-table-column prop="productNumber" label="数量"></el-table-column>
+                <el-table-column prop="name" :label="$t('message.商品名称')"></el-table-column>
+                <el-table-column prop="skuprice" :label="$t('message.单价')"></el-table-column>
+                <el-table-column prop="productNumber" :label="$t('message.数量')"></el-table-column>
                 </el-table>
             </template>
             </el-table-column>
-            <el-table-column label="订单编号" prop="logNum">
+            <el-table-column :label="$t('message.订单编号')" prop="logNum">
                 <template slot-scope="scope">
                 <span>{{ scope.row._id.substr(-8) }}</span>
                 </template>
             </el-table-column>
-            <el-table-column label="物流编号" prop="logNum">
+            <el-table-column :label="$t('message.物流编号')" prop="logNum">
                 <template slot-scope="scope">
                 <span>{{ scope.row.logId?scope.row.logId:'--' }}</span>
                 </template>
             </el-table-column>
-            <el-table-column label="物流方式" prop="logPath">
+            <el-table-column :label="$t('message.物流方式')" prop="logPath">
                 <template slot-scope="scope">
                 <span>{{ scope.row.logType?scope.row.logType:'--' }}</span>
                 </template>
             </el-table-column>
-            <el-table-column label="收货地址" prop="shopName">
+            <el-table-column :label="$t('message.收货地址')" prop="shopName">
                 <template slot-scope="scope">
                 <span>{{ scope.row.logType?scope.row.logType:'--' }}</span>
                 </template>
             </el-table-column>
-            <el-table-column label="运费" prop="shopName">
+            <el-table-column :label="$t('message.运费')" prop="shopName">
                 <template slot-scope="scope">
                 <span>{{ scope.row.logType?scope.row.logType:'--' }}</span>
                 </template>
             </el-table-column>
-            <el-table-column label="商品金额" prop="productPrice">
+            <el-table-column :label="$t('message.商品金额')" prop="productPrice">
             </el-table-column>
-            <el-table-column label="总金额" prop="totalPrice">
+            <el-table-column :label="$t('message.总金额')" prop="totalPrice">
             </el-table-column>
-            <el-table-column label="订单状态" prop="status">
+            <el-table-column :label="$t('message.订单状态')" prop="status">
                 <template slot-scope="scope">
                 <span>{{orderStatus(scope.row.status)}}</span>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" prop="status">
+            <el-table-column :label="$t('message.操作')" prop="status">
                 <template slot-scope="scope">
-                    <el-button v-if="scope.row.status == 0 || scope.row.status == 1" @click="cancle(scope.row)">取消订单</el-button>
-                    <el-button v-if="scope.row.status == 2" @click="finished(scope.row)">确认收货</el-button>
+                    <el-button v-if="scope.row.status == 0 || scope.row.status == 1" @click="cancle(scope.row)">{{$t('message.取消订单')}}</el-button>
+                    <el-button v-if="scope.row.status == 2" @click="finished(scope.row)">{{$t('message.确认收货')}}</el-button>
                 <!-- <span>{{orderStatus(scope.row.status)}}</span> -->
                 </template>
             </el-table-column>
@@ -139,19 +139,19 @@ export default {
     orderStatus(status) {
       switch (status) {
         case "0":
-          return "待付款";
+          return this.$t('message.待付款');
           break;
         case "1":
-          return "待发货";
+          return this.$t('message.待发货');
           break;
         case "2":
-          return "待收货";
+          return this.$t('message.待收货');
           break;
         case "3":
-          return "完成收货";
+          return this.$t('message.完成收货');
           break;
         case "4":
-          return "已取消";
+          return this.$t('message.已取消');
           break;
       }
     },

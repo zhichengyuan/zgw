@@ -3,19 +3,19 @@
     <!-- 还未加入购物车 -->
     <div class="logToast">
       <div v-if="! $store.state.token">
-        <span>登陆后可同步购物车商品</span>
-        <el-button @click="$router.push('/my')" type="danger">去登陆</el-button>
+        <span>{{$t('message.登陆后可同步购物车商品')}}</span>
+        <el-button @click="$router.push('/my')" type="danger">{{$t('message.去登陆')}}</el-button>
       </div>
     </div>
     <div class="empty" v-if="$store.state.cartList.length == 0">
       <div>
         <img src="@/assets/imgs/cat.png" alt="">
         <div>
-          <h2>您的购物车还没有东西</h2>
+          <h2>{{$t('message.您的购物车还没有东西')}}</h2>
         <span>
-          篮子正在等待装满。祝您购物愉快！
+          {{$t('message.篮子正在等待装满。祝您购物愉快！')}}
         </span>
-        <el-button @click="$router.push('/') " type="primary" size="small" round>去逛逛</el-button>
+        <el-button @click="$router.push('/') " type="primary" size="small" round>{{$t('message.去逛逛')}}</el-button>
         </div>
       </div>
       
@@ -42,9 +42,9 @@
                     </el-col>
                     <el-col class="product" :span="12">
                       <p class="name">{{item.name}}</p>
-                      <p class="product-code">商品编号 {{item.skucode}}</p>
+                      <p class="product-code">{{$t('message.商品编号')}} {{item.skucode}}</p>
                       <p class="num">
-                        <span>数量</span>
+                        <span>{{$t('message.数量')}}</span>
                         <el-button
                           icon="el-icon-minus"
                           :disabled="item.productNumber <=1"
@@ -61,7 +61,7 @@
                       </p>
                     </el-col>
                     <el-col class="price" :span="6">
-                      <span>单价：{{item.skuprice}}₽</span>
+                      <span>{{$t('message.单价：')}}{{item.skuprice}}₽</span>
                     </el-col>
                   </el-col>
                 </el-row>
@@ -103,11 +103,11 @@
               <!-- 右侧去结账 -->
               <div class="right-price">
                 <p>
-                  <span>总金额</span>
+                  <span>{{$t('message.总金额')}}</span>
                   <span>{{sumPrice}}₽</span>
                 </p>
                 <p>
-                  <span>数量</span>
+                  <span>{{$t('message.数量')}}</span>
                   <span>{{sumProductNumber}}</span>
                 </p>
                 <!-- <p>
@@ -115,10 +115,10 @@
                   <span>0₽</span>
                 </p> -->
                 <div>
-                  <el-checkbox v-model="isCheckAll" @change="checkAll(true)">全选</el-checkbox>
-                  <el-button  type="danger" round @click="onClickRight">删除</el-button>
+                  <el-checkbox v-model="isCheckAll" @change="checkAll(true)">{{$t('message.全选')}}</el-checkbox>
+                  <el-button  type="danger" round @click="onClickRight">{{$t('message.全选')}}</el-button>
 
-                  <el-button type="primary" round @click="onSubmit" >提交订单</el-button>
+                  <el-button type="primary" round @click="onSubmit" >{{$t('message.提交订单')}}</el-button>
                 </div>
               </div>
             </div>
@@ -234,7 +234,7 @@ export default {
       });
       if (selectedList.length == 0) {
         this.$message({
-          message: "请选择要购买的商品",
+          message: this.$t('message.请选择要购买的商品'),
           type: "warning",
         });
         // this.$toast({
@@ -256,7 +256,7 @@ export default {
           this.$router.push("/order");
         } else {
           this.$message({
-            message: "订单创建失败",
+            message: this.$t('message.订单创建失败'),
             type: "warning",
           });
           // this.$toast({
@@ -394,7 +394,7 @@ export default {
         box-sizing: border-box;
         border: 1px solid #e8e8e8;
         background: #fff;
-        padding: 32px 40px 27px;
+        padding: 32px 9px 27px;
         p {
           display: flex;
           justify-content: space-between;

@@ -1,6 +1,6 @@
 <template>
   <div class="activity">
-    <h2 class="title">*首页活动</h2>
+    <h2 class="title">{{$t("message.*首页活动")}}</h2>
     <el-row :gutter="20">
         <el-col :span="6" v-for="(o) in 4" :key="o">
             <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">

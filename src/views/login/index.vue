@@ -26,17 +26,17 @@
                 class="demo-ruleForm"
               >
                 <el-form-item prop="loginName">
-                  <el-input v-model="loginForm.loginName" placeholder="用户名"></el-input>
+                  <el-input v-model="loginForm.loginName" :placheholder="$t('message.用户名')"></el-input>
                 </el-form-item>
                 <el-form-item prop="loginPass">
                   <el-input
                     type="password"
                     v-model="loginForm.loginPass"
                     autocomplete="off"
-                    placeholder="密码"
+                    :placheholder="$t('message.密码')"
                   ></el-input>
                 </el-form-item>
-                <el-button @click="login('loginForm')" class="fm-button">登录</el-button>
+                <el-button @click="login('loginForm')" class="fm-button">{{$t('message.登录')}}</el-button>
               </el-form>
             </div>
             <!-- form content 注册-->
@@ -49,14 +49,14 @@
                 class="demo-ruleForm"
               >
                 <el-form-item prop="regName">
-                  <el-input v-model="registerForm.regName" placeholder="用户名"></el-input>
+                  <el-input v-model="registerForm.regName" :placheholder="$t('message.用户名')"></el-input>
                 </el-form-item>
                 <el-form-item prop="regPass">
                   <el-input
                     type="password"
                     v-model="registerForm.regPass"
                     autocomplete="off"
-                    placeholder="密码"
+                    :placheholder="$t('message.密码')"
                   ></el-input>
                 </el-form-item>
                 <el-form-item prop="regcheckPass">
@@ -64,11 +64,11 @@
                     type="password"
                     v-model="registerForm.regcheckPass"
                     autocomplete="off"
-                    placeholder="确认密码"
+                    :placheholder="$t('message.确认密码')"
                   ></el-input>
                 </el-form-item>
 
-                <el-button @click="register('registerForm')" class="fm-button">注册</el-button>
+                <el-button @click="register('registerForm')" class="fm-button">{{$t('message.注册')}}</el-button>
               </el-form>
             </div>
           </div>
@@ -94,16 +94,16 @@ export default {
     };
     var validatePass2 = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请再次输入密码"));
+        callback(new Error(this.$t('message.请再次输入密码')));
       } else if (value !== this.registerForm.regcheckPass) {
-        callback(new Error("两次输入密码不一致!"));
+        callback(new Error(this.$t('message.两次输入密码不一致!')));
       } else {
         callback();
       }
     };
     return {
       currentIndex: 0,
-      tabs: ["个人登录", "个人注册"],
+      tabs: [this.$t('message.个人登录'), this.$t('message.个人注册')],
       loginShow: 0,
       loginForm: {
         loginPass: "",
@@ -147,7 +147,7 @@ export default {
             this.loadCartList()
             //this.$store.dispatch("loadCartList");
             this.$message({
-              message: '登录成功',
+              message: this.$t('message.登录成功'),
               type: 'success'
             });
            
@@ -155,7 +155,7 @@ export default {
            
           } else {
             this.$message({
-              message: "用户名或密码错误",
+              message: this.$t('message.用户名或密码错误'),
               type: "warning",
             });
             
@@ -194,7 +194,7 @@ export default {
             this.loginForm.loginName = this.registerForm.regName;
             this.loginForm.loginPass = this.registerForm.regPass;
             this.$message({
-              message: "注册成功",
+              message: this.$t('message.注册成功'),
               type: "success",
             });
             // this.$toast({
@@ -205,7 +205,7 @@ export default {
           }
           if (res.code == 1) {
             this.$message({
-              message: "该账号已注册",
+              message: this.$t('message.该账号已注册') ,
               type: "warning",
             });
             // this.$toast({

@@ -31,7 +31,7 @@
             <el-row>
               <el-col :span="2">
                 <div class="grid-content article">
-                  <span class="art">文章:</span>
+                  <span class="art">{{$t('message.文章:')}}</span>
                   <span>11329342</span>
                 </div>
               </el-col>
@@ -48,12 +48,12 @@
               </el-col>
               <el-col :span="2">
                 <div class="grid-content">
-                  <span>117则评论</span>
+                  <span>{{$t('message.117则评论')}}</span>
                 </div>
               </el-col>
               <el-col :span="2">
                 <div class="grid-content">
-                  <span>超过1700次购买</span>
+                  <span>{{$t('message.超过1700次购买')}}</span>
                 </div>
               </el-col>
               <el-col :span="15">
@@ -154,8 +154,8 @@
                       </div>
                     </div>
                     <div class="sku-info">
-                      <span class="colorSku">规格：</span>
-                      <span class="colorInfo">请选择</span>
+                      <span class="colorSku">{{$t('message.规格：')}}</span>
+                      <span class="colorInfo">{{$t('message.请选择')}}</span>
                     </div>
                     <div class="sku-select">
                       <ul>
@@ -176,7 +176,7 @@
                     </div>
                     <div class="addCart">
                       <div class="cart-btn">
-                        <el-button class="add-btn" @click="submitCartItem">加入购物车</el-button>
+                        <el-button class="add-btn" @click="submitCartItem">{{$t('message.加入购物车')}}</el-button>
                       </div>
                     </div>
                   </div>
@@ -186,10 +186,10 @@
           </div>
           <!-- 产品详情 -->
           <div class="pro-detail">
-            <h1 style="text-align:center;font-weight:700;margin-top:100px">详情内容</h1>
+            <h1 style="text-align:center;font-weight:700;margin-top:100px">{{$t('message.详情内容')}}</h1>
            
             <div v-if="product.detailMobileHtml" class="container" v-html="getMobile()"></div>
-            <div v-else style="text-align:center;">{{'暂无数据'}}</div>
+            <div v-else style="text-align:center;">{{$t('message.暂无数据')}}</div>
 
             
           </div>
@@ -356,7 +356,7 @@ export default {
         if (!this.selectedSku) {
           //whm?
           this.$message({
-            message: "请选择商品规格",
+            message: this.$t('message.请选择商品规格'),
             type: "warning",
           });
           // this.$toast({
@@ -395,7 +395,7 @@ export default {
 
           // this.$toast.success(this.$lang["添加成功"]);
           this.$message({
-            message: "恭喜你，这是一条成功消息",
+            message:this.$t('message.恭喜你，这是一条成功消息'),
             type: "success",
           });
           this.show = false;

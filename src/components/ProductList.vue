@@ -3,8 +3,8 @@
     <h2 class="title">*{{title}}</h2>
     <product :productArr="list"></product>
     <div class="button">
-        <el-button v-if="finished == false" type="primary" plain round @click="more" :loading="loading">显示更多<i class="el-icon-bottom el-icon--right"></i></el-button>
-        <span v-else>没有更多了</span>
+        <el-button v-if="finished == false" type="primary" plain round @click="more" :loading="loading">{{$t('message.显示更多')}}<i class="el-icon-bottom el-icon--right"></i></el-button>
+        <span v-else>{{$t('message.没有更多了')}}</span>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
         title: {
         type: String,
             default: () => {
-                return '推荐商品';
+                // return this.$t('message.推荐商品')
             }
         }
     },

@@ -4,27 +4,27 @@
     <div class="order-wrapper">
       <div class="order-content">
         <!-- theme -->
-        <h2>待付款订单</h2>
+        <h2>{{$t('message.待付款订单')}}</h2>
         <!-- 商品订单详情 -->
         <div class="orde-detail">
           <el-table :data="shopData" style="width: 100%">
             <el-table-column type="expand">
               <template >
                 <el-table :data="orderBuffer.productList" style="width: 100%">
-                  <el-table-column prop="img" label="商品主图" width="100">
+                  <el-table-column prop="img" :label="$t('message.商品主图')" width="100">
                     <template slot-scope="scope">
                       <img  :src="$imgpath(scope.row.pic)" alt />
                     </template>
                   </el-table-column>
-                  <el-table-column prop="name" label="商品名称" ></el-table-column>
-                  <el-table-column prop="skuprice" label="单价"></el-table-column>
-                  <el-table-column prop="productNumber" label="数量"></el-table-column>
-                  <el-table-column prop="transPrice" label="运费">
+                  <el-table-column prop="name" :label="$t('message.商品名称')" ></el-table-column>
+                  <el-table-column prop="skuprice" :label="$t('message.单价')"></el-table-column>
+                  <el-table-column prop="productNumber" :label="$t('message.数量')"></el-table-column>
+                  <el-table-column prop="transPrice" :label="$t('message.运费')">
                     <template >
-                      <div>货物需要运输费用，请与服务人员联系  Tel:0123456789</div>
+                      <div>{{$t('message.货物需要运输费用，请与服务人员联系')}}Tel:0123456789</div>
                     </template>
                   </el-table-column>
-                  <el-table-column prop="totalPrice" label="总金额">
+                  <el-table-column prop="totalPrice" :label="$t('message.总金额')">
                     <template slot-scope="scope">
                       <div>{{scope.row.skuprice * scope.row.productNumber}}₽</div>
                     </template>
@@ -32,18 +32,18 @@
                 </el-table>
               </template>
             </el-table-column>
-            <el-table-column label="商铺名称" prop="shopName"></el-table-column>
-            <el-table-column label="商铺电话" prop="shopTel"></el-table-column>
-            <el-table-column label="商铺地址" prop="shopAdress"></el-table-column>
+            <el-table-column :label="$t('message.商铺名称')" prop="shopName"></el-table-column>
+            <el-table-column :label="$t('message.商铺电话')" prop="shopTel"></el-table-column>
+            <el-table-column :label="$t('message.商铺地址')" prop="shopAdress"></el-table-column>
           </el-table>
         </div>
         <!-- 支付 -->
         <div class="payment">
           <div class="totalPrice">
-            <span>总金额：</span>
+            <span>{{$t('message.总金额：')}}</span>
             <span>{{orderBuffer.totalPrice}}₽</span>
           </div>
-          <el-button @click="onSubmit">待支付结算</el-button>
+          <el-button @click="onSubmit">{{$t('message.待支付结算')}}</el-button>
         </div>
       </div>
     </div>
@@ -130,7 +130,7 @@ export default {
           //this.$store.dispatch("loadCartList")
           let orderId = res.data._id;
           this.$message({
-            message: '订单已提交',
+            message: this.$t('message.订单已提交'),
             type: 'success'
           });
           // this.$toast({

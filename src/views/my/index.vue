@@ -13,14 +13,14 @@
                 label-width="100px"
                 class="demo-ruleForm"
               >
-                <el-form-item label="用户名" prop="name">
+                <el-form-item :label="$t('message.用户名')" prop="name">
                   <el-input v-model="ruleForm.name" disabled></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="pass">
+                <el-form-item :label="$t('message.密码')" prop="pass">
                   <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="primary" @click="submitForm('ruleForm')">修改个人信息</el-button>
+                  <el-button type="primary" @click="submitForm('ruleForm')">{{$t('message.修改个人信息')}}</el-button>
                 </el-form-item>
               </el-form>
             </div>
@@ -42,12 +42,12 @@ export default {
       },
       rules: {
         name: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+          { required: true, message: this.$t('message.请输入用户名'), trigger: "blur" },
+          { min: 3, max: 5, message: this.$t('message.长度在 3 到 5 个字符'), trigger: "blur" },
         ],
         pass: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 4, max: 6, message: "长度在 4 到 6 个字符", trigger: "blur" },
+          { required: true, message:this.$t('message.请输入密码'), trigger: "blur" },
+          { min: 4, max: 6, message: this.$t('message.长度在 4 到 6 个字符'), trigger: "blur" },
         ],
       },
     };
@@ -81,7 +81,7 @@ export default {
          
             localStorage.removeItem("token");
             this.$message({
-              message: "请重新登陆",
+              message: this.$t('message.请重新登陆') ,
               type: "success",
             });
         
