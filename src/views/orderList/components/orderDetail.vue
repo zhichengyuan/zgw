@@ -10,6 +10,14 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="name" :label="$t('message.商品名称')"></el-table-column>
+                <el-table-column prop="sku" :label="$t('message.商品规格')">
+                    <template slot-scope="scope">
+                      <div
+                        v-for="(item,index) in Object.values(scope.row.attributeList)"
+                        :key="index"
+                      >{{item}}</div>
+                    </template>
+                  </el-table-column>
                 <el-table-column prop="skuprice" :label="$t('message.单价')"></el-table-column>
                 <el-table-column prop="productNumber" :label="$t('message.数量')"></el-table-column>
                 </el-table>
@@ -30,19 +38,26 @@
                 <span>{{ scope.row.logType?scope.row.logType:'--' }}</span>
                 </template>
             </el-table-column>
-            <el-table-column :label="$t('message.收货地址')" prop="shopName">
-                <template slot-scope="scope">
-                <span>{{ scope.row.logType?scope.row.logType:'--' }}</span>
-                </template>
-            </el-table-column>
             <el-table-column :label="$t('message.运费')" prop="shopName">
                 <template slot-scope="scope">
-                <span>{{ scope.row.logType?scope.row.logType:'--' }}</span>
+                <span>{{ scope.row.transPrice?scope.row.transPrice:'--' }}</span>
                 </template>
             </el-table-column>
+            <el-table-column :label="$t('message.收货地址')" prop="shopName">
+                <template >
+                <span>{{ $store.state.storeinfo.address }}</span>
+                </template>
+            </el-table-column>
+            
             <el-table-column :label="$t('message.商品金额')" prop="productPrice">
+              <template slot-scope="scope">
+                      <div>{{scope.row.productPrice}}₽</div>
+                    </template>
             </el-table-column>
             <el-table-column :label="$t('message.总金额')" prop="totalPrice">
+              <template slot-scope="scope">
+                      <div>{{scope.row.totalPrice}}₽</div>
+                    </template>
             </el-table-column>
             <el-table-column :label="$t('message.订单状态')" prop="status">
                 <template slot-scope="scope">
@@ -51,8 +66,8 @@
             </el-table-column>
             <el-table-column :label="$t('message.操作')" prop="status">
                 <template slot-scope="scope">
-                    <el-button v-if="scope.row.status == 0 || scope.row.status == 1" @click="cancle(scope.row)">{{$t('message.取消订单')}}</el-button>
-                    <el-button v-if="scope.row.status == 2" @click="finished(scope.row)">{{$t('message.确认收货')}}</el-button>
+                    <el-button type="danger" v-if="scope.row.status == 0 || scope.row.status == 1" @click="cancle(scope.row)">{{$t('message.取消订单')}}</el-button>
+                    <el-button type="success" v-if="scope.row.status == 2" @click="finished(scope.row)">{{$t('message.确认收货')}}</el-button>
                 <!-- <span>{{orderStatus(scope.row.status)}}</span> -->
                 </template>
             </el-table-column>

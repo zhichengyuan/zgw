@@ -15,7 +15,7 @@
           </el-input>
         </el-col>
         <el-col class="box class" :span="3">
-          <el-dropdown class="tu-box" @command="handleCommand">
+          <el-dropdown class="tu-box" @command="handleCommand" trigger="click">
             <span class="person"></span>
             <span>{{$t("message.个人中心")}}</span>
             <el-dropdown-menu slot="dropdown">
@@ -28,10 +28,12 @@
         </el-col>
         <el-col class="box class" :span="2">
           <div class="tu-box" @click="bindTabbar('cart')">
-            <span class="person cart"></span>
+            <span class="person cart">
+              <div class="roundLogo">{{calcproductNumber}}</div>
+            </span>
             <span>{{$t("message.购物车")}}</span>
             <!-- 小徽标 -->
-            <div class="roundLogo">{{calcproductNumber}}</div>
+            
           </div>
         </el-col>
       </el-row>
@@ -128,7 +130,7 @@ export default {
       this.nicname = "";
       this.passWord = "";
       this.$message({
-          message: "this.$t('message.已退出')",
+          message: this.$t('message.已退出'),
           type: "success",
         });
       // this.$toast({
@@ -203,12 +205,8 @@ export default {
           // background: red;
           background: url("../assets/imgs/person.png") no-repeat center center;
           background-size: 100%;
-        }
-        .cart {
-          background: url("../assets/imgs/chart.png") no-repeat center center;
-          background-size: 100%;
-        }
-        .roundLogo {
+          position: relative;
+          .roundLogo {
         width: 15px;
         height: 15px;
         border-radius: 50%;
@@ -217,8 +215,14 @@ export default {
         color: #fff;
         text-align: center;
         line-height: 15px;
-        right: -10px;
+        right: -17px;
       }
+        }
+        .cart {
+          background: url("../assets/imgs/chart.png") no-repeat center center;
+          background-size: 100%;
+        }
+        
       }
       
     }

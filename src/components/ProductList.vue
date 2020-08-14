@@ -27,7 +27,7 @@ export default {
         title: {
         type: String,
             default: () => {
-                // return this.$t('message.推荐商品')
+                return this.defaultTitle
             }
         }
     },
@@ -36,7 +36,7 @@ export default {
         currentDate: new Date(),
         number:10,
         moreProduct:false,
-
+        defaultTitle:"推荐商品",
         //imgUrlPath: ImgUrlPath.ImgUrlPath,
         offset: 100,
         pagesize: 12,

@@ -94,9 +94,9 @@ export default {
     };
     var validatePass2 = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error(this.$t('message.请再次输入密码')));
-      } else if (value !== this.registerForm.regcheckPass) {
-        callback(new Error(this.$t('message.两次输入密码不一致!')));
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.registerForm.regPass) {
+        callback(new Error("两次输入密码不一致"));
       } else {
         callback();
       }
@@ -115,6 +115,8 @@ export default {
         regName: "",
       },
       rules: {
+         regName:[{ required: true, trigger: "blur",message:"请输入用户名" }],
+        loginName:[{ required: true, trigger: "blur",message:"请输入用户名" }],
         loginPass: [{ required: true, trigger: "blur" }],
         regPass: [{ validator: validatePass, trigger: "blur" }],
         regcheckPass: [{ validator: validatePass2, trigger: "blur" }],

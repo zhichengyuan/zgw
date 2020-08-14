@@ -11,7 +11,7 @@
               <el-breadcrumb-item>活动列表</el-breadcrumb-item>
               <el-breadcrumb-item>活动详情</el-breadcrumb-item>
             </el-breadcrumb>
-          </div> -->
+          </div>-->
           <!-- 商品名字-->
           <div class="pro-name">
             <!-- 名字 -->
@@ -27,7 +27,7 @@
             </el-row>
           </div>
           <!-- 产品浏览量 -->
-          <div class="pro-views">
+          <!-- <div class="pro-views">
             <el-row>
               <el-col :span="2">
                 <div class="grid-content article">
@@ -60,7 +60,7 @@
                 <div class="grid-content"></div>
               </el-col>
             </el-row>
-          </div>
+          </div>-->
           <!-- 产品细节放大 以及购买 -->
           <div class="pro-card">
             <el-row>
@@ -145,11 +145,17 @@
 
                           <!-- <span class="final-price">2995₽</span> -->
                           <!-- <span class="old-price">5990₽</span> -->
-                          <div class="skuNum" v-if="skuStock>0">{{'库存'+'：'+skuStock}}</div>
+                          <div class="skuNum" v-if="skuStock>0">{{$t('message.库存')+'：'+skuStock}}</div>
                           <!-- {{stock}} -->
-                          <div class="skuNum" v-else-if="stock">{{'库存' +stock + '件'}}</div>
-                          <div class="skuNum" v-else>{{'库存' +product.stock + '件'}}</div>
-                          <div class="pitch" v-if="text">{{'已选'+'：' + text}}</div>
+                          <div
+                            class="skuNum"
+                            v-else-if="stock"
+                          >{{$t('message.库存') +stock + $t('message.件')}}</div>
+                          <div
+                            class="skuNum"
+                            v-else
+                          >{{$t('message.库存') +product.stock + $t('message.件')}}</div>
+                          <div class="pitch" v-if="text">{{$t('message.已选')+'：' + text}}</div>
                         </div>
                       </div>
                     </div>
@@ -172,6 +178,9 @@
                             :key="index"
                           >{{item}}</a>
                         </li>
+                        <div v-if="skuDataList.length<=0">
+                          <h3>此商品无具体的商品选择,可直接加入购物车</h3>
+                        </div>
                       </ul>
                     </div>
                     <div class="addCart">
@@ -186,12 +195,22 @@
           </div>
           <!-- 产品详情 -->
           <div class="pro-detail">
+            <h1 style="text-align:center;font-weight:700;margin-top:100px;margin-bottom:50px">{{$t('message.产品参数')}}</h1>
+            <div>
+              <table border style="width: 100%" >
+                <tr>
+                  <th v-for="(item,index) in attarList" :key="index">{{item.name}}</th>
+                </tr>
+                <tr>
+                  <th v-for="(item,index) in attarList" :key="index">{{item.value}}</th>
+                </tr>
+                
+              </table>
+            </div>
             <h1 style="text-align:center;font-weight:700;margin-top:100px">{{$t('message.详情内容')}}</h1>
-           
+
             <div v-if="product.detailMobileHtml" class="container" v-html="getMobile()"></div>
             <div v-else style="text-align:center;">{{$t('message.暂无数据')}}</div>
-
-            
           </div>
         </div>
       </div>
@@ -207,6 +226,7 @@ export default {
   components: { PicZoom },
   data() {
     return {
+      attarList: [],
       current: 0,
       value: 3.7,
       currentIndex: 0,
@@ -217,7 +237,7 @@ export default {
       skuStock: 0, //sku库存
       skuPrice: "", //sku价格
       selectedSku: null, //传入购物车数据
-      detailMobileHtml:'',
+      detailMobileHtml: "",
       text: "",
       img: [
         "https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg",
@@ -229,13 +249,30 @@ export default {
     };
   },
   created() {
+    console.log(window.scrollY,"aaa")
     this.active = this.img[0];
     console.log("路由参数", this.$route.params);
     this.getProducts();
     // this.getMobile();
   },
-  mounted() {},
+  mounted() {
+     window.scrollTo(0,0);
+  },
   methods: {
+    // 设置产品规格弹层
+    attributeList() {
+      let attributeList = this.product.attributeList;
+      // console.log(attributeList)
+      this.attarList = [];
+      for (let name in attributeList) {
+        this.attarList.push({
+          name,
+          value: attributeList[name],
+        });
+      }
+      console.log(this.attarList, "arrt");
+    },
+
     selectPic(index) {
       this.active = this.img[index];
       this.currentIndex = index;
@@ -256,11 +293,12 @@ export default {
     // 获取商品
     getProducts() {
       this.$request.getProduct(this.$route.params.id).then((res) => {
-        console.log(res);
+        // console.log(res,"277");
         let imgs = res.data.albumPics;
         this.img = this.editPic(imgs);
         this.active = this.img[0];
         this.product = res.data;
+        this.attributeList();
         this.getSkulist();
       });
     },
@@ -328,15 +366,17 @@ export default {
       this.selectedSku.productNumber = this.productNumber;
     },
     submitCartItem() {
+      console.log(this.skuDataList);
       if (this.skuDataList.length == 0) {
         const noneSku = {
           selectStock: this.product.stock,
-          attributeList: {},
+          attributeList: { 商品规格: "该商品没有属性" },
           productId: this.product._id,
           categoryNameRu: this.product.categoryNameRu,
           categoryName: this.product.categoryName,
           skuprice: this.product.price,
-          productNumber: this.noSelectNum,
+          // productNumber: this.noSelectNum,
+          productNumber: 1,
           pic: this.product.albumPics[0],
           name: this.product.name,
           runame: this.product.runame,
@@ -345,10 +385,13 @@ export default {
           skucode: this.product.productSn,
           skuImg: this.product.albumPics[0],
         };
-        // console.log(noneSku);
+        console.log(noneSku);
 
-        // this.$store.dispatch("addCart", noneSku);
-        // this.$toast.success(this.$lang["添加成功"]);
+        this.$store.dispatch("addCart", noneSku);
+        this.$message({
+          message: this.$t("message.商品已加入购物车"),
+          type: "success",
+        });
 
         this.show = false;
         this.colorIndex = "";
@@ -356,7 +399,7 @@ export default {
         if (!this.selectedSku) {
           //whm?
           this.$message({
-            message: this.$t('message.请选择商品规格'),
+            message: this.$t("message.请选择商品规格"),
             type: "warning",
           });
           // this.$toast({
@@ -395,7 +438,7 @@ export default {
 
           // this.$toast.success(this.$lang["添加成功"]);
           this.$message({
-            message:this.$t('message.恭喜你，这是一条成功消息'),
+            message: this.$t("message.商品已加入购物车"),
             type: "success",
           });
           this.show = false;
@@ -403,6 +446,7 @@ export default {
           // this.skuPrice = "";
           this.skuStock = 0;
           this.selectedSku = null;
+          this.text = "";
         }
       }
     },
@@ -414,8 +458,11 @@ export default {
 .card-right .grid-content {
   padding-left: 50px;
 }
-/deep/ .magnifier-box img {
-  height: 100%;
+/deep/ .magnifier-box {
+  border: 1px solid;
+  img {
+    height: 100%;
+  }
 }
 .el-carousel__item img {
   color: #475669;

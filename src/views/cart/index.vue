@@ -42,7 +42,14 @@
                     </el-col>
                     <el-col class="product" :span="12">
                       <p class="name">{{item.name}}</p>
-                      <p class="product-code">{{$t('message.商品编号')}} {{item.skucode}}</p>
+                      
+                      <p class="product-code">{{$t('message.商品编号:')}}{{item.skucode}}</p>
+                      <p class="product-code">{{$t('message.选择规格:')}}
+                        <a
+                            v-for="(item,index) in Object.values(item.attributeList)"
+                            :key="index"
+                          >{{item}}</a>
+                      </p>
                       <p class="num">
                         <span>{{$t('message.数量')}}</span>
                         <el-button
@@ -116,7 +123,7 @@
                 </p> -->
                 <div>
                   <el-checkbox v-model="isCheckAll" @change="checkAll(true)">{{$t('message.全选')}}</el-checkbox>
-                  <el-button  type="danger" round @click="onClickRight">{{$t('message.全选')}}</el-button>
+                  <el-button  type="danger" round @click="onClickRight">{{$t('message.删除')}}</el-button>
 
                   <el-button type="primary" round @click="onSubmit" >{{$t('message.提交订单')}}</el-button>
                 </div>
