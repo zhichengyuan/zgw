@@ -58,9 +58,9 @@
           </div>
           <el-button @click="selectPay">{{$t('message.待支付结算')}}</el-button>
         </div>
-        <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-          <span>请选择支付方式</span>
-          <el-select v-model="value" placeholder="请选择">
+        <el-dialog :title="$t('message.提示')" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+          <span>{{$t('message.请选择支付方式')}}</span>
+          <el-select v-model="value" :placeholder="$t('message.请选择')">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -69,8 +69,8 @@
             ></el-option>
           </el-select>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="onSubmit">确 定</el-button>
+            <el-button @click="dialogVisible = false">{{$t('message.取 消')}}</el-button>
+            <el-button type="primary" @click="onSubmit">{{$t('message.确 定')}}</el-button>
           </span>
         </el-dialog>
       </div>
@@ -86,15 +86,15 @@ export default {
       options: [
         {
           value: "赊账",
-          label: "赊账",
+          label: this.$t("message.赊账"),
         },
         {
           value: "现金",
-          label: "现金",
+          label: this.$t("message.现金"),
         },
         {
           value: "转账",
-          label: "转账",
+          label: this.$t("message.转账"),
         },
       ],
       value: "",
@@ -119,7 +119,7 @@ export default {
   inject: ["loadCartList"],
   methods: {
     handleClose(done) {
-      this.$confirm("确认关闭？")
+      this.$confirm(this.$t("message.确认关闭？"))
         .then((_) => {
           done();
         })
@@ -133,9 +133,9 @@ export default {
       // console.log(this.value);
       if (this.value == "") {
         // this.orderBuffer.payment=this.$lang["赊账"]
-        this.$confirm("请选择你的支付方式", "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
+        this.$confirm(this.$t("message.请选择你的支付方式"), this.$t("message.提示"), {
+          confirmButtonText: this.$t("message.确定"),
+          cancelButtonText: this.$t("message.取消"),
           type: "warning",
         })
           .then(() => {
