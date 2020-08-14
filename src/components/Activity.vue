@@ -3,20 +3,15 @@
     <h2 class="title">{{$t("message.*首页活动")}}</h2>
     <!-- <span>{{activitys}}</span> -->
     <el-row :gutter="20">
-<<<<<<< HEAD
-        <el-col :span="6" v-for="(o) in activitys" :key="o">
-            <span @click="goClassly(o)">{{o}}</span>
-            <!-- <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
-=======
       <el-col
         :span="6"
         v-for="(o) in activitys"
         :key="o"
+        
         style="text-align:center;background: linear-gradient(to top right, #FF9500, #ff5000);line-height: 45px;border-radius: 22px;cursor:pointer"
       >
-        <span style="font-size: 18px;font-weight: 700;color:#fff">{{o}}</span>
+        <div style="" @click="goClassly(o)"><span class="text" >{{o}}</span></div>
         <!-- <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
->>>>>>> 53894bdeaa72d1e63f9adf6cd83131d5e3f85666
             <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
         </el-card>-->
       </el-col>
@@ -42,7 +37,6 @@ export default {
           a.push(element);
         }
       });
-<<<<<<< HEAD
       // console.log('默认',a)
       return a
     },
@@ -76,17 +70,18 @@ export default {
      },
   }
 }
-=======
-      console.log('默认',a)
-      return a;
-    },
-  },
-};
->>>>>>> 53894bdeaa72d1e63f9adf6cd83131d5e3f85666
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.text{
+  font-size: 18px;font-weight: 700;color:#fff;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+}
 .title {
   margin-bottom: 15px;
 }
