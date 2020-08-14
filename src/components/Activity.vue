@@ -4,7 +4,7 @@
     <!-- <span>{{activitys}}</span> -->
     <el-row :gutter="20">
         <el-col :span="6" v-for="(o) in activitys" :key="o">
-            <span>{{o}}</span>
+            <span @click="goClassly(o)">{{o}}</span>
             <!-- <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
             <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
             </el-card> -->
@@ -33,8 +33,36 @@ export default {
       });
       // console.log('默认',a)
       return a
-      }
+    },
+    
   },
+  methods:{
+    //跳转分类页面
+     goClassly(cat){
+         console.log(cat);
+        //  this.$emit('handCahnge',{'isShow':'true'});
+        let codes = [];
+        this.$router.push({
+            path: "/listPage",
+            query: { listtype: "activity", code: cat,title:cat },
+        });
+        // if (cat.items.length != 0) {
+        //     for (var i = 0; i < cat.items.length; i++) {
+        //         codes.push(cat.items[i].id);
+        //     }
+        //     this.$router.push({
+        //         path: "/listPage",
+        //         query: { listtype: "category", code: codes.join(",") ,title:cat.name},
+        //     });
+        //   }else {
+        //   this.$router.push({
+        //       path: "/listPage",
+        //       query: { listtype: "category", code: cat.id,title:cat.name },
+        //   });
+        // }
+     
+     },
+  }
 }
 </script>
 

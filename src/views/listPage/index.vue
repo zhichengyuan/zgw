@@ -50,15 +50,15 @@ export default {
     ProductList
   },
   beforeRouteUpdate (to, from, next) {
-    console.log('路由守卫',to);
+   
     // this.commodity = to.query;
     
     let obj = {
       code : to.query.code,
       listtype : to.query.listtype
     }
-    this.commodity= obj
-    console.log('新的请求',this.commodity);
+    this.commodity= obj;
+    this.title = to.query.title
     next();
   },
   data(){
@@ -68,7 +68,7 @@ export default {
     }
   },
   created(){
-    console.log('路由',this.$route.query);
+   
     let obj = {
       code : this.$route.query.code,
       listtype : this.$route.query.listtype

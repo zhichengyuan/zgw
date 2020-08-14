@@ -27,10 +27,11 @@ export default {
         title: {
         type: String,
             default: () => {
-                return this.defaultTitle
+                return 'Pекомендовать товар '
             }
         }
     },
+   
   data () {
     return {
         currentDate: new Date(),
@@ -58,13 +59,18 @@ export default {
   },
   watch: {
     commodity(newV,oldV) {
+      console.log('我vvvvv')
+      console.log(this.$route.query.title);
+      // this.title = this.$route.query.title
         this.onRefresh();
-      } 
+      } ,
       // commodity(newV,oldV) {
       //   this.commodity = newV;
       //   console.log('新条件',this.commodity)
       // } 
+     
     },
+    
   methods:{
       //跳转详情页面
       toDetail(item){
