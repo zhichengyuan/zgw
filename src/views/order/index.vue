@@ -152,6 +152,10 @@ export default {
           productList: this.orderBuffer.productList,
           payment: this.value,
         };
+        newOrderBuffer.productList.forEach(e => {
+          console.log(e.productNumber.toString())
+          e.productNumber=e.productNumber.toString()
+        });
         console.log(newOrderBuffer);
         this.$request.order(newOrderBuffer).then((res) => {
           if (res.code == 0) {
@@ -163,10 +167,7 @@ export default {
               type: "success",
             });
             this.$router.push("/orderList");
-            // this.$toast({
-            //   message: this.$lang["订单已提交"]
-            // });
-            // this.$router.push("/orderDetail/" + res.data._id);
+           
           }
         });
       }
