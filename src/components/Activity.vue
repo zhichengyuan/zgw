@@ -7,7 +7,7 @@
         :span="6"
         v-for="(o) in activitys"
         :key="o"
-        style="text-align:center;background: linear-gradient(to top right, #FF9500, #ff5000);line-height: 45px;"
+        style="text-align:center;background: linear-gradient(to top right, #FF9500, #ff5000);line-height: 45px;border-radius: 22px;"
       >
         <span style="font-size: 18px;font-weight: 700;color:#fff">{{o}}</span>
         <!-- <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
@@ -31,12 +31,12 @@ export default {
       var a = [];
 
       this.$store.state.activitys.forEach((element) => {
-        // console.log(element)
-        if (element != "首页活动") {
+        console.log(element)
+        if (element != " Деятельность на первой странице ") {
           a.push(element);
         }
       });
-      // console.log('默认',a)
+      console.log('默认',a)
       return a;
     },
   },
