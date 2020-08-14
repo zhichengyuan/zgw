@@ -205,7 +205,7 @@ export default {
         margin-top: 50px;
         .cell {
           > img {
-            width: 100px;
+            width: 100%;
           }
         }
       }

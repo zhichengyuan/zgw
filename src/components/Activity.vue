@@ -7,7 +7,7 @@
         :span="6"
         v-for="(o) in activitys"
         :key="o"
-        style="text-align:center;background: linear-gradient(to top right, #FF9500, #ff5000);line-height: 45px;border-radius: 22px;"
+        style="text-align:center;background: linear-gradient(to top right, #FF9500, #ff5000);line-height: 45px;border-radius: 22px;cursor:pointer"
       >
         <span style="font-size: 18px;font-weight: 700;color:#fff">{{o}}</span>
         <!-- <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
@@ -32,7 +32,7 @@ export default {
 
       this.$store.state.activitys.forEach((element) => {
         console.log(element)
-        if (element != " Деятельность на первой странице ") {
+        if (element != "Деятельность на первой странице") {
           a.push(element);
         }
       });

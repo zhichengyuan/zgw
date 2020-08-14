@@ -45,7 +45,7 @@
         <!-- 商店 -->
         <div class="shop">2020-2021 мебель, обувь и одежда матери и ребенка онлайн платформа</div>
         <!-- logo -->
-        <div class="logo">LOGO</div>
+        <div class="logo">shopvill</div>
       </div>
     </div>
   </div>
