@@ -78,7 +78,7 @@ export default {
       // }
       this.$request.userSave(userinfo).then(res => {
         if (res.code == 0) {
-         
+            
             localStorage.removeItem("token");
             this.$message({
               message: this.$t('message.请重新登陆') ,

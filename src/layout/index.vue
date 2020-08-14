@@ -34,7 +34,7 @@ export default {
     .wrapper{
       width: 90%;
       margin:0 auto;
-      margin-top:64px;
+      margin-top:80px;
 
     }
   }

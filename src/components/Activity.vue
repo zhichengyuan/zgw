@@ -1,11 +1,13 @@
 <template>
   <div class="activity">
     <h2 class="title">{{$t("message.*首页活动")}}</h2>
+    <!-- <span>{{activitys}}</span> -->
     <el-row :gutter="20">
-        <el-col :span="6" v-for="(o) in 4" :key="o">
-            <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
+        <el-col :span="6" v-for="(o) in activitys" :key="o">
+            <span>{{o}}</span>
+            <!-- <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
             <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-            </el-card>
+            </el-card> -->
         </el-col>
     </el-row>
   </div>
@@ -18,7 +20,21 @@ export default {
     return {
         currentDate: new Date()
     }
-  }
+  },
+  computed:{
+    activitys(){
+      var a=[]
+      
+      this.$store.state.activitys.forEach(element => {
+        // console.log(element)
+          if(element != "首页活动"){
+            a.push(element)
+          }
+      });
+      // console.log('默认',a)
+      return a
+      }
+  },
 }
 </script>
 

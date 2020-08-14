@@ -31,7 +31,7 @@
             <span class="person cart">
               <div class="roundLogo">{{calcproductNumber}}</div>
             </span>
-            <span>{{$t("message.购物车")}}</span>
+            <span class="cart1">{{$t("message.购物车")}}</span>
             <!-- 小徽标 -->
             
           </div>
@@ -198,7 +198,11 @@ export default {
         flex-direction: column;
         align-items: center;
         position: relative;
+        
         cursor: pointer;
+        .cart1{
+          text-align: center;
+        }
         .person {
           width: 30px;
           height: 30px;
@@ -207,16 +211,16 @@ export default {
           background-size: 100%;
           position: relative;
           .roundLogo {
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background: red;
-        position: absolute;
-        color: #fff;
-        text-align: center;
-        line-height: 15px;
-        right: -17px;
-      }
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: red;
+            position: absolute;
+            color: #fff;
+            text-align: center;
+            line-height: 15px;
+            right: -17px;
+          }
         }
         .cart {
           background: url("../assets/imgs/chart.png") no-repeat center center;
