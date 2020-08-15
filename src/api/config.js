@@ -1,6 +1,6 @@
-let development = "http://154.8.173.206:7777";
-// let development = "http://192.168.0.110:7777";
-let production = "http://154.8.173.206:7777";
+let development = "http://www.shopvill.com/api";
+// let development = "http://154.8.173.206:777";
+let production = "http://www.shopvill.com/api";
 
 export default {
     baseURL: process.env.NODE_ENV === 'production' ? production : development,

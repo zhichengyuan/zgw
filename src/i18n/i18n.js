@@ -4,18 +4,18 @@ import VueI18n from 'vue-i18n'
 import messages from './langs'
 Vue.use(VueI18n)
 
-let locale1="";
+let locale1="ru";
 // localStorage.getItem('switchingLanguage')?localStorage.getItem('switchingLanguage'):localStorage.getItem('language') || 'cn'
-if(localStorage.getItem('switchingLanguage')){
-    locale1 = localStorage.getItem('switchingLanguage');
-}else {
-    if(localStorage.getItem('language')){
-        locale1 = localStorage.getItem('language');
-    }else {
-        // console.log('当前语言');
-        locale1 = 'ru'
-    }
-}
+// if(localStorage.getItem('switchingLanguage')){
+//     locale1 = localStorage.getItem('switchingLanguage');
+// }else {
+//     if(localStorage.getItem('language')){
+//         locale1 = localStorage.getItem('language');
+//     }else {
+//         // console.log('当前语言');
+//         locale1 = 'ru'
+//     }
+// }
 
 // console.log('当前语言1',(navigator.language || navigator.browserLanguage).toLowerCase(),navigator.language,navigator.browserLanguage);
 
