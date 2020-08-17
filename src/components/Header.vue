@@ -101,7 +101,7 @@ export default {
     },
     
     bindTabbar(name) {
-      console.log(this.$store.state.token);
+      // console.log(this.$store.state.token);
       if(name == 'orderList' || name == 'myInfo') {
         if(!this.$store.state.token) {
           this.$router.push({ name: 'my' });

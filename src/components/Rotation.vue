@@ -27,7 +27,7 @@ export default {
     }
   },
   created(){
-    console.log(this.swiperList);
+    // console.log(this.swiperList);
   }
 }
 </script>

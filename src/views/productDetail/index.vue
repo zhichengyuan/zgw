@@ -249,9 +249,9 @@ export default {
     };
   },
   created() {
-    console.log(window.scrollY,"aaa")
+    // console.log(window.scrollY,"aaa")
     this.active = this.img[0];
-    console.log("路由参数", this.$route.params);
+    // console.log("路由参数", this.$route.params);
     this.getProducts();
     // this.getMobile();
   },
@@ -270,7 +270,7 @@ export default {
           value: attributeList[name],
         });
       }
-      console.log(this.attarList, "arrt");
+      // console.log(this.attarList, "arrt");
     },
 
     selectPic(index) {
@@ -286,7 +286,7 @@ export default {
         RegExp('src="', "g"),
         'src="' + this.$request.imgpath("")
       );
-      console.log(html);
+      // console.log(html);
       // this.detailMobileHtml = html;
       return html;
     },
@@ -312,12 +312,12 @@ export default {
     },
     // 获取sku
     getSkulist() {
-      console.log(this.product.productSn);
+      // console.log(this.product.productSn);
       this.$request
         .getSkulist(this.product.productSn, this.$store.state.sid)
         .then((res) => {
           if (res.code == 0) {
-            console.log("res", res);
+            // console.log("res", res);
             // this.defaultSkuImg = this.product.albumPics[0]; //?
             this.skuDataList = res.data.items;
             this.stock = 0;
@@ -348,7 +348,7 @@ export default {
     getSkus(index) {
       this.current = index;
       let sku = this.skuDataList[index];
-      console.log(sku);
+      // console.log(sku);
       // console.log(this.$imgpath(sku.pic));
       this.active = this.$imgpath(sku.pic);
       this.$store.state.getrole;
@@ -366,7 +366,7 @@ export default {
       this.selectedSku.productNumber = this.productNumber;
     },
     submitCartItem() {
-      console.log(this.skuDataList);
+      // console.log(this.skuDataList);
       if (this.skuDataList.length == 0) {
         const noneSku = {
           selectStock: this.product.stock,
@@ -385,7 +385,7 @@ export default {
           skucode: this.product.productSn,
           skuImg: this.product.albumPics[0],
         };
-        console.log(noneSku);
+        // console.log(noneSku);
 
         this.$store.dispatch("addCart", noneSku);
         this.$message({
@@ -408,7 +408,7 @@ export default {
           // });
         } else {
           let sku = this.selectedSku;
-          console.log(sku);
+          // console.log(sku);
 
           const localInfo = {
             selectStock: sku.skunum,

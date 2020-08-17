@@ -41,11 +41,11 @@ export default {
     // console.log(next, '组件独享守beforeRouteUpdate卫第三个参数');
     this.searchStr = to.params.search
     this.getList();
-    console.log(this.$route.params);
+    // console.log(this.$route.params);
     next();
   },
   created(){
-      console.log(this.$route.params);
+      // console.log(this.$route.params);
       this.searchStr = this.$route.params.search
       this.getList();
   },

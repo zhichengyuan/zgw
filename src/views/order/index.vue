@@ -114,7 +114,7 @@ export default {
   mounted() {
     const orderProduct = JSON.parse(localStorage.getItem("orderBuffer"));
     this.orderBuffer = orderProduct || this.$store.state.orderBuffer;
-    console.log(this.orderBuffer, "ssss", this.value);
+    // console.log(this.orderBuffer, "ssss", this.value);
   },
   inject: ["loadCartList"],
   methods: {
@@ -153,10 +153,10 @@ export default {
           payment: this.value,
         };
         newOrderBuffer.productList.forEach(e => {
-          console.log(e.productNumber.toString())
+          // console.log(e.productNumber.toString())
           e.productNumber=e.productNumber.toString()
         });
-        console.log(newOrderBuffer);
+        // console.log(newOrderBuffer);
         this.$request.order(newOrderBuffer).then((res) => {
           if (res.code == 0) {
             this.loadCartList();

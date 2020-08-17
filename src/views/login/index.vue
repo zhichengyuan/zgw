@@ -134,7 +134,7 @@ export default {
           // alert("loginForm!");
           this.userLogin();
         } else {
-          console.log("error loginForm!!");
+          // console.log("error loginForm!!");
           return false;
         }
       });
@@ -165,14 +165,14 @@ export default {
         });
     },
     register(registerForm) {
-      console.log(this.registerForm);
+      // console.log(this.registerForm);
       this.$refs[registerForm].validate((valid) => {
         if (valid) {
           
           // alert("registerForm!");
           this.onRegister();
         } else {
-          console.log("error registerForm!!");
+          // console.log("error registerForm!!");
           return false;
         }
       });

@@ -42,7 +42,7 @@ export default {
   methods: {
     //跳转详情页面
     toDetail(item) {
-      console.log(item);
+      // console.log(item);
       this.$router.push({
         path: "/product/" + item._id,
         // query: { listtype: "category", code: cat.id,title:cat.name },

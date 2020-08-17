@@ -184,7 +184,7 @@ export default {
         }
       });
       this.isCheckAll = isCheckAll;
-      console.log(this.sumPrice);
+      // console.log(this.sumPrice);
       return this.sumPrice;
     },
     //是否选中
@@ -200,7 +200,7 @@ export default {
         item.productNumber--;
       }
       if (item.productNumber == 0) {
-        console.log("我执行了");
+        // console.log("我执行了");
         // item.isChecked = true;
       }
 
@@ -209,18 +209,18 @@ export default {
       this.calcTotalPrice();
     },
     changNum(v) {
-      console.log(v);
+      // console.log(v);
     },
     //删除商品
     onClickRight() {
-      console.log("我要被删除");
+      // console.log("我要被删除");
       let removeList = [];
       let list = this.$store.state.cartList;
 
       this.$store.state.cartList.forEach((cart) => {
         if (cart.isChecked == true) removeList.push(cart);
       });
-      console.log(removeList);
+      // console.log(removeList);
       if (removeList.length > 0) this.$store.dispatch("removeCart", removeList);
     },
     // 全选
@@ -254,7 +254,7 @@ export default {
         this.$router.push("/my");
         return;
       }
-      console.log(selectedList);
+      // console.log(selectedList);
 
       this.$request.orderConfirm(selectedList).then((res) => {
         if (res.code == 0) {

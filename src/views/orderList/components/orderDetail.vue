@@ -95,7 +95,7 @@ export default {
   methods:{
        // 取消订单
     cancle(item) {
-        console.log(item);
+        // console.log(item);
       item.status = '4'
       // const infoCancel = {
       //   _id: item._id,
@@ -145,7 +145,7 @@ export default {
       }
       this.$request.order(infoFinsh).then(res => {
         if (res.code == 0) {
-            console.log('已收货')
+            // console.log('已收货')
           this.$emit('cancleOrder','完成');
         }
 

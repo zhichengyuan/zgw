@@ -64,7 +64,7 @@ export default {
     methods: {
      //跳转分类页面
      goClassly(cat){
-         console.log(cat);
+        //  console.log(cat);
          this.$emit('handCahnge',{'isShow':'true'});
          let codes = [];
         if (cat.items.length != 0) {
@@ -92,9 +92,9 @@ export default {
      // 获取分类数据
     getMenu() {
       this.$request.getClassify().then((res) => {
-        console.log('恒大大大大',res);
+        // console.log('恒大大大大',res);
         if (res.code == 0) {
-          console.log('分类',res);
+        //   console.log('分类',res);
           if(res.data.items.length !=0){
             this.menuList = res.data.items;
             this.menuList.reverse();

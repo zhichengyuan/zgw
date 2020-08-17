@@ -32,7 +32,7 @@ export default {
       var a = [];
 
       this.$store.state.activitys.forEach((element) => {
-        console.log(element)
+        // console.log(element)
         if (element != "Деятельность на первой странице") {
           a.push(element);
         }
@@ -45,7 +45,7 @@ export default {
   methods:{
     //跳转分类页面
      goClassly(cat){
-         console.log(cat);
+        //  console.log(cat);
         //  this.$emit('handCahnge',{'isShow':'true'});
         let codes = [];
         this.$router.push({
