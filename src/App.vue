@@ -114,7 +114,10 @@ export default {
         this.$store.dispatch("syncUpdateUserInfo", token);
       }
     },
-
+    _isMobile() {
+      let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+      return flag;
+    },
     getSid() { 
       let url = window.location.href; //获取当前url
       let hostname = window.location.hostname;
@@ -151,8 +154,15 @@ export default {
   mounted() {
     // console.log(b);
     // console.log(getUser);
-    
+    let flag = this._isMobile()
     this.getSid();
+    if (flag != null) {
+      window.location.href = "index.html";
+      //this.$router.replace('/indexpc.html');
+      return
+    }
+    
+    
    
     this.$nextTick(() => {
     
