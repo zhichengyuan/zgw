@@ -71,8 +71,8 @@
                     <el-row>
                       <!-- 放大图 -->
                       <el-col :span="24">
-                        <div class="grid-content container_3d">
-                          <pic-zoom :url="active" :scale="3" />
+                        <div class="grid-content container_3d" v-if="img.length>0">
+                          <pic-zoom :url="active" :scale="3"  />
                         </div>
                       </el-col>
                       <!-- 小图 -->
@@ -179,7 +179,7 @@
                           >{{item}}</a>
                         </li>
                         <div v-if="skuDataList.length<=0">
-                          <h3>此商品无具体的商品选择,可直接加入购物车</h3>
+                          <h3>{{$t('message.此商品无具体的商品选择,可直接加入购物车')}}</h3>
                         </div>
                       </ul>
                     </div>
@@ -197,7 +197,7 @@
           <div class="pro-detail">
             <h1 style="text-align:center;font-weight:700;margin-top:100px;margin-bottom:50px">{{$t('message.产品参数')}}</h1>
             <div>
-              <table border style="width: 100%" >
+              <table border style="width: 100%" v-if="attarList.length>0">
                 <tr>
                   <th v-for="(item,index) in attarList" :key="index">{{item.name}}</th>
                 </tr>
@@ -206,6 +206,7 @@
                 </tr>
                 
               </table>
+             <h3 v-else  style="text-align:center;">{{$t('message.此商品无产品参数，可从图中了解具体的信息')}}</h3>
             </div>
             <h1 style="text-align:center;font-weight:700;margin-top:100px">{{$t('message.详情内容')}}</h1>
 
@@ -240,10 +241,10 @@ export default {
       detailMobileHtml: "",
       text: "",
       img: [
-        "https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg",
-        "https://img2.wbstatic.net/big/new/12990000/12998540-1.jpg",
-        "https://img1.wbstatic.net/big/new/12500000/12502409-2.jpg",
-        "https://img1.wbstatic.net/big/new/12500000/12502409-3.jpg",
+        // "https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg",
+        // "https://img2.wbstatic.net/big/new/12990000/12998540-1.jpg",
+        // "https://img1.wbstatic.net/big/new/12500000/12502409-2.jpg",
+        // "https://img1.wbstatic.net/big/new/12500000/12502409-3.jpg",
       ],
       // img:['https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg',]
     };
