@@ -1,6 +1,6 @@
 <template>
   <div class="activity">
-    <h2 class="title">{{$t("message.*首页活动")}}</h2>
+    <h2 class="title" v-if="activitys.length != 0">{{$t("message.*首页活动")}}</h2>
     <!-- <span>{{activitys}}</span> -->
     <el-row :gutter="20">
       <el-col
