@@ -3,8 +3,8 @@
     <div class="header">
       <el-row class="content">
         <el-col class="box logo" :span="3" >
-          <img src="@/assets/imgs/logo.png" alt="" style="width:50px;height:50px;border-radius: 50%;cursor:pointer" @click="bindTabbar('home')">
-          <h2 style="font-size:18px;font-weight:700;color:#fff;margin-left:10px;cursor:pointer" @click="bindTabbar('home')">shopvill</h2>
+          <!-- <img src="@/assets/imgs/logo.png" alt="" style="width:50px;height:50px;border-radius: 50%;cursor:pointer" @click="bindTabbar('home')"> -->
+          <h2 style="font-size:24px;font-weight:700;color:#fff;margin-left:10px;cursor:pointer" @click="bindTabbar('home')">shopvill</h2>
         </el-col>
         <el-col class="box class icon" :span="2">
           <span v-if="!isShow" @click="bindTrigger"></span>
