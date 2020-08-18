@@ -184,4 +184,7 @@ export default {
   /* width: 75px!important;
   height: 75px!important; */
 }
+span,h1,h2,h3,h4,h5,h6,a{
+  font-family: system,-apple-system,BlinkMacSystemFont,'Segoe UI','Segoe WP',Roboto,Ubuntu,Oxygen,Cantarell,'Fira Sans','Helvetica Neue',Helvetica,'Lucida Grande','Droid Sans',Tahoma,'Microsoft Sans Serif',sans-serif;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="activity">
-    <h2 class="title">{{$t("message.*首页活动")}}</h2>
+    <h2 class="title">{{$t("message.首页活动")}}</h2>
     <!-- <span>{{activitys}}</span> -->
     <el-row :gutter="20">
       <el-col
@@ -83,6 +83,9 @@ export default {
   overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 }
 .title {
+  font-weight: 700;
+    font-size: 36px;
+    line-height: 48px;
   margin-bottom: 15px;
 }
 .time {

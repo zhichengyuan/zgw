@@ -1,6 +1,6 @@
 <template>
   <div class="productList">
-    <h2 class="title">*{{title}}</h2>
+    <h2 class="title">{{title}}</h2>
     <product :productArr="list"></product>
     <div class="button">
         <el-button v-if="finished == false" type="primary" plain round @click="more" :loading="loading">{{$t('message.显示更多')}}<i class="el-icon-bottom el-icon--right"></i></el-button>
@@ -153,7 +153,12 @@ export default {
     }
 }
 .title{
-  margin-bottom: 15px;
+  
+ font-weight: 700;
+    font-size: 36px;
+    line-height: 48px;
+    margin-bottom: 15px;
+
 }
 .time {
 font-size: 13px;
