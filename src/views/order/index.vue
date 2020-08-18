@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import {dbreq} from '@/api/apis';
 export default {
   name: "order",
   data() {
@@ -129,6 +130,7 @@ export default {
       this.dialogVisible = true;
     },
     onSubmit() {
+      let that = this;
       // console.log(this.orderBuffer.payment);
       // console.log(this.value);
       if (this.value == "") {
@@ -157,19 +159,97 @@ export default {
           e.productNumber=e.productNumber.toString()
         });
         // console.log(newOrderBuffer);
-        this.$request.order(newOrderBuffer).then((res) => {
-          if (res.code == 0) {
-            this.loadCartList();
-            //this.$store.dispatch("loadCartList")
-            let orderId = res.data._id;
-            this.$message({
-              message: this.$t("message.订单已提交"),
-              type: "success",
+        var checkProduct = newOrderBuffer.productList;
+      var arr  = [];
+      var counter = 0;
+      checkProduct.map((v) => {
+        // console.log(5555)
+        counter ++;
+        if (v.productSn == v.skucode) {
+          this.$request
+            .dbreq("product", { productSn: v.productSn, sid: v.sid })
+            .then((res) => {
+              // console.log(res.data.items);
+              res.data.items.map((item) => {
+                console.log(Number(item.stock) - Number(v.productNumber),"nosku");
+                if (Number(item.stock) - Number(v.productNumber) <0) {
+                  arr.push('false')
+                  this.$message({
+                      message:this.$t("message.你购买的") +
+                      item.name +
+                      this.$t("message.库存不足，无法下单")
+                  });
+                  // return 
+                }else {
+                  arr.push('true')
+                }
+              });
             });
-            this.$router.push("/orderList");
+        } else {
+          this.$request
+            .dbreq("sku", {
+              productSn: v.productSn,
+              sid: v.sid,
+              skucode: v.skucode,
+            })
+            .then((res) => {
+              console.log(res.data.items);
+              res.data.items.map((item) => {
+                console.log(item.skunum,"skunum")
+                console.log(v.productNumber,"productNumber")
+                console.log(Number(item.skunum) - Number(v.productNumber),"sku");
+                if (Number(item.skunum) - Number(v.productNumber) <0) {
+                  arr.push('false')
+                  this.$message({
+                      message:this.$t("message.你购买的") +
+                      v.name +
+                      this.$t("message.库存不足，无法下单")
+                  });
+                }else {
+                  arr.push('true')
+                }
+              });
+            });
+
+        }
+        if(counter === checkProduct.length) {
+          setTimeout(() => {
+            var a = arr.indexOf("false")
+            if(a === -1) {
+                  that.$request.order(newOrderBuffer).then((res) => {
+              if (res.code == 0) {
+                that.loadCartList();
+                let orderId = res.data._id;
+                that.$message({
+                  message: that.$t("message.订单已提交"),
+                  type: "success",
+                });
+                that.$router.push("/orderList");
+              
+              }
+            });
+            }
+          },500)
+          
+          
+        }
+      });
+
+
+
+        // that.$request.order(newOrderBuffer).then((res) => {
+        //   if (res.code == 0) {
+        //     that.loadCartList();
+        //     //this.$store.dispatch("loadCartList")
+        //     let orderId = res.data._id;
+        //     that.$message({
+        //       message: that.$t("message.订单已提交"),
+        //       type: "success",
+        //     });
+        //     that.$router.push("/orderList");
            
-          }
-        });
+        //   }
+        // });
       }
     },
   },

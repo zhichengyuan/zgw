@@ -60,11 +60,12 @@
                         ></el-button>
                         <el-input
                           v-model.number="item.productNumber"
-                          min="0"
-                          @input="changNum"
+                          min = "0"
+                          max = "8"
+                          @input="changNum($event,item.selectStock,item)"
                           placeholder
                         ></el-input>
-                        <el-button icon="el-icon-plus" circle @click="onChangeNum(item,'add')"></el-button>
+                        <el-button icon="el-icon-plus" circle @click="onChangeNum(item,'add')" :disabled="item.productNumber >=item.selectStock"></el-button>
                       </p>
                     </el-col>
                     <el-col class="price" :span="6">
@@ -184,7 +185,6 @@ export default {
         }
       });
       this.isCheckAll = isCheckAll;
-      // console.log(this.sumPrice);
       return this.sumPrice;
     },
     //是否选中
@@ -193,34 +193,31 @@ export default {
     },
     //改变数量
     onChangeNum(item, type) {
-      // console.log(item,type);
       if (type == "add") {
         item.productNumber++;
       } else {
         item.productNumber--;
       }
       if (item.productNumber == 0) {
-        // console.log("我执行了");
-        // item.isChecked = true;
       }
 
       this.$store.dispatch("updateCart", item);
-      // this.onClickRight();
       this.calcTotalPrice();
     },
-    changNum(v) {
-      // console.log(v);
+    changNum(e,limitNum,item) {
+      console.log(e,limitNum,item)
+     if(Number(e)>Number(limitNum)){
+      item.productNumber=Number(limitNum)
+     }
     },
     //删除商品
     onClickRight() {
-      // console.log("我要被删除");
       let removeList = [];
       let list = this.$store.state.cartList;
 
       this.$store.state.cartList.forEach((cart) => {
         if (cart.isChecked == true) removeList.push(cart);
       });
-      // console.log(removeList);
       if (removeList.length > 0) this.$store.dispatch("removeCart", removeList);
     },
     // 全选
@@ -244,9 +241,6 @@ export default {
           message: this.$t('message.请选择要购买的商品'),
           type: "warning",
         });
-        // this.$toast({
-        //   message: `${this.$lang["请选择要购买的商品"]}`
-        // });
         return;
       }
 
@@ -254,11 +248,9 @@ export default {
         this.$router.push("/my");
         return;
       }
-      // console.log(selectedList);
 
       this.$request.orderConfirm(selectedList).then((res) => {
         if (res.code == 0) {
-          console.log("创建成功");
           this.$store.commit("orderBuffer", res.data);
           this.$router.push("/order");
         } else {
@@ -266,9 +258,6 @@ export default {
             message: this.$t('message.订单创建失败'),
             type: "warning",
           });
-          // this.$toast({
-          //   message: `${this.$lang["订单创建失败"]}`
-          // });
         }
       });
     },

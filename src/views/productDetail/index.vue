@@ -72,7 +72,7 @@
                       <!-- 放大图 -->
                       <el-col :span="24">
                         <div class="grid-content container_3d" v-if="img.length>0">
-                          <pic-zoom :url="active" :scale="3"  />
+                          <pic-zoom :url="active" :scale="3" />
                         </div>
                       </el-col>
                       <!-- 小图 -->
@@ -145,7 +145,7 @@
 
                           <!-- <span class="final-price">2995₽</span> -->
                           <!-- <span class="old-price">5990₽</span> -->
-                          <div class="skuNum" v-if="skuStock>0">{{$t('message.库存')+'：'+skuStock}}</div>
+                          <div class="skuNum" v-if="select==true">{{$t('message.库存')+'：'+skuStock}}</div>
                           <!-- {{stock}} -->
                           <div
                             class="skuNum"
@@ -170,7 +170,7 @@
                           v-for="(item,index) in skuDataList"
                           @click="getSkus(index)"
                           :key="index"
-                          :class="{'current':index==current}"
+                          :class="{'current':current===index}"
                         >
                           <!-- {{Object.values(item.attributeList)}} -->
                           <a
@@ -195,7 +195,9 @@
           </div>
           <!-- 产品详情 -->
           <div class="pro-detail">
-            <h1 style="text-align:center;font-weight:700;margin-top:100px;margin-bottom:50px">{{$t('message.产品参数')}}</h1>
+            <h1
+              style="text-align:center;font-weight:700;margin-top:100px;margin-bottom:50px"
+            >{{$t('message.产品参数')}}</h1>
             <div>
               <table border style="width: 100%" v-if="attarList.length>0">
                 <tr>
@@ -204,9 +206,8 @@
                 <tr>
                   <th v-for="(item,index) in attarList" :key="index">{{item.value}}</th>
                 </tr>
-                
               </table>
-             <h3 v-else  style="text-align:center;">{{$t('message.此商品无产品参数，可从图中了解具体的信息')}}</h3>
+              <h3 v-else style="text-align:center;">{{$t('message.此商品无产品参数，可从图中了解具体的信息')}}</h3>
             </div>
             <h1 style="text-align:center;font-weight:700;margin-top:100px">{{$t('message.详情内容')}}</h1>
 
@@ -227,8 +228,9 @@ export default {
   components: { PicZoom },
   data() {
     return {
+      select: false,
       attarList: [],
-      current: 0,
+      current: "",
       value: 3.7,
       currentIndex: 0,
       active: "",
@@ -257,7 +259,7 @@ export default {
     // this.getMobile();
   },
   mounted() {
-     window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   },
   methods: {
     // 设置产品规格弹层
@@ -347,6 +349,7 @@ export default {
     },
     // 选择sku规格
     getSkus(index) {
+      this.select = true;
       this.current = index;
       let sku = this.skuDataList[index];
       // console.log(sku);
@@ -387,15 +390,21 @@ export default {
           skuImg: this.product.albumPics[0],
         };
         // console.log(noneSku);
-
-        this.$store.dispatch("addCart", noneSku);
-        this.$message({
-          message: this.$t("message.商品已加入购物车"),
-          type: "success",
-        });
-
-        this.show = false;
-        this.colorIndex = "";
+        if (noneSku.selectStock == 0) {
+          this.$message({
+            message: this.$t("message.库存不足，无法下单"),
+            type: "warning",
+          });
+        } else {
+          this.$store.dispatch("addCart", noneSku);
+          this.$message({
+            message: this.$t("message.商品已加入购物车"),
+            type: "success",
+          });
+          this.show = false;
+          this.select = false;
+          this.current = "";
+        }
       } else {
         if (!this.selectedSku) {
           //whm?
@@ -429,25 +438,25 @@ export default {
             skuplace: sku.skuplace,
             skucode: sku.skucode,
           };
-          // console.log(localInfo);
-
-          this.$store.dispatch("addCart", localInfo);
-
-          // this.$store.dispatch("loadCartList")
-
-          // console.log(this.$store.state.cartInfo);
-
-          // this.$toast.success(this.$lang["添加成功"]);
-          this.$message({
-            message: this.$t("message.商品已加入购物车"),
-            type: "success",
-          });
-          this.show = false;
-          this.colorIndex = "";
-          // this.skuPrice = "";
-          this.skuStock = 0;
-          this.selectedSku = null;
-          this.text = "";
+          if (localInfo.selectStock == 0) {
+            this.$message({
+              message: this.$t("message.库存不足，无法下单"),
+              type: "warning",
+            });
+          } else {
+            this.$store.dispatch("addCart", localInfo);
+            this.$message({
+              message: this.$t("message.商品已加入购物车"),
+              type: "success",
+            });
+            this.show = false;
+            this.select = false;
+            this.current = "";
+            // this.skuPrice = "";
+            this.skuStock = 0;
+            this.selectedSku = null;
+            this.text = "";
+          }
         }
       }
     },
