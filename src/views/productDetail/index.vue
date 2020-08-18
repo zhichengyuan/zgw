@@ -66,7 +66,7 @@
             <el-row>
               <!-- 左边 -->
               <div class="card-left">
-                <el-col :span="10">
+                <el-col  :xs="6" :sm="10" :md="10" :lg="10" :xl="10">
                   <div class="grid-content">
                     <el-row>
                       <!-- 放大图 -->
@@ -121,7 +121,7 @@
               </div>
               <!-- 右边 -->
               <div class="card-right">
-                <el-col :span="12" :offset="2">
+                <el-col  :offset="2" :xs="6" :sm="12" :md="12" :lg="12" :xl="12">
                   <div class="grid-content">
                     <div class="price">
                       <div class="cost">

@@ -1,9 +1,9 @@
 <template>
-  <el-row :gutter="20">
-    <el-col class="buttom-margin" :span="4" v-for="(o) in productArr" :key="o._id">
+  <el-row :gutter="20" class="detail">
+    <el-col class="buttom-margin" :xs="6" :sm="4" :md="4" :lg="4" :xl="3" v-for="(o) in productArr" :key="o._id">
       <div @click="toDetail(o)">
         <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
-          <img :src="$imgpath(o.pic)" class="image" />
+          <img :src="$imgpath(o.albumPics[0])" class="image" />
           <div style="padding: 14px;">
             <div class="batch" v-if="$store.state.getrole[0] == 'b'">
               <span>{{$t('message.批发价')}}</span>
@@ -54,6 +54,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.detail{
+  /deep/ .el-card{
+    height: 270px;
+    img{
+      max-height: 200px;
+      min-height: 180px;
+    }
+  }
+}
 .batch {
   color: green;
   border: 1px dashed #ff9000;

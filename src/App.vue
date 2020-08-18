@@ -175,11 +175,64 @@ export default {
 </script>
 
 <style>
+      /* @media all and (max-width:1000px){
+				body{
+					background: #1177bb;
+        }
+        .mouse-cover-canvas {
+          background: rgb(255, 255, 255);
+          left: 730px!important;
+          top: 180px!important;
+        }
+				
+			}
+
+			@media (max-width:800px){
+				body{
+					background: #aeaeae;
+        }
+        .mouse-cover-canvas {
+          background: rgb(255, 255, 255);
+          left: 530px!important;
+          top: 180px!important;
+        }
+			
+			}
+
+			@media (max-width:500px){
+				body{
+					background: #46ae46;
+        }
+        .mouse-cover-canvas {
+          background: rgb(255, 255, 255);
+          left: 230px!important;
+          top: 180px!important;
+        }
+				
+			}
+			@media (max-width:300px){
+				body{
+					background: #ff8cff;
+				}
+				
+      } */
+      
+/* @media screen and (max-width: 1920px) {
+    body {
+        background-color:red;
+    }
+    .mouse-cover-canvas {
+    background: rgb(255, 255, 255);
+      left: 730px!important;
+      top: 180px!important;
+    }
+} */
 .mouse-cover-canvas {
- background: rgb(255, 255, 255);
-  left: 730px!important;
-  top: 180px!important;
-}
+    background: rgb(255, 255, 255);
+      left: 730px!important;
+      top: 180px!important;
+    }
+
 .mouse-cover{
   /* width: 75px!important;
   height: 75px!important; */

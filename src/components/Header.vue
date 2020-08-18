@@ -156,6 +156,7 @@ export default {
 
 <style lang="scss" scoped>
 .header-warpper {
+  min-width: 1200px;
   background: #ff9000;
 }
 .header {
