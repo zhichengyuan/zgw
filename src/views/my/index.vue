@@ -10,7 +10,7 @@
                 status-icon
                 :rules="rules"
                 ref="ruleForm"
-                label-width="100px"
+               
                 class="demo-ruleForm"
               >
                 <el-form-item :label="$t('message.用户名')" prop="name">
@@ -125,6 +125,9 @@ export default {
         margin-top: 40px;
         .block-info {
         }
+      }
+      /deep/ .el-form-item__content{
+        text-align: center;
       }
     }
   }
