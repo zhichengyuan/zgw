@@ -86,15 +86,15 @@ export default {
     return {
       options: [
         {
-          value: "赊账",
+          value: this.$t("message.赊账"),
           label: this.$t("message.赊账"),
         },
         {
-          value: "现金",
+          value: this.$t("message.现金"),
           label: this.$t("message.现金"),
         },
         {
-          value: "转账",
+          value: this.$t("message.转账"),
           label: this.$t("message.转账"),
         },
       ],
