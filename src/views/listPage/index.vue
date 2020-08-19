@@ -48,6 +48,7 @@ export default {
   name: 'listpage',
   components: {
     ProductList
+    
   },
   beforeRouteUpdate (to, from, next) {
    
