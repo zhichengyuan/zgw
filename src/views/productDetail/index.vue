@@ -472,6 +472,7 @@ export default {
 }
 /deep/ .magnifier-box {
   border: 1px solid;
+  z-index: 999;
   img {
     height: 100%;
   }
