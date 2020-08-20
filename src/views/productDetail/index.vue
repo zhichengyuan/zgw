@@ -66,7 +66,7 @@
             <el-row>
               <!-- 左边 -->
               <div class="card-left">
-                <el-col  :xs="6" :sm="10" :md="10" :lg="10" :xl="10">
+                <el-col :xs="6" :sm="10" :md="10" :lg="10" :xl="10">
                   <div class="grid-content">
                     <el-row>
                       <!-- 放大图 -->
@@ -121,7 +121,7 @@
               </div>
               <!-- 右边 -->
               <div class="card-right">
-                <el-col  :offset="2" :xs="6" :sm="12" :md="12" :lg="12" :xl="12">
+                <el-col :offset="2" :xs="6" :sm="12" :md="12" :lg="12" :xl="12">
                   <div class="grid-content">
                     <div class="price">
                       <div class="cost">
@@ -326,7 +326,9 @@ export default {
             this.stock = 0;
             this.skuDataList.forEach((item) => {
               this.stock += parseInt(item.skunum);
+              console.log(this.stock);
             });
+            console.log(this.stock);
           }
 
           // if (res.data.items) {
@@ -374,7 +376,7 @@ export default {
       if (this.skuDataList.length == 0) {
         const noneSku = {
           selectStock: this.product.stock,
-          attributeList: { 商品规格: "该商品没有属性" },
+          attributeList: { 商品规格: this.$t('message.该商品没有属性') },
           productId: this.product._id,
           categoryNameRu: this.product.categoryNameRu,
           categoryName: this.product.categoryName,
@@ -635,9 +637,11 @@ export default {
               }
             }
             .sku-select {
-              max-height: 194px;
-              overflow: hidden;
-              padding: 5px 200px 0 0;
+              
+              max-height: 240px;
+              overflow-y: scroll;
+              
+              padding: 5px 0 0 0;
               .pro-specifi {
                 font-weight: 400;
                 font-size: 14px;
@@ -692,4 +696,5 @@ export default {
     }
   }
 }
+
 </style>

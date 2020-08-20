@@ -17,9 +17,7 @@ export default new Vuex.Store({
         nickname: "",
         getrole:[],
         // cartNumber: localStorage.getItem('cartNum') || 0,
-        storeinfo: {
-
-        },
+        storeinfo:JSON.parse(localStorage.getItem('storeInfo'))|| {},
         userInfo: {},
         activitys: [],
         swiperList: [],
@@ -142,6 +140,7 @@ export default new Vuex.Store({
                     state.activitys.push(state.activitys[i])
             }
             state.storeinfo = payload
+            localStorage.setItem('storeInfo',JSON.stringify(payload))
         },
 
         setActivitys(state, payload) {

@@ -1,6 +1,7 @@
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN' //引入element语言包
 const zh_CN = {
     message: {
+        "该商品没有属性":"该商品没有属性",
         "库存不足，无法下单":"库存不足，无法下单",
         "你购买的":"你购买的",
         "此商品无产品参数，可从图中了解具体的信息":"此商品无产品参数，可从图中了解具体的信息",
