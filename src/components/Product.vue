@@ -1,6 +1,6 @@
 <template>
   <el-row :gutter="20" class="detail">
-    <el-col class="buttom-margin" :xs="6" :sm="4" :md="4" :lg="4" :xl="3" v-for="(o) in productArr" :key="o._id">
+    <el-col class="buttom-margin" :xs="6" :sm="4" :md="4" :lg="4" :xl="4" v-for="(o) in productArr" :key="o._id">
       <div @click="toDetail(o)">
         <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
           <img :src="$imgpath(o.albumPics[0])" class="image" />

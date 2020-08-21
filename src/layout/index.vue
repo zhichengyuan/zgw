@@ -32,10 +32,10 @@ export default {
   .layout{
     position: relative;
     .wrapper{
-      width: 90%;
+      // width: 90%;
       margin:0 auto;
       margin-top:80px;
-
+      padding: 0 270px;
     }
   }
 </style>

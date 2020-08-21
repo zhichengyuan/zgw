@@ -13,14 +13,14 @@
                
                 class="demo-ruleForm"
               >
-                <el-form-item :label="$t('message.用户名')" prop="name">
-                  <el-input v-model="ruleForm.name" disabled></el-input>
+                <el-form-item :label="$t('message.用户名')" prop="name" >
+                  <el-input v-model="ruleForm.name" :disabled="true"></el-input>
                 </el-form-item>
                 <el-form-item :label="$t('message.密码')" prop="pass">
-                  <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+                  <el-input type="password" v-model="ruleForm.pass" autocomplete="off" ></el-input>
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="primary" @click="submitForm('ruleForm')">{{$t('message.修改个人信息')}}</el-button>
+                  <el-button type="primary" @click="submitForm('ruleForm')">{{$t('message.更改密码')}}</el-button>
                 </el-form-item>
               </el-form>
             </div>
@@ -38,7 +38,7 @@ export default {
     return {
       ruleForm: {
         name: "",
-        pass: "",
+        pass: "******",
       },
       rules: {
         name: [

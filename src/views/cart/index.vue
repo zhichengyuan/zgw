@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- 还未加入购物车 -->
-    <div class="logToast">
-      <div v-if="! $store.state.token">
+    <div class="logToast" v-if="! $store.state.token">
+      <div >
         <span>{{$t('message.登陆后可同步购物车商品')}}</span>
         <el-button @click="$router.push('/my')" type="danger">{{$t('message.去登陆')}}</el-button>
       </div>
