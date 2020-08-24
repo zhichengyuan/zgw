@@ -249,7 +249,7 @@ export default {
         return;
       }
 
-      this.$request.orderConfirm(selectedList).then((res) => {
+      this.$request.orderBreak(selectedList).then((res) => {
         if (res.code == 0) {
           this.$store.commit("orderBuffer", res.data);
           this.$router.push("/order");

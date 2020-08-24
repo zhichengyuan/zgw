@@ -390,6 +390,7 @@ export default {
           productSn: this.product.productSn,
           skucode: this.product.productSn,
           skuImg: this.product.albumPics[0],
+           categoryId:this.product.categoryId
         };
         // console.log(noneSku);
         if (noneSku.selectStock == 0) {
@@ -439,6 +440,7 @@ export default {
             productSn: sku.productSn,
             skuplace: sku.skuplace,
             skucode: sku.skucode,
+             categoryId:this.product.categoryId
           };
           if (localInfo.selectStock == 0) {
             this.$message({
@@ -472,7 +474,7 @@ export default {
 }
 /deep/ .magnifier-box {
   border: 1px solid;
-  z-index: 999;
+  z-index: 9;
   background: #fff;
   img {
     height: 100%;

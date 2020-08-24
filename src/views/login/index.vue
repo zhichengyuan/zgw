@@ -189,7 +189,7 @@ export default {
       // }
 
       this.$request
-        .register({ username: this.registerForm.regName, password: this.registerForm.regPass,roles:["c"]})
+        .register({ username: this.registerForm.regName, password: this.registerForm.regPass,roles:["c"],integral:0})
         .then(res => {
           
           if (res.code == 0) {

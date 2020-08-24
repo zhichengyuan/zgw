@@ -16,6 +16,7 @@ export default new Vuex.Store({
         userId:"",
         nickname: "",
         getrole:[],
+        integral:1000,
         // cartNumber: localStorage.getItem('cartNum') || 0,
         storeinfo:JSON.parse(localStorage.getItem('storeInfo'))|| {},
         userInfo: {},
@@ -58,6 +59,7 @@ export default new Vuex.Store({
             state.userId = ""
             state.getrole = []
             state.userInfo = {}
+            state.integral = 0
         },
         //同步本地和数据库的购物车的商品，相同的去除
         clearCart(state,cart){
@@ -66,6 +68,9 @@ export default new Vuex.Store({
                     state.cartList.splice(index,1) 
                 }
             })
+        },
+        setIntegral(state, payload) {
+            state.integral = payload
         },
         setToken(state, token) {
             state.token = token
@@ -169,6 +174,7 @@ export default new Vuex.Store({
                     commit("setUserId", res.data._id);
                     commit("setNickName", res.data.nickname);
                     commit("setRole", res.data.roles);
+                    commit("setIntegral", res.data.integral);
                 }
             });
         },

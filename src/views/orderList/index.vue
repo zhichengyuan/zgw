@@ -11,6 +11,9 @@
             <el-tab-pane :label="$t('message.所有订单')" name="-1">
               <order-detail :orderList="orderList" @cancleOrder="cancleOrder"></order-detail>
             </el-tab-pane>
+            <el-tab-pane :label="$t('message.待支付')" name="0">
+              <order-detail :orderList="orderList"></order-detail>
+            </el-tab-pane>
             <el-tab-pane :label="$t('message.待发货')" name="1">
               <order-detail :orderList="orderList"></order-detail>
             </el-tab-pane>

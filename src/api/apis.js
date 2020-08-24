@@ -187,6 +187,13 @@ let orderConfirm = (productList) => {
         data: { productList }
     })
 }
+let orderBreak= (productList) => {
+    return arequest.create({
+        url: "order/break",
+        method: "post",
+        data: { productList }
+    })
+}
 
 // 提交订单 1
 let order = (data) => {
@@ -294,6 +301,7 @@ let imgpath = (imgid) => {
 
 
 export default{
+    orderBreak,
     dbReq,
     getStoreInfo,
     // getSwiper,
