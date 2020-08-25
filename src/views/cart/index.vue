@@ -169,6 +169,9 @@ export default {
     //   return this.sumPrice;
     // }
   },
+  mounted(){
+    this.calcTotalPrice()
+  },
   methods: {
     //计算
     calcTotalPrice() {
@@ -248,8 +251,13 @@ export default {
         this.$router.push("/my");
         return;
       }
-
-      this.$request.orderBreak(selectedList).then((res) => {
+        console.log(selectedList)
+        var obj={
+          productList:selectedList,
+          uname:this.$store.state.username,
+          payment:"0"
+        }
+      this.$request.orderBreak(obj).then((res) => {
         if (res.code == 0) {
           this.$store.commit("orderBuffer", res.data);
           this.$router.push("/order");

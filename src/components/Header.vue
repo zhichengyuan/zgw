@@ -18,10 +18,11 @@
         <el-col class="box class" :span="3">
           <el-dropdown class="tu-box" @command="handleCommand" trigger="click">
             <span class="person"></span>
-            <span>{{$t("message.个人中心")}}</span>
+            <!-- <span>{{$t("message.个人中心")}}</span> -->
             <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="tempOrder">{{$t("message.查看个人临时订单")}}</el-dropdown-item>
               <el-dropdown-item command="orderList">{{$t("message.查看个人订单")}}</el-dropdown-item>
-              <el-dropdown-item command="myInfo">{{$t("message.修改个人信息")}}</el-dropdown-item>
+              <el-dropdown-item command="myInfo">{{$t("message.个人中心")}}</el-dropdown-item>
               <el-dropdown-item v-if="!$store.state.token" command="my">{{$t("message.登录")}}    </el-dropdown-item>
               <el-dropdown-item v-if="$store.state.token" command="my">{{$t("message.退出登录")}}</el-dropdown-item>
             </el-dropdown-menu>

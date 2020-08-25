@@ -5,16 +5,19 @@
       <div class="order-content" v-if="this.orderBuffer">
         <!-- theme -->
         <h2>{{$t('message.待付款订单')}}</h2>
+        <h3
+          style="color:red;font-weight:700;background-color:rgb(253,242,192)"
+          v-if="this.furnitureOrder.productList.length>0&&this.otherOrder.productList.length>0"
+        >{{$t("message.因物流运费的不同，将订单拆分成两个订单")}}</h3>
         <!-- 商品订单详情 1111-->
-        <div class="orde-detail" v-if="this.otherOrder.productList && this.otherOrder.productList.length>0">
-          <el-table :data="otherdata" style="width: 100%" v-if=" otherOrder">
+        <div
+          class="orde-detail"
+          v-if="this.otherOrder.productList && this.otherOrder.productList.length>0"
+        >
+          <el-table :data="otherdata" style="width: 100%" v-if=" otherOrder" default-expand-all>
             <el-table-column type="expand">
               <template>
-                <el-table
-                  :data="otherOrder.productList"
-                  style="width: 100%"
-                  
-                >
+                <el-table :data="otherOrder.productList" style="width: 100%">
                   <el-table-column prop="img" :label="$t('message.商品主图')" width="100">
                     <template slot-scope="scope">
                       <img :src="$imgpath(scope.row.pic)" alt />
@@ -36,7 +39,7 @@
                   </el-table-column>
                   <el-table-column prop="productNumber" :label="$t('message.数量')"></el-table-column>
 
-                  <el-table-column prop="totalPrice" :label="$t('message.总金额')">
+                  <el-table-column prop="totalPrice" :label="$t('message.金额')">
                     <template slot-scope="scope">
                       <div>{{scope.row.skuprice * scope.row.productNumber}}₽</div>
                     </template>
@@ -49,13 +52,13 @@
             <el-table-column :label="$t('message.商铺地址')" prop="shopAdress"></el-table-column>
             <el-table-column :label="$t('message.当前运费')" prop="transPrice">
               <template slot-scope="scope">
-                      <div>{{scope.row.transPrice}}₽</div>
-                    </template>
+                <div>{{scope.row.transPrice}}₽</div>
+              </template>
             </el-table-column>
-            <el-table-column :label="$t('message.当前金额')" prop="totalPrice">
+            <el-table-column :label="$t('message.当前总金额(包运费)')" prop="totalPrice">
               <template slot-scope="scope">
-                      <div>{{scope.row.totalPrice}}₽</div>
-                    </template>
+                <div>{{scope.row.totalPrice}}₽</div>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -64,7 +67,7 @@
           class="orde-detail"
           v-if="this.furnitureOrder.productList && this.furnitureOrder.productList.length>0"
         >
-          <el-table :data="furnituredata" style="width: 100%">
+          <el-table :data="furnituredata" style="width: 100%" default-expand-all>
             <el-table-column type="expand">
               <template>
                 <el-table :data="furnitureOrder.productList" style="width: 100%">
@@ -89,7 +92,7 @@
                   </el-table-column>
                   <el-table-column prop="productNumber" :label="$t('message.数量')"></el-table-column>
 
-                  <el-table-column prop="totalPrice" :label="$t('message.总金额')">
+                  <el-table-column prop="totalPrice" :label="$t('message.金额')">
                     <template slot-scope="scope">
                       <div>{{scope.row.skuprice * scope.row.productNumber}}₽</div>
                     </template>
@@ -102,13 +105,13 @@
             <el-table-column :label="$t('message.商铺地址')" prop="shopAdress"></el-table-column>
             <el-table-column :label="$t('message.当前运费')" prop="transPrice">
               <template slot-scope="scope">
-                      <div>{{scope.row.transPrice}}₽</div>
-                    </template>
+                <div>{{scope.row.transPrice}}₽</div>
+              </template>
             </el-table-column>
-            <el-table-column :label="$t('message.当前金额')" prop="totalPrice">
+            <el-table-column :label="$t('message.当前总金额(包运费)')" prop="totalPrice">
               <template slot-scope="scope">
-                      <div>{{scope.row.totalPrice}}₽</div>
-                    </template>
+                <div>{{scope.row.totalPrice}}₽</div>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -116,13 +119,23 @@
         <div class="payment">
           <div class="totalPrice">
             <span style="margin-right:25px">
-            <el-switch v-model="points" active-color="#13ce66"   active-text="可用积分为:" @change="change"></el-switch>
-            <span style="color: rgb(19, 206, 102)">{{integral}}</span>
+              <el-switch
+                v-model="points"
+                active-color="#13ce66"
+                :active-text="$t('message.可用积分为:')"
+                @change="change"
+              ></el-switch>
+              <span style="color: rgb(19, 206, 102)">{{integral}}</span>
             </span>
             <span>{{$t('message.总金额：')}}</span>
             <span>{{treansPrice}}₽</span>
           </div>
-          <el-button @click="selectPay">{{$t('message.待支付结算')}}</el-button>
+          <el-button
+            @click="selectPay"
+            :disabled="isOk"
+            :class="isOk?'disable':'on'"
+          >{{$t('message.去支付')}}</el-button>
+          <span v-if="isOk">{{$t('message.部分订单需更改运费，客服更改完后可进行支付')}}</span>
         </div>
         <el-dialog
           :title="$t('message.提示')"
@@ -131,7 +144,7 @@
           :before-close="handleClose"
         >
           <span>{{$t('message.请选择支付方式')}}</span>
-          <el-select v-model="value"  :placeholder="$t('message.请选择')">
+          <el-select v-model="value" :placeholder="$t('message.请选择')">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -150,12 +163,15 @@
 </template>
 
 <script>
-import { dbreq,order } from "@/api/apis";
+import { dbreq, order, ordercheck,oderRemove} from "@/api/apis";
 export default {
   name: "order",
   data() {
     return {
-      points: true,
+     
+      timer: null,
+      isOk: true,
+      points: false,
       options: [
         {
           value: "0",
@@ -187,6 +203,8 @@ export default {
           shopAdress: this.$store.state.storeinfo.address,
           shopTel: this.$store.state.storeinfo.tel,
           shopName: this.$store.state.storeinfo.shopName,
+          totalPrice: 0,
+          transPrice: 0,
         },
       ],
       otherdata: [
@@ -197,12 +215,21 @@ export default {
         },
       ],
       orderBuffer: {},
+      furnitureTotal: 0,
+      furnitureTran: 0,
+      oterTotal: 0,
+      otherTrans: 0,
     };
   },
-   computed: {
+  computed: {
     treansPrice() {
       this.newPrice = this.orderBuffer.allPrice;
       return parseInt(this.newPrice);
+    },
+  },
+  watch: {
+    orderBuffer(newVal, oldVal) {
+      console.log("adsf手动阀沙发舒服", newVal);
     },
   },
   created() {
@@ -221,12 +248,93 @@ export default {
     this.otherdata[0].transPrice = this.othertransPrice;
 
     this.compoutIntegral();
+    let that = this;
+    if (this.orderBuffer.furniture.productList.length > 0) {
+      console.log("分家具");
+      this.lanXun();
+    } else {
+      this.orderBuffer.isOk = false;
+      that.isOk = false;
+    }
   },
   inject: ["loadCartList"],
+
   methods: {
+    //轮询查询
+    lanXun() {
+      let that = this;
+      console.log("进来了", this.orderBuffer);
+      let data = {};
+      data.id = [];
+
+      this.orderBuffer.isOk = true;
+
+      data.id.push(this.furnitureOrder._id);
+      console.log("dara", data);
+      that.timer = setInterval(() => {
+        console.log(data, "data");
+        that.$request.ordercheck(data).then((res) => {
+          console.log(res, "rrrr");
+          if (res.code == 0) {
+            console.log("轮询1111", res);
+            that.orderBuffer.isOk = false;
+            that.isOk = false;
+            this.furnitureOrder = res.data[0];
+            // console.log(this.furnitureOrder)
+            this.orderBuffer.furniture=this.furnitureOrder 
+            this.furnituredata[0].totalPrice = res.data[0].totalPrice;
+            console.log(this.furnituredata[0].totalPrice, "ttttttt");
+            this.furnituredata[0].transPrice = res.data[0].transPrice;
+            if (this.otherOrder.productList.length > 0) {
+              this.orderBuffer.allPrice =
+                this.otherOrder.totalPrice + this.furnitureOrder.totalPrice;
+            } else {
+              this.orderBuffer.allPrice = this.furnitureOrder.totalPrice;
+            }
+
+            clearInterval(that.timer);
+          } else {
+            that.orderBuffer.isOk = true;
+            that.isOk = true;
+          }
+        });
+      }, 5000);
+    },
     // 改变积分
-    change(data){
-      console.log(data)
+    change(data) {
+      console.log(data);
+      if (data == true) {
+        // console.log(this.otherOrder, this.furnitureOrder);
+        this.orderBuffer.allPrice =
+          parseFloat(this.orderBuffer.allPrice) - parseFloat(this.integral);
+        this.orderBuffer.integral = this.integral;
+        if (this.otherOrder.productList.length > 0) {
+          this.orderBuffer.other.integral = this.integral;
+          this.orderBuffer.other.totalPrice =
+            parseFloat(this.orderBuffer.other.totalPrice) -
+            parseFloat(this.integral);
+        } else {
+          this.orderBuffer.furniture.integral = this.integral;
+          this.orderBuffer.furniture.totalPrice =
+            parseFloat(this.orderBuffer.furniture.totalPrice) -
+            parseFloat(this.integral);
+        }
+      } else {
+        this.orderBuffer.allPrice =
+          parseFloat(this.integral) + parseFloat(this.orderBuffer.allPrice);
+        this.orderBuffer.integral = this.integral;
+        if (this.otherOrder.productList.length > 0) {
+          this.orderBuffer.other.integral = this.integral;
+          this.orderBuffer.other.totalPrice =
+            parseFloat(this.orderBuffer.other.totalPrice) +
+            parseFloat(this.integral);
+        } else {
+          this.orderBuffer.furniture.integral = this.integral;
+          this.orderBuffer.furniture.totalPrice =
+            parseFloat(this.orderBuffer.furniture.totalPrice) +
+            parseFloat(this.integral);
+        }
+      }
     },
     compoutIntegral() {
       this.integral = this.orderBuffer.allPrice * 0.1;
@@ -269,39 +377,41 @@ export default {
       } else {
         const newOrderBuffer = {
           totalPrice: this.newPrice.toFixed(2),
-        productPrice: this.newPrice.toFixed(2),
+          productPrice: this.newPrice.toFixed(2),
           transPrice: this.transPrice,
           productList: this.orderBuffer.productList,
           payment: this.value,
         };
         //除家具外的商品订单
-      const otherOrderBuffer = {
-       totalPrice: this.orderBuffer.other.totalPrice.toFixed(2),
-        productPrice: this.orderBuffer.other.totalPrice.toFixed(2),
-        transPrice: this.orderBuffer.other.transPrice,
-        productList: this.orderBuffer.other.productList,
-        payment: this.value,
-      };
-      //家具商品订单
-      const furnitureOrderBuffer = {
-        totalPrice: this.orderBuffer.furniture.totalPrice.toFixed(2),
-        productPrice: this.orderBuffer.furniture.totalPrice.toFixed(2),
-        transPrice: this.orderBuffer.furniture.transPrice,
-        productList: this.orderBuffer.furniture.productList,
-        payment: this.value,
-      };
-      //所有订单的商品合并列表
-      var allProduct = otherOrderBuffer.productList.concat(furnitureOrderBuffer.productList)
-      if(furnitureOrderBuffer.productList.length > 0) {
-        furnitureOrderBuffer.productList.forEach((e) => {
-          e.productNumber = e.productNumber.toString();
-        });
-      }
-      if(otherOrderBuffer.productList.length > 0) {
-        otherOrderBuffer.productList.forEach((e) => {
-          e.productNumber = e.productNumber.toString();
-        });
-      }
+        const otherOrderBuffer = {
+          totalPrice: this.orderBuffer.other.totalPrice.toFixed(2),
+          productPrice: this.orderBuffer.other.productPrice,
+          transPrice: this.orderBuffer.other.transPrice,
+          productList: this.orderBuffer.other.productList,
+          payment: this.value,
+        };
+        //家具商品订单
+        const furnitureOrderBuffer = {
+          totalPrice: this.orderBuffer.furniture.totalPrice.toFixed(2),
+          productPrice: this.orderBuffer.furniture.productPrice,
+          transPrice: this.orderBuffer.furniture.transPrice,
+          productList: this.orderBuffer.furniture.productList,
+          payment: this.value,
+        };
+        //所有订单的商品合并列表
+        var allProduct = otherOrderBuffer.productList.concat(
+          furnitureOrderBuffer.productList
+        );
+        if (furnitureOrderBuffer.productList.length > 0) {
+          furnitureOrderBuffer.productList.forEach((e) => {
+            e.productNumber = e.productNumber.toString();
+          });
+        }
+        if (otherOrderBuffer.productList.length > 0) {
+          otherOrderBuffer.productList.forEach((e) => {
+            e.productNumber = e.productNumber.toString();
+          });
+        }
         var checkProduct = allProduct;
         var arr = [];
         var counter = 0;
@@ -367,55 +477,75 @@ export default {
             setTimeout(() => {
               var a = arr.indexOf("false");
               if (a === -1) {
-                console.log('下订单');
-              //判断是否两种订单都有
-              console.log(otherOrderBuffer,furnitureOrderBuffer)
-              if(otherOrderBuffer.productList.length > 0 && furnitureOrderBuffer.productList.length > 0) {
-                Promise.all([this.submitOrder(otherOrderBuffer), this.submitOrder(furnitureOrderBuffer)]).then((values) => {
-                  console.log('我成功了',values);
-                  that.toOrderD();
-                });
-              }else if(otherOrderBuffer.productList.length == 0 ) {
-                Promise.all([this.submitOrder(furnitureOrderBuffer)]).then((values) => {
-                  console.log('我成功了',values);
-                  that.toOrderD();
-                });
-              } else if(furnitureOrderBuffer.productList == 0){
-                Promise.all([this.submitOrder(otherOrderBuffer)]).then((values) => {
-                  console.log('我成功了',values);
-                  that.toOrderD();
-                });
-              }
+                console.log("下订单");
+                //判断是否两种订单都有
+                console.log(otherOrderBuffer, furnitureOrderBuffer);
+                if (
+                  otherOrderBuffer.productList.length > 0 &&
+                  furnitureOrderBuffer.productList.length > 0
+                ) {
+                  Promise.all([
+                    this.submitOrder(otherOrderBuffer),
+                    this.submitOrder(furnitureOrderBuffer),
+                  ]).then((values) => {
+                    console.log("我成功了", values);
+                    that.toOrderD();
+                  });
+                } else if (otherOrderBuffer.productList.length == 0) {
+                  Promise.all([this.submitOrder(furnitureOrderBuffer)]).then(
+                    (values) => {
+                      console.log("我成功了", values);
+                      that.toOrderD();
+                    }
+                  );
+                } else if (furnitureOrderBuffer.productList == 0) {
+                  Promise.all([this.submitOrder(otherOrderBuffer)]).then(
+                    (values) => {
+                      console.log("我成功了", values);
+                      that.toOrderD();
+                    }
+                  );
+                }
               }
             }, 500);
           }
         });
-      }
+        let orderId=[this.orderBuffer.furniture._id,this.orderBuffer.other._id]
+        orderId.forEach(v=>{
+          var req={
+            _id:v
+          }
+          this.$request.oderRemove("tmporder",req).then(res=>{
+            console.log(res)
+          })
+        })
 
+      }
     },
     //提交订单
-    submitOrder (newOrderBuffer) { 
+    submitOrder(newOrderBuffer) {
       let that = this;
-      return new Promise ((resolve,reject) => {
+      return new Promise((resolve, reject) => {
         that.$request.order(newOrderBuffer).then((res) => {
           if (res.code == 0) {
+            console.log("返回值",res)
             that.loadCartList();
-            resolve(res) ;
-            // that.$router.push("/orderDetail/" + res.data._id);
+            resolve(res);
           }
         });
-    })},
+      });
+    },
     //成功后跳转
-    toOrderD(){
+    toOrderD() {
       let that = this;
-  
-      //that.$store.dispatch("loadCartList")
-      
       that.$message({
         message: that.$t("message.订单已提交"),
       });
-      this.$router.push("/orderList")
-    }
+      this.$router.push("/orderList");
+    },
+  },
+  destroyed() {
+    clearInterval(this.timer);
   },
 };
 </script>
@@ -462,8 +592,14 @@ export default {
           padding: 0 20px;
           color: #ff9000;
         }
-        > button {
+        .on {
           background: #ff9000;
+          color: #fff;
+          font-size: 18px;
+          font-weight: 400;
+        }
+        .disable {
+          background: #ff900038;
           color: #fff;
           font-size: 18px;
           font-weight: 400;

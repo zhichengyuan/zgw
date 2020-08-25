@@ -4,7 +4,7 @@ import VueI18n from 'vue-i18n'
 import messages from './langs'
 Vue.use(VueI18n)
 
-let locale1="cn";
+let locale1="ru";
 // localStorage.getItem('switchingLanguage')?localStorage.getItem('switchingLanguage'):localStorage.getItem('language') || 'cn'
 // if(localStorage.getItem('switchingLanguage')){
 //     locale1 = localStorage.getItem('switchingLanguage');

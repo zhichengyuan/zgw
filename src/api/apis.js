@@ -187,11 +187,11 @@ let orderConfirm = (productList) => {
         data: { productList }
     })
 }
-let orderBreak= (productList) => {
+let orderBreak= (data) => {
     return arequest.create({
         url: "order/break",
         method: "post",
-        data: { productList }
+        data
     })
 }
 
@@ -263,7 +263,30 @@ let dbreq = (name, req) => {
         data: { table_name: name, req }
     })
 }
-
+//轮询接口
+let ordercheck = (data) => {
+    return arequest.create({
+        url: "order/check",
+        method: "post",
+        data
+    })
+}
+// 删除临时订单
+let oderRemove = (name, req) => {
+    return arequest.create({
+        url: "db/remove",
+        method: "post",
+        data: { table_name: name, req }
+    })
+}
+// 临时表订单
+let bufferorder = (data) => {
+    return arequest.create({
+        url: "order/bufforder",
+        method: "post",
+        data
+    })
+}
 // 获取地址列表
 // let addressList = () => {
 //         return arequest.create({
@@ -301,6 +324,9 @@ let imgpath = (imgid) => {
 
 
 export default{
+    bufferorder,
+    oderRemove,
+    ordercheck,
     orderBreak,
     dbReq,
     getStoreInfo,

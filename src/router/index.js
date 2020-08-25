@@ -91,6 +91,12 @@ const router = new VueRouter({
           component: () =>
             import("@/views/search/index.vue")
         },
+        {
+          path: "/tempOrder",
+          name:"tempOrder",
+          component: () =>
+            import("@/views/tempOrder/index.vue")
+        },
       ]
     },
     // 分类内部

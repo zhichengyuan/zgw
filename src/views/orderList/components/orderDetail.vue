@@ -40,7 +40,7 @@
             </el-table-column>
             <el-table-column :label="$t('message.运费')" prop="shopName">
                 <template slot-scope="scope">
-                <span>{{ scope.row.transPrice?scope.row.transPrice:'--' }}</span>
+                <span>{{ scope.row.transPrice }}</span>
                 </template>
             </el-table-column>
             <el-table-column :label="$t('message.收货地址')" prop="shopName">
@@ -68,7 +68,6 @@
                 <template slot-scope="scope">
                     <el-button type="danger" v-if="scope.row.status == 0 || scope.row.status == 1" @click="cancle(scope.row)">{{$t('message.取消订单')}}</el-button>
                     <el-button type="success" v-if="scope.row.status == 2" @click="finished(scope.row)">{{$t('message.确认收货')}}</el-button>
-                <!-- <span>{{orderStatus(scope.row.status)}}</span> -->
                 </template>
             </el-table-column>
         </el-table>
@@ -97,36 +96,13 @@ export default {
     cancle(item) {
         // console.log(item);
       item.status = '4'
-      // const infoCancel = {
-      //   _id: item._id,
-      //   status: '4'
-      // }
-    //   this.$emit('cancleOrder','完成');
-
+     
       this.$request.orderCancel(item).then(res => {
         if (res.code == 0) {
           this.$emit('cancleOrder','完成');
         }
         
       })
-
-      // if(item.warehousId){
-      //   var obj = {
-      //     _id: item.warehousId,
-      //     status: '4'
-      //   }
-      //   console.log(obj);
-      //   this.$request.receiptSave(obj).then(res => {
-      //     console.log('成功了',res);
-      //   })
-      // }
-      // console.log('dddddd',infoCancel)
-      // this.$request.order(infoCancel).then(res => {
-      //   if (res.code == 0) {
-      //     this.getOrderList();
-      //   }
-
-      // })
 
     },
     // 订单已收货
