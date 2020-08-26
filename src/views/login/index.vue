@@ -25,15 +25,15 @@
                 ref="loginForm"
                 class="demo-ruleForm"
               >
-                <el-form-item prop="loginName">
-                  <el-input v-model="loginForm.loginName" :placheholder="$t('message.用户名')"></el-input>
+                <el-form-item prop="loginName" :label="$t('message.用户名')">
+                  <el-input v-model="loginForm.loginName" ></el-input>
                 </el-form-item>
-                <el-form-item prop="loginPass">
+                <el-form-item prop="loginPass" :label="$t('message.密码')">
                   <el-input
                     type="password"
                     v-model="loginForm.loginPass"
                     autocomplete="off"
-                    :placheholder="$t('message.密码')"
+                    
                   ></el-input>
                 </el-form-item>
                 <el-button @click="login('loginForm')" class="fm-button">{{$t('message.登录')}}</el-button>
@@ -48,26 +48,30 @@
                 ref="registerForm"
                 class="demo-ruleForm"
               >
-                <el-form-item prop="regName">
-                  <el-input v-model="registerForm.regName" :placheholder="$t('message.用户名')"></el-input>
+                <el-form-item prop="regName" :label="$t('message.用户名')">
+                  <el-input v-model="registerForm.regName" ></el-input>
                 </el-form-item>
-                <el-form-item prop="regPass">
+                <el-form-item prop="regPass" :label="$t('message.密码')">
                   <el-input
                     type="password"
                     v-model="registerForm.regPass"
                     autocomplete="off"
-                    :placheholder="$t('message.密码')"
+                    
                   ></el-input>
                 </el-form-item>
-                <el-form-item prop="regcheckPass">
+                <el-form-item prop="regcheckPass" :label="$t('message.确认密码')">
                   <el-input
                     type="password"
                     v-model="registerForm.regcheckPass"
                     autocomplete="off"
-                    :placheholder="$t('message.确认密码')"
                   ></el-input>
                 </el-form-item>
-
+                <el-form-item prop="regtel" :label="$t('message.电话')">
+                  <el-input
+                    v-model="registerForm.regtel"
+                    autocomplete="off"
+                  ></el-input>
+                </el-form-item>
                 <el-button @click="register('registerForm')" class="fm-button">{{$t('message.注册')}}</el-button>
               </el-form>
             </div>
@@ -113,6 +117,7 @@ export default {
         regPass: "",
         regCheckpass: "",
         regName: "",
+        regtel:""
       },
       rules: {
          regName:[{ required: true, trigger: "blur",message:this.$t('message.请输入用户名') }],
@@ -120,6 +125,15 @@ export default {
         loginPass: [{ required: true, trigger: "blur" ,message:this.$t('message.请输入密码')}],
         regPass: [{ validator: validatePass, trigger: "blur" }],
         regcheckPass: [{ validator: validatePass2, trigger: "blur" }],
+        regtel: [
+          { required: true, trigger: 'blur' , message: this.$t('message.请输入电话'),},
+          {
+            min: 11,
+            max: 11,
+            message: this.$t('message.号码格式不正确'),
+            trigger: 'blur',
+          },
+        ],
       },
     };
   },
@@ -187,14 +201,15 @@ export default {
       //   });
       //   return;
       // }
-
+      
       this.$request
-        .register({ username: this.registerForm.regName, password: this.registerForm.regPass,roles:["c"],integral:0})
+        .register({ username: this.registerForm.regName, password: this.registerForm.regPass,tel: this.registerForm.regtel,roles:["c"],integral:0})
         .then(res => {
           
           if (res.code == 0) {
             this.loginForm.loginName = this.registerForm.regName;
             this.loginForm.loginPass = this.registerForm.regPass;
+           
             this.$message({
               message: this.$t('message.注册成功'),
               type: "success",
