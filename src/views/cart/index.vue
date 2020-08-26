@@ -183,12 +183,14 @@ export default {
         if (item.isChecked == true) {
           this.sumPrice += item.skuprice * item.productNumber;
           this.sumProductNumber += item.productNumber;
+          
         } else {
           isCheckAll = false;
         }
       });
       this.isCheckAll = isCheckAll;
-      return this.sumPrice;
+      this.sumPrice=Number(this.sumPrice.toFixed(2))
+      return this.sumPrice
     },
     //是否选中
     onChangeCheck() {

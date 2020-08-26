@@ -262,6 +262,7 @@ export default {
       this.$request.bufferorder(data).then((res) => {
         console.log(res);
         this.orderList = res.data;
+        this.orderList.reverse()
       });
     },
   },
@@ -269,6 +270,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-table .cell{
+  img{
+    width: 100%;
+  }
+}
 .temporder {
   position: relative;
   background-color: #fff;

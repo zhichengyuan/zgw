@@ -12,7 +12,7 @@ export default new Vuex.Store({
         token: localStorage.getItem('token'),
         //购物车数据储存
         cartList: [],
-        username: "",
+        username:JSON.parse(localStorage.getItem('username')) ||"",
         userId:"",
         nickname: "",
         getrole:[],
@@ -124,6 +124,7 @@ export default new Vuex.Store({
 
         getUserName(state, payload) {
             state.username = payload
+            localStorage.setItem('username', JSON.stringify(payload))
         },
 
         setSid(state, payload) {

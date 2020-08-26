@@ -224,7 +224,7 @@ export default {
   computed: {
     treansPrice() {
       this.newPrice = this.orderBuffer.allPrice;
-      return parseInt(this.newPrice);
+      return this.newPrice.toFixed(2);
     },
   },
   watch: {

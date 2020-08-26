@@ -9,15 +9,15 @@
         <div class="list">
           <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane :label="$t('message.所有订单')" name="-1">
-              <order-detail :orderList="orderList" @cancleOrder="cancleOrder"></order-detail>
+              <order-detail :orderList="orderList" @cancleOrder="cancleOrder" @finish="finish"></order-detail>
             </el-tab-pane>
-            <el-tab-pane :label="$t('message.待支付')" name="0">
+            <el-tab-pane :label="$t('message.待支付')" name="0" @cancleOrder="cancleOrder">
               <order-detail :orderList="orderList"></order-detail>
             </el-tab-pane>
-            <el-tab-pane :label="$t('message.待发货')" name="1">
+            <el-tab-pane :label="$t('message.待发货')" name="1" @cancleOrder="cancleOrder">
               <order-detail :orderList="orderList"></order-detail>
             </el-tab-pane>
-            <el-tab-pane :label="$t('message.待收货')" name="2">
+            <el-tab-pane :label="$t('message.待收货')" name="2" @finish="finish">
               <order-detail :orderList="orderList"></order-detail>
             </el-tab-pane>
             <el-tab-pane :label="$t('message.已收货')" name="3">
@@ -56,8 +56,12 @@ export default {
     this.getOrderList();
   },
   methods: {
+    finish(parms){
+      console.log(parms);
+      this.getOrderList();
+    },
     cancleOrder(parms){
-      // console.log(parms);
+      console.log(parms);
       this.getOrderList();
     },
     handleClick(tab, event) {

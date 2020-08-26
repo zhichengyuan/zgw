@@ -121,8 +121,8 @@ export default {
       }
       this.$request.order(infoFinsh).then(res => {
         if (res.code == 0) {
-            // console.log('已收货')
-          this.$emit('cancleOrder','完成');
+            console.log('已收货')
+          this.$emit('finish','完成');
         }
 
       })
