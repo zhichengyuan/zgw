@@ -11,20 +11,20 @@
             <el-tab-pane :label="$t('message.所有订单')" name="-1">
               <order-detail :orderList="orderList" @cancleOrder="cancleOrder" @finish="finish"></order-detail>
             </el-tab-pane>
-            <el-tab-pane :label="$t('message.待支付')" name="0" @cancleOrder="cancleOrder">
-              <order-detail :orderList="orderList"></order-detail>
+            <el-tab-pane :label="$t('message.待支付')" name="0" >
+              <order-detail :orderList="orderList" @cancleOrder="cancleOrder" @finish="finish"></order-detail>
             </el-tab-pane>
-            <el-tab-pane :label="$t('message.待发货')" name="1" @cancleOrder="cancleOrder">
-              <order-detail :orderList="orderList"></order-detail>
+            <el-tab-pane :label="$t('message.待发货')" name="1" >
+              <order-detail :orderList="orderList" @cancleOrder="cancleOrder" @finish="finish"></order-detail>
             </el-tab-pane>
-            <el-tab-pane :label="$t('message.待收货')" name="2" @finish="finish">
-              <order-detail :orderList="orderList"></order-detail>
+            <el-tab-pane :label="$t('message.待收货')" name="2" >
+              <order-detail :orderList="orderList" @cancleOrder="cancleOrder" @finish="finish"></order-detail>
             </el-tab-pane>
-            <el-tab-pane :label="$t('message.已收货')" name="3">
-              <order-detail :orderList="orderList"></order-detail>
+            <el-tab-pane :label="$t('message.已收货')" name="3" >
+              <order-detail :orderList="orderList" @cancleOrder="cancleOrder" @finish="finish"></order-detail >
             </el-tab-pane>
             <el-tab-pane :label="$t('message.已取消')" name="4">
-              <order-detail :orderList="orderList"></order-detail>
+              <order-detail :orderList="orderList" @cancleOrder="cancleOrder" @finish="finish"></order-detail>
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -80,7 +80,7 @@ export default {
       };
       this.$request.orderList(this.status).then(res => {
         if (res.code == 0) {
-          // console.log(res);
+          console.log(res);
           this.orderList = res.data.items;
         }
 
