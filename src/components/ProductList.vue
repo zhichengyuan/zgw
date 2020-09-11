@@ -51,33 +51,22 @@ export default {
         // curtime: new Date().getTime()
     }
   },
-  created(){
-      // console.log(this.commodity);
-  },
+
   mounted(){
       this.getList();
   },
   watch: {
     commodity(newV,oldV) {
-      // console.log('我vvvvv')
-      // console.log(this.$route.query.title);
-      // this.title = this.$route.query.title
         this.onRefresh();
       } ,
-      // commodity(newV,oldV) {
-      //   this.commodity = newV;
-      //   console.log('新条件',this.commodity)
-      // } 
      
     },
     
   methods:{
       //跳转详情页面
       toDetail(item){
-        // console.log(item);
         this.$router.push({
               path: "/product/" + item._id,
-              // query: { listtype: "category", code: cat.id,title:cat.name },
           });
       },
       more(){
@@ -103,7 +92,6 @@ export default {
           this.pagenum
         )
           .then(res => {
-            // console.log('商品',res);
                 that.loading = false;
             if (res.code == 0) {
               if(this.pagenum == 1) {

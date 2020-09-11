@@ -35,17 +35,11 @@ export default {
     //对于一个带有动态参数的路径 /good/:id，在 /good/1 和 /good/2 之间跳转的时候，
     // 由于会渲染同样的good组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
     // 可以访问组件实例 `this`
-    // console.log(this, 'beforeRouteUpdate'); //当前组件实例
-    // console.log(to, '组件独享守卫beforeRouteUpdate第一个参数');
-    // console.log(from, '组件独享守beforeRouteUpdate卫第二个参数');
-    // console.log(next, '组件独享守beforeRouteUpdate卫第三个参数');
     this.searchStr = to.params.search
     this.getList();
-    // console.log(this.$route.params);
     next();
   },
   created(){
-      // console.log(this.$route.params);
       this.searchStr = this.$route.params.search
       this.getList();
   },
@@ -56,11 +50,6 @@ export default {
       },
       // 获取数据
       getList() {
-        // if (this.searchStr == "") {
-
-        //   return
-        // }
-
         this.loading = true;
         this.$request.fetchCommodityList(
           "search",
@@ -69,10 +58,6 @@ export default {
           this.pagenum
         )
           .then(res => {
-            // console.log('条件查询',res);
-            // this.dataList = res.data.items;
-            // this.total = res.data.total;
-            // this.loading = false;
             if (res.code == 0) {
               this.total = res.data.total;
               this.dataList.push(...res.data.items);

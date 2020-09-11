@@ -229,13 +229,11 @@ export default {
   },
   watch: {
     orderBuffer(newVal, oldVal) {
-      console.log("adsf手动阀沙发舒服", newVal);
     },
   },
   created() {
     const orderProduct = JSON.parse(localStorage.getItem("orderBuffer"));
     this.orderBuffer = orderProduct || this.$store.state.orderBuffer;
-    console.log(this.orderBuffer, "ssss", this.value);
     this.otherOrder = this.orderBuffer.other;
     this.furnitureOrder = this.orderBuffer.furniture;
     (this.furtotalPrice = this.furnitureOrder.totalPrice),
@@ -250,7 +248,6 @@ export default {
     this.compoutIntegral();
     let that = this;
     if (this.orderBuffer.furniture.productList.length > 0) {
-      console.log("分家具");
       this.lanXun();
     } else {
       this.orderBuffer.isOk = false;
@@ -263,27 +260,20 @@ export default {
     //轮询查询
     lanXun() {
       let that = this;
-      console.log("进来了", this.orderBuffer);
       let data = {};
       data.id = [];
 
       this.orderBuffer.isOk = true;
 
       data.id.push(this.furnitureOrder._id);
-      console.log("dara", data);
       that.timer = setInterval(() => {
-        console.log(data, "data");
         that.$request.ordercheck(data).then((res) => {
-          console.log(res, "rrrr");
           if (res.code == 0) {
-            console.log("轮询1111", res);
             that.orderBuffer.isOk = false;
             that.isOk = false;
             this.furnitureOrder = res.data[0];
-            // console.log(this.furnitureOrder)
             this.orderBuffer.furniture=this.furnitureOrder 
             this.furnituredata[0].totalPrice = res.data[0].totalPrice;
-            console.log(this.furnituredata[0].totalPrice, "ttttttt");
             this.furnituredata[0].transPrice = res.data[0].transPrice;
             if (this.otherOrder.productList.length > 0) {
               this.orderBuffer.allPrice =
@@ -302,9 +292,7 @@ export default {
     },
     // 改变积分
     change(data) {
-      console.log(data);
       if (data == true) {
-        // console.log(this.otherOrder, this.furnitureOrder);
         this.orderBuffer.allPrice =
           parseFloat(this.orderBuffer.allPrice) - parseFloat(this.integral);
         this.orderBuffer.integral = this.integral;
@@ -355,10 +343,7 @@ export default {
     },
     onSubmit() {
       let that = this;
-      // console.log(this.orderBuffer.payment);
-      // console.log(this.value);
       if (this.value == "") {
-        // this.orderBuffer.payment=this.$lang["赊账"]
         this.$confirm(
           this.$t("message.请选择你的支付方式"),
           this.$t("message.提示"),
@@ -417,18 +402,15 @@ export default {
         var counter = 0;
 
         checkProduct.map((v) => {
-          // console.log(5555)
+
           counter++;
           if (v.productSn == v.skucode) {
             this.$request
               .dbreq("product", { productSn: v.productSn, sid: v.sid })
               .then((res) => {
-                // console.log(res.data.items);
+            
                 res.data.items.map((item) => {
-                  console.log(
-                    Number(item.stock) - Number(v.productNumber),
-                    "nosku"
-                  );
+                 
                   if (Number(item.stock) - Number(v.productNumber) < 0) {
                     arr.push("false");
                     this.$message({
@@ -437,7 +419,7 @@ export default {
                         item.name +
                         this.$t("message.库存不足，无法下单"),
                     });
-                    // return
+                
                   } else {
                     arr.push("true");
                   }
@@ -451,14 +433,8 @@ export default {
                 skucode: v.skucode,
               })
               .then((res) => {
-                console.log(res.data.items);
+          
                 res.data.items.map((item) => {
-                  console.log(item.skunum, "skunum");
-                  console.log(v.productNumber, "productNumber");
-                  console.log(
-                    Number(item.skunum) - Number(v.productNumber),
-                    "sku"
-                  );
                   if (Number(item.skunum) - Number(v.productNumber) < 0) {
                     arr.push("false");
                     this.$message({
@@ -477,9 +453,7 @@ export default {
             setTimeout(() => {
               var a = arr.indexOf("false");
               if (a === -1) {
-                console.log("下订单");
                 //判断是否两种订单都有
-                console.log(otherOrderBuffer, furnitureOrderBuffer);
                 if (
                   otherOrderBuffer.productList.length > 0 &&
                   furnitureOrderBuffer.productList.length > 0
@@ -488,20 +462,17 @@ export default {
                     this.submitOrder(otherOrderBuffer),
                     this.submitOrder(furnitureOrderBuffer),
                   ]).then((values) => {
-                    console.log("我成功了", values);
                     that.toOrderD();
                   });
                 } else if (otherOrderBuffer.productList.length == 0) {
                   Promise.all([this.submitOrder(furnitureOrderBuffer)]).then(
                     (values) => {
-                      console.log("我成功了", values);
                       that.toOrderD();
                     }
                   );
                 } else if (furnitureOrderBuffer.productList == 0) {
                   Promise.all([this.submitOrder(otherOrderBuffer)]).then(
                     (values) => {
-                      console.log("我成功了", values);
                       that.toOrderD();
                     }
                   );
@@ -516,7 +487,6 @@ export default {
             _id:v
           }
           this.$request.oderRemove("tmporder",req).then(res=>{
-            console.log(res)
           })
         })
 
@@ -528,7 +498,6 @@ export default {
       return new Promise((resolve, reject) => {
         that.$request.order(newOrderBuffer).then((res) => {
           if (res.code == 0) {
-            console.log("返回值",res)
             that.loadCartList();
             resolve(res);
           }

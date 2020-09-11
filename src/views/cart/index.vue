@@ -73,36 +73,6 @@
                     </el-col>
                   </el-col>
                 </el-row>
-
-                <!-- <ul class="product-list">
-                  <li class="list">
-                    <div class="order">
-                        <div class="check">
-                          <el-checkbox v-model="checked"></el-checkbox>
-                        </div>
-                        <div class="img">
-                          <img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1141259048,554497535&fm=26&gp=0.jpg" alt="">
-                        </div>
-                        <div class="product">
-                          <p class="name">AUSSIE//修复奇迹，牛仔裤</p>
-                          <p class="product-code">供应商代码  2554870</p>
-                          <p class="num">
-                            <span>数量</span>
-                            <el-button icon="el-icon-minus" circle></el-button>
-                            <el-input v-model="input" placeholder="1"></el-input>
-                            <el-button icon="el-icon-plus" circle></el-button>
-                          </p>
-                        </div>
-                        <div class="price">
-                          <span>8912₽</span>
-                        </div>
-                    </div>
-                    <div class="delete">
-                      <span>删除</span>
-                    </div>
-
-                  </li>
-                </ul>-->
               </div>
             </div>
           </el-col>
@@ -152,23 +122,6 @@ export default {
   created() {
     // this.onClickRight()
   },
-  computed: {
-    // calcTotalPrice() {
-    //   //每次遍历商品之前对总金额进行清零
-    //   let isCheckAll = true;
-    //   this.sumPrice = 0;
-    //   this.$store.state.cartList.forEach((item, index) => {
-    //     if (item.isChecked == true) {
-    //       this.sumPrice += item.skuprice * item.productNumber;
-    //     } else {
-    //       isCheckAll = false;
-    //     }
-    //   });
-    //   this.isCheckAll = isCheckAll;
-    //   console.log(this.sumPrice);
-    //   return this.sumPrice;
-    // }
-  },
   mounted(){
     this.calcTotalPrice()
   },
@@ -210,7 +163,6 @@ export default {
       this.calcTotalPrice();
     },
     changNum(e,limitNum,item) {
-      console.log(e,limitNum,item)
      if(Number(e)>Number(limitNum)){
       item.productNumber=Number(limitNum)
      }
@@ -253,7 +205,6 @@ export default {
         this.$router.push("/my");
         return;
       }
-        console.log(selectedList)
         var obj={
           productList:selectedList,
           uname:this.$store.state.username,

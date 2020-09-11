@@ -1,6 +1,5 @@
 import Axios from 'axios'
 import config from './config'
-// import { Toast } from "vant";
 import {Message} from "element-ui"
 class HttpRequest {
     handleAuthorization(instance) {
@@ -22,10 +21,6 @@ class HttpRequest {
                 Message.error(`服务器错误：${error.response.status}.${error.response.data.msg}`) :
                 Message.error(`sevice err`);
             throw error;
-            // error.msg ?
-            //     Toast.fail(`服务器错误：${error.response.status}.${error.response.data.msg}`) :
-            //     Toast.fail(`sevice err`);
-            // throw error;
         })
     }
 

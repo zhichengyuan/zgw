@@ -56,7 +56,6 @@ export default {
     // 获取商品俄语语言包
     getRu() {
       this.$request.getRuname().then(res => {
-        // console.log(res)
         if (res.code == 0) {
           if (res.data == null) {
             return; //whm
@@ -82,23 +81,17 @@ export default {
     },
     updateStoreInf() {
       this.$request.getStoreInfo().then(res => {
-        // console.log(res)
         if (res.code == 0) {
           let storeinfo = {
             address: res.data.storeAddress,
             tel: res.data.storeTel,
             shopName:res.data.sid
           };
-          // console.log(res);
           this.$store.commit("setStoreInfo", storeinfo);
           this.$store.commit("setActivitys", res.data.desc); 
           this.$store.commit("setSwiperList", res.data.adds);
         }
 
-        // console.log(storeinfo);
-
-        // // localStorage.setItem('perInfo', JSON.stringify(storeinfo))
-        // this.$store.commit("setStoreInfo", storeinfo);
       });
       this.$request.getUser().then(res => {
         if (res.code == 0) {
@@ -138,27 +131,21 @@ export default {
       }
 
       this.$store.commit("setSid", newsid);
-      // console.log(newsid);
-
       if (newsid != "" && newsid != oldsid) {
         //待查询参数的 跳转一下 清除路径中的查询参数
         window.location.href = "/";
       }
 
       document.title =
-        // localStorage.getItem("sid") + " " + this.$lang["高级商城"];
         localStorage.getItem("sid") + " " + '高级商城';
       this.updateStoreInf();
     }
   },
   mounted() {
-    // console.log(b);
-    // console.log(getUser);
     let flag = this._isMobile()
     this.getSid();
     if (flag != null) {
       window.location.href = "index.html";
-      //this.$router.replace('/indexpc.html');
       return
     }
     
@@ -175,58 +162,7 @@ export default {
 </script>
 
 <style>
-      /* @media all and (max-width:1000px){
-				body{
-					background: #1177bb;
-        }
-        .mouse-cover-canvas {
-          background: rgb(255, 255, 255);
-          left: 730px!important;
-          top: 180px!important;
-        }
-				
-			}
-
-			@media (max-width:800px){
-				body{
-					background: #aeaeae;
-        }
-        .mouse-cover-canvas {
-          background: rgb(255, 255, 255);
-          left: 530px!important;
-          top: 180px!important;
-        }
-			
-			}
-
-			@media (max-width:500px){
-				body{
-					background: #46ae46;
-        }
-        .mouse-cover-canvas {
-          background: rgb(255, 255, 255);
-          left: 230px!important;
-          top: 180px!important;
-        }
-				
-			}
-			@media (max-width:300px){
-				body{
-					background: #ff8cff;
-				}
-				
-      } */
-      
-/* @media screen and (max-width: 1920px) {
-    body {
-        background-color:red;
-    }
-    .mouse-cover-canvas {
-    background: rgb(255, 255, 255);
-      left: 730px!important;
-      top: 180px!important;
-    }
-} */
+     
 .mouse-cover-canvas {
     background: rgb(255, 255, 255);
       left: 730px!important;

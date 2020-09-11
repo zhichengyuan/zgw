@@ -240,7 +240,6 @@ export default new Vuex.Store({
             if (localStorage.getItem('token')) {
                 api.saveCart(cart).then(res => {
                     if (res.code == 0) {
-                        console.log(res);
                     }
                 })
             } else {

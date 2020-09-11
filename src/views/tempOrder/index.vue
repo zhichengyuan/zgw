@@ -138,15 +138,11 @@ export default {
     },
     selectPay(data) {
         this.submitOrder=data
-        console.log(this.submitOrder)
       this.dialogVisible = true;
     },
     onSubmit() {
       let that = this;
-      // console.log(this.orderBuffer.payment);
-      // console.log(this.value);
       if (this.value == "") {
-        // this.orderBuffer.payment=this.$lang["赊账"]
         this.$confirm(
           this.$t("message.请选择你的支付方式"),
           this.$t("message.提示"),
@@ -163,7 +159,6 @@ export default {
             this.selectPay(this.submitOrder);
           });
       } else {
-          console.log(this.submitOrder,'手动发送给法官撒发生')
         const newOrderBuffer = {
           totalPrice: this.submitOrder.totalPrice.toFixed(2),
           productPrice: this.submitOrder.productPrice.toFixed(2),
@@ -187,7 +182,6 @@ export default {
             this.$request
               .dbreq("product", { productSn: v.productSn, sid: v.sid })
               .then((res) => {
-                // console.log(res.data.items);
                 res.data.items.map((item) => {
                   if (Number(item.stock) - Number(v.productNumber) < 0) {
                     arr.push("false");
@@ -197,7 +191,6 @@ export default {
                         item.name +
                         this.$t("message.库存不足，无法下单"),
                     });
-                    // return
                   } else {
                     arr.push("true");
                   }
@@ -211,7 +204,6 @@ export default {
                 skucode: v.skucode,
               })
               .then((res) => {
-                console.log(res.data.items);
                 res.data.items.map((item) => {
                   if (Number(item.skunum) - Number(v.productNumber) < 0) {
                     arr.push("false");
@@ -231,9 +223,7 @@ export default {
             setTimeout(() => {
               var a = arr.indexOf("false");
               if (a === -1) {
-                  console.log()
                 this.$request.order(newOrderBuffer).then((res) => {
-                  console.log(res);
                   if (res.code == 0) {
                     this.dialogVisible = false;
                     that.$message({
@@ -250,7 +240,6 @@ export default {
           _id: this.submitOrder._id,
         };
         this.$request.oderRemove("tmporder", req).then((res) => {
-          console.log(res);
         });
       }
     },
@@ -260,7 +249,6 @@ export default {
         uname: this.$store.state.username,
       };
       this.$request.bufferorder(data).then((res) => {
-        console.log(res);
         this.orderList = res.data;
         this.orderList.reverse()
       });
