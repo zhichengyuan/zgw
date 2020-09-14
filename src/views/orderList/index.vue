@@ -57,16 +57,13 @@ export default {
   },
   methods: {
     finish(parms){
-      console.log(parms);
       this.getOrderList();
     },
     cancleOrder(parms){
-      console.log(parms);
       this.getOrderList();
     },
     handleClick(tab, event) {
       this.status = tab.name;
-      // console.log(this.status);
       this.getOrderList();
     },
     attribute(item) {
@@ -80,7 +77,6 @@ export default {
       };
       this.$request.orderList(this.status).then(res => {
         if (res.code == 0) {
-          console.log(res);
           this.orderList = res.data.items;
         }
 

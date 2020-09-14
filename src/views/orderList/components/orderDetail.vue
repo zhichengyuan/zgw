@@ -94,7 +94,6 @@ export default {
   methods:{
        // 取消订单
     cancle(item) {
-        // console.log(item);
       item.status = '4'
      
       this.$request.orderCancel(item).then(res => {

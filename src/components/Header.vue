@@ -18,7 +18,6 @@
         <el-col class="box class" :span="3">
           <el-dropdown class="tu-box" @command="handleCommand" trigger="click">
             <span class="person"></span>
-            <!-- <span>{{$t("message.个人中心")}}</span> -->
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="tempOrder">{{$t("message.查看个人临时订单")}}</el-dropdown-item>
               <el-dropdown-item command="orderList">{{$t("message.查看个人订单")}}</el-dropdown-item>
@@ -76,12 +75,10 @@ export default {
   },
   mounted() {},
   created(){
-   
   },
   methods: {
     //填写搜索词进入商品搜索页面
     searchChange(v){
-      console.log(v);
       if(v == '') {
         this.$router.push({name:'home'});
       }else {
@@ -97,13 +94,9 @@ export default {
         }
       }
         this.bindTabbar(command)
-      
-      
-      // this.$router.push({ name: command });
     },
     //tab页面跳转
     bindTabbar(name) {
-      // console.log(this.$store.state.token);
       if(name == 'orderList' || name == 'myInfo') {
         if(!this.$store.state.token) {
           this.$router.push({ name: 'my' });
@@ -116,12 +109,12 @@ export default {
       
     },
     changeShow(parms) {
-      // console.log(parms)
+     
       this.isShow = false;
     },
     bindTrigger() {
       this.isShow = !this.isShow;
-      // console.log(this.isShow);
+     
     },
     //退出登录
     logout() {

@@ -35,7 +35,7 @@
             <div class="about">
                 <div class="main">
                     <div class="img">
-                        <img src="@/assets/image/5.png" alt="">
+                        <img src="@/assets/imgs/5.png" alt="">
                     </div>
                     <div class="detail">
                         <div class="about-title">
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="quan">
-                <img src="@/assets/image/8.png" alt="">
+                <img src="@/assets/imgs/8.png" alt="">
             </div>
         </div>
         <!-- 机会部分 -->
@@ -69,7 +69,7 @@
                             <p class="title-e">Our opportunities</p>
                         </div>
                         <div class="photo">
-                            <div class="photo-one"><img src="@/assets/image/11.png" alt=""></div>
+                            <div class="photo-one"><img src="@/assets/imgs/11.png" alt=""></div>
                             <div class="text">
                                 <h3>
                                     В офлайн розничных магазинах мало товаров, низкое качество и высокие цены.
@@ -82,7 +82,7 @@
                     </div>
                     <div class="main-right">
                         <div class="photo-top">
-                            <img src="@/assets/image/9.png" alt="">
+                            <img src="@/assets/imgs/9.png" alt="">
                             <div class="text">
                                 <h3>Объем рынка в триллионах рублей.</h3>
                                 <p>
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         <div class="photo-bottom">
-                            <img src="@/assets/image/10.png" alt="">
+                            <img src="@/assets/imgs/10.png" alt="">
                             <div class="text">
                                 <h3>
                                     Традиционные магазины электроники, стоимость логистики слишком высока.
@@ -107,7 +107,7 @@
                     <!-- <div class="mengceng"></div> -->
                 </div>
                 <div class="yinhao">
-                    <img src="@/assets/image/3.png" alt="">
+                    <img src="@/assets/imgs/3.png" alt="">
                 </div>
                 <div class="mengceng"></div>
             </div>
@@ -124,7 +124,7 @@
                         <p class="detail">Товары приобретенные через традиционные офлайн, онлайн-каналы розничной торговли в России, как правило, проходят через китайских экспортеров, оптовиков московского уровня, государственных оптовиков второго уровня, местных ритейлеров и т. д., Чтобы добраться до потребителя, каждый из которых должен добавить свою собственную прибыль, поэтому цена продажи очень высока. Новая модель розничной торговли в нашем сообществе shopvill-это сокращение всех промежуточных звеньев, прямая стыковка китайских заводов с российскими потребителями без каких-либо затрат посредников, товаров такого же качества, наши цены могут быть самыми низкими по всей ！</p>
                     </div>
                     <div class="img">
-                        <img src="@/assets/image/youyinhao.png" alt="">
+                        <img src="@/assets/imgs/youyinhao.png" alt="">
                     </div>
                 </div>
                 <div class="main-bottom">
@@ -180,17 +180,17 @@
                     
                 </div>
                 <div class="yuan1">
-                    <img src="@/assets/image/12.png" alt="">
+                    <img src="@/assets/imgs/12.png" alt="">
                 </div>
             </div>
         </div>
         <!-- 特权部分 -->
         <div class="contionter tequan" id="tequan">
             <div class="img">
-                <img src="@/assets/image/2.png" alt="">
+                <img src="@/assets/imgs/2.png" alt="">
             </div>
             <div class="yinhao-img">
-                <img src="@/assets/image/3.png" alt="">
+                <img src="@/assets/imgs/3.png" alt="">
             </div>
             <div class="detail">
                 <h2>Шесть привилегий для партнеров Shopvill</h2>
@@ -230,10 +230,10 @@
                 </div>
             </div>
             <div class="icon">
-                <img src="@/assets/image/4.png" alt="">
+                <img src="@/assets/imgs/4.png" alt="">
             </div>
             <div class="bian">
-                <img src="@/assets/image/shopvill.png" alt="">
+                <img src="@/assets/imgs/shopvill.png" alt="">
             </div>
         </div>
         <!-- 合伙人招募 -->
@@ -374,7 +374,7 @@
                     </form> -->
                 </div>
                 <div class="welcome">
-                    <img src="@/assets/image/061.png" alt="">
+                    <img src="@/assets/imgs/061.png" alt="">
                 </div>
             </div>
             <div class="text">
@@ -388,7 +388,7 @@
         <div class="footer" id="footer">
             <h2>Наши партнеры</h2>
             <div class="friend">
-                <img src="@/assets/image/07.png" alt="">
+                <img src="@/assets/imgs/07.png" alt="">
             </div>
         </div>
         <div class="content">
@@ -423,9 +423,9 @@
 </template>
 
 <script>
-import { save as saveuser, dbreq } from '@/api/user'
-import '@/assets/css/base.css'
-import '@/assets/css/index.css'
+// import { save as saveuser } from '@/api/user'
+import '@/assets/css/shopvill.css'
+import '@/assets/css/shopVillindex.css'
 
 export default {
   name: 'register',
@@ -580,7 +580,7 @@ export default {
           console.log(this.parentId);
 
           
-          saveuser(temp).then((res) => {
+          this.$request.save(temp).then((res) => {
             if (res.code == 0) {
               this.$message({
                 message: 'Вы успешно зарегистрировались',
@@ -619,6 +619,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// @import "@/assets/css/shopvill.scss";
 .el-button {
   width: 100%;
 }

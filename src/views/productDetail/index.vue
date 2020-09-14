@@ -80,16 +80,6 @@
                         <div class="grid-content bg-purple">
                           <div class="carousel-wrapper">
                             <div class="scrollImage">
-                              <!-- <ul>
-                                <li class="product-pic" v-for="(item,index) in 5" :key="index" @click="selectPic(index)" >
-                                  <a  :class="{'current':index==currentIndex}">
-                                    <img
-                                      src="//img2.wbstatic.net/tm/new/11320000/11329342-1.jpg"
-                                      alt
-                                    />
-                                  </a>
-                                </li>
-                              </ul>-->
 
                               <el-carousel
                                 :interval="4000"
@@ -127,9 +117,6 @@
                       <div class="cost">
                         <div class="inner-price">
                           <span class="final-price" v-if="skuPrice != ''">{{ skuPrice }}₽</span>
-
-                          <!-- <div class="skuPrice" v-if="items.price">{{item.price}}</div> -->
-
                           <span
                             class="final-price"
                             v-if="skuPrice == '' && $store.state.getrole.length == '0'"
@@ -142,11 +129,7 @@
                             class="final-price"
                             v-if="skuPrice == '' && $store.state.getrole[0] == 'c'"
                           >{{ product.price }}₽</span>
-
-                          <!-- <span class="final-price">2995₽</span> -->
-                          <!-- <span class="old-price">5990₽</span> -->
                           <div class="skuNum" v-if="select==true">{{$t('message.库存')+'：'+skuStock}}</div>
-                          <!-- {{stock}} -->
                           <div
                             class="skuNum"
                             v-else-if="stock"
@@ -172,7 +155,6 @@
                           :key="index"
                           :class="{'current':current===index}"
                         >
-                          <!-- {{Object.values(item.attributeList)}} -->
                           <a
                             v-for="(item,index) in Object.values(item.attributeList)"
                             :key="index"
@@ -222,6 +204,7 @@
 
 <script>
 import PicZoom from "vue-piczoom";
+
 import { getProduct, getProductBysn, imgpath, getSkulist } from "@/api/apis";
 export default {
   name: "login",
@@ -243,20 +226,15 @@ export default {
       detailMobileHtml: "",
       text: "",
       img: [
-        // "https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg",
-        // "https://img2.wbstatic.net/big/new/12990000/12998540-1.jpg",
-        // "https://img1.wbstatic.net/big/new/12500000/12502409-2.jpg",
-        // "https://img1.wbstatic.net/big/new/12500000/12502409-3.jpg",
       ],
-      // img:['https://img1.wbstatic.net/big/new/12500000/12502409-1.jpg',]
+
     };
   },
   created() {
-    // console.log(window.scrollY,"aaa")
+ 
     this.active = this.img[0];
-    // console.log("路由参数", this.$route.params);
+
     this.getProducts();
-    // this.getMobile();
   },
   mounted() {
     window.scrollTo(0, 0);
@@ -265,7 +243,6 @@ export default {
     // 设置产品规格弹层
     attributeList() {
       let attributeList = this.product.attributeList;
-      // console.log(attributeList)
       this.attarList = [];
       for (let name in attributeList) {
         this.attarList.push({
@@ -273,7 +250,6 @@ export default {
           value: attributeList[name],
         });
       }
-      // console.log(this.attarList, "arrt");
     },
 
     selectPic(index) {
@@ -289,14 +265,12 @@ export default {
         RegExp('src="', "g"),
         'src="' + this.$request.imgpath("")
       );
-      // console.log(html);
-      // this.detailMobileHtml = html;
       return html;
     },
     // 获取商品
     getProducts() {
       this.$request.getProduct(this.$route.params.id).then((res) => {
-        // console.log(res,"277");
+
         let imgs = res.data.albumPics;
         this.img = this.editPic(imgs);
         this.active = this.img[0];
@@ -315,38 +289,17 @@ export default {
     },
     // 获取sku
     getSkulist() {
-      // console.log(this.product.productSn);
       this.$request
         .getSkulist(this.product.productSn, this.$store.state.sid)
         .then((res) => {
           if (res.code == 0) {
-            // console.log("res", res);
-            // this.defaultSkuImg = this.product.albumPics[0]; //?
+
             this.skuDataList = res.data.items;
             this.stock = 0;
             this.skuDataList.forEach((item) => {
               this.stock += parseInt(item.skunum);
-              console.log(this.stock);
             });
-            console.log(this.stock);
           }
-
-          // if (res.data.items) {
-          //   this.skuData = res.data.items;
-          //   // skus.forEach((sku, index) => {
-          //   //   if (Object.values(sku.attributeList).length == 0) {
-          //   //     datas.splice(index, 1);
-          //   //   }
-          //   // });
-
-          //   // this.skuData = datas;
-          //   this.skuData.forEach(item => {
-          //     this.stock += parseInt(item.skunum);
-          //   });
-          // } else {
-          //   this.skuData = null;
-          //   this.stock = this.items.stock;
-          // }
         });
     },
     // 选择sku规格
@@ -354,14 +307,11 @@ export default {
       this.select = true;
       this.current = index;
       let sku = this.skuDataList[index];
-      // console.log(sku);
-      // console.log(this.$imgpath(sku.pic));
       this.active = this.$imgpath(sku.pic);
       this.$store.state.getrole;
       if (this.$store.state.getrole[0] == "b") {
         sku.skuprice = sku.skuBradePrice;
       }
-      // console.log("sku", sku);
 
       this.colorIndex = index;
       this.selectedSku = sku;
@@ -372,7 +322,6 @@ export default {
       this.selectedSku.productNumber = this.productNumber;
     },
     submitCartItem() {
-      // console.log(this.skuDataList);
       if (this.skuDataList.length == 0) {
         const noneSku = {
           selectStock: this.product.stock,
@@ -381,7 +330,6 @@ export default {
           categoryNameRu: this.product.categoryNameRu,
           categoryName: this.product.categoryName,
           skuprice: this.product.price,
-          // productNumber: this.noSelectNum,
           productNumber: 1,
           pic: this.product.albumPics[0],
           name: this.product.name,
@@ -392,7 +340,6 @@ export default {
           skuImg: this.product.albumPics[0],
            categoryId:this.product.categoryId
         };
-        // console.log(noneSku);
         if (noneSku.selectStock == 0) {
           this.$message({
             message: this.$t("message.库存不足，无法下单"),
@@ -410,18 +357,12 @@ export default {
         }
       } else {
         if (!this.selectedSku) {
-          //whm?
           this.$message({
             message: this.$t("message.请选择商品规格"),
             type: "warning",
           });
-          // this.$toast({
-          //   // this.$message('这是一条消息提示');
-          //   message: this.$lang["请选择商品规格"],
-          // });
         } else {
           let sku = this.selectedSku;
-          // console.log(sku);
 
           const localInfo = {
             selectStock: sku.skunum,

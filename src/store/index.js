@@ -131,6 +131,7 @@ export default new Vuex.Store({
             let old = localStorage.getItem("sid")
             if (payload == "") {
                 if (old == undefined || old == "") {
+                    // this.$router.replace({path:'/shopvill'}) 
                     payload = "shopvill"
                 }
             } else {
@@ -240,7 +241,6 @@ export default new Vuex.Store({
             if (localStorage.getItem('token')) {
                 api.saveCart(cart).then(res => {
                     if (res.code == 0) {
-                        console.log(res);
                     }
                 })
             } else {

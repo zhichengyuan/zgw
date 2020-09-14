@@ -51,9 +51,7 @@ export default {
         // curtime: new Date().getTime()
     }
   },
-  created(){
-      // console.log(this.commodity);
-  },
+
   mounted(){
       this.getList();
   },
@@ -61,15 +59,14 @@ export default {
     commodity(newV,oldV) {
         this.onRefresh();
       } ,
+     
     },
     
   methods:{
       //跳转详情页面
       toDetail(item){
-        // console.log(item);
         this.$router.push({
               path: "/product/" + item._id,
-              // query: { listtype: "category", code: cat.id,title:cat.name },
           });
       },
       more(){
@@ -95,7 +92,6 @@ export default {
           this.pagenum
         )
           .then(res => {
-            // console.log('商品',res);
                 that.loading = false;
             if (res.code == 0) {
               if(this.pagenum == 1) {

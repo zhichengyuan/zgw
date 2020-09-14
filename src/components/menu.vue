@@ -12,7 +12,6 @@
             <div v-if="curDetail" class="detail" @mouseenter="detailEnter" @mouseleave="detailLeave">
                 <template v-for="(item,index) in curDetail.items">
                     <h4 style="cursor:pointer;" @click="goClassly(item)" :key="index">{{item.name}}</h4>
-                    <!-- <span @click="goClassly(v)" v-for="(v,i) in item.items" :key="v.id + '_'+ i">{{v.name}}</span> -->
                 
                 </template>
             </div>
@@ -33,19 +32,16 @@ export default {
         this.getMenu();
     },
     created(){
-       
     },
     methods: {
      //跳转分类页面
      goClassly(cat){
-        //  console.log(cat);
         this.$emit('handCahnge',{'isShow':'true'});
         let codes = [];
         if (cat.items.length != 0) {
             for (var i = 0; i < cat.items.length; i++) {
                 codes.push(cat.items[i].id);
             }
-            // console.log(codes);
             this.$router.push({
                 path: "/listPage",
                 query: { listtype: "category", code: codes.join(",") ,title:cat.name},
@@ -56,20 +52,17 @@ export default {
                 query: { listtype: "category", code: cat.id,title:cat.name },
             });
         }
-        
      },
      // 获取分类数据
     getMenu() {
       this.$request.getClassify().then((res) => {
-       
-        if (res.code == 0) {
-        //   console.log('分类',res);
+        if (res.code == 0) { 
           if(res.data.items.length !=0){
             this.menuList = res.data.items;
             this.menuList.reverse();
-            
+   
           }
-            
+
         }
       })
     },

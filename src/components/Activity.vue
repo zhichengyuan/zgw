@@ -11,9 +11,6 @@
         style="text-align:center;background: linear-gradient(to top right, #FF9500, #ff5000);line-height: 45px;border-radius: 22px;cursor:pointer"
       >
         <div style="" @click="goClassly(o)"><span class="text" >{{o}}</span></div>
-        <!-- <el-card shadow="hover" :body-style="{ padding: '5px',borderRadius:'20px' }">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-        </el-card>-->
       </el-col>
     </el-row>
   </div>
@@ -32,12 +29,10 @@ export default {
       var a = [];
 
       this.$store.state.activitys.forEach((element) => {
-        // console.log(element)
         if (element != "Деятельность на первой странице") {
           a.push(element);
         }
       });
-      // console.log('默认',a)
       return a
     },
     
@@ -45,34 +40,17 @@ export default {
   methods:{
     //跳转分类页面
      goClassly(cat){
-        //  console.log(cat);
-        //  this.$emit('handCahnge',{'isShow':'true'});
         let codes = [];
         this.$router.push({
             path: "/listPage",
             query: { listtype: "activity", code: cat,title:cat },
         });
-        // if (cat.items.length != 0) {
-        //     for (var i = 0; i < cat.items.length; i++) {
-        //         codes.push(cat.items[i].id);
-        //     }
-        //     this.$router.push({
-        //         path: "/listPage",
-        //         query: { listtype: "category", code: codes.join(",") ,title:cat.name},
-        //     });
-        //   }else {
-        //   this.$router.push({
-        //       path: "/listPage",
-        //       query: { listtype: "category", code: cat.id,title:cat.name },
-        //   });
-        // }
      
      },
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .text{
   font-size: 18px;font-weight: 700;color:#fff;

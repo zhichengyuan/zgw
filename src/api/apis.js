@@ -36,18 +36,6 @@ let commoditySearch = (productname) => {
     })
 }
 
-// 首页 轮播     1
-// let getSwiper = () => {
-//     return arequest.create({
-//         url: "config/adlist",
-//         method: 'get',
-//         data: {
-//             // sid: store.state.sid
-//         }
-//     })
-
-// }
-
 //店铺  活动名称     1
 let getActivitylist = () => {
     return arequest.create({
@@ -154,13 +142,6 @@ let getUser = () => {
         data: {}
     })
 }
-// export function getUser() {
-//     return arequest.create({
-//         url: "user/info",
-//         method: "post",
-//         data: {}
-//     })
-// }
 
 // 登陆 1
 let login = (data) => {
@@ -287,22 +268,7 @@ let bufferorder = (data) => {
         data
     })
 }
-// 获取地址列表
-// let addressList = () => {
-//         return arequest.create({
-//             url: "address/list",
-//             method: "post",
-//             data: {}
-//         })
-//     }
-// 获取地址详情
-// let addressDetail = (id) => {
-//     return arequest.create({
-//         url: "address/detail",
-//         method: "post",
-//         data: { _id: id }
-//     })
-// }
+
 
 
 
@@ -321,9 +287,19 @@ let imgpath = (imgid) => {
     return config.ImgUrlPath + imgid
 }
 
+//首页注册
+let save = (data) => {
+    return arequest.create({
+        url: "/user/save",
+        method: "post",
+        data,
+    })
+    
+}
 
 
 export default{
+    save,
     bufferorder,
     oderRemove,
     ordercheck,

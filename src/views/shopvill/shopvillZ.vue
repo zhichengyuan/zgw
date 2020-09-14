@@ -34,7 +34,7 @@
             <div class="about">
                 <div class="main">
                     <div class="img">
-                        <img src="@/assets/image/5.png" alt="">
+                        <img src="@/assets/imgs/5.png" alt="">
                     </div>
                     <div class="detail">
                         <div class="about-title">
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="quan">
-                <img src="@/assets/image/8.png" alt="">
+                <img src="@/assets/imgs/8.png" alt="">
             </div>
         </div>
         <!-- 机会部分 -->
@@ -68,7 +68,7 @@
                             <p class="title-e">Our opportunities</p>
                         </div>
                         <div class="photo">
-                            <div class="photo-one"><img src="@/assets/image/11.png" alt=""></div>
+                            <div class="photo-one"><img src="@/assets/imgs/11.png" alt=""></div>
                             <div class="text">
                                 <h3>线下零售店品类少、质量差、价格高</h3>
                                 <p>目前线下零售渠道的商品种类有限、质量较差，同时因流通环节过多，商品价格巨高，无法满足俄罗斯消费者的需求。</p>
@@ -77,7 +77,7 @@
                     </div>
                     <div class="main-right">
                         <div class="photo-top">
-                            <img src="@/assets/image/9.png" alt="">
+                            <img src="@/assets/imgs/9.png" alt="">
                             <div class="text">
                                 <h3>万亿卢布市场规模</h3>
                                 <p>俄罗斯人平均每年用于购买服装、鞋、家具家居和其他日常生活用品的开支为35000卢布左右，全国1.46亿人口，全国每年接近50000亿卢布的市场容量；</p>
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                         <div class="photo-bottom">
-                            <img src="@/assets/image/10.png" alt="">
+                            <img src="@/assets/imgs/10.png" alt="">
                             <div class="text">
                                 <h3>传统电商购物，物流成本太高</h3>
                                 <p>传统电商网站的商品种类虽然相对比较丰富，但是因为俄罗斯地广人稀，往往物流费用占了销售价格的70%以上，比如aliexpress.ru。</p>
@@ -96,7 +96,7 @@
                     <!-- <div class="mengceng"></div> -->
                 </div>
                 <div class="yinhao">
-                    <img src="@/assets/image/3.png" alt="">
+                    <img src="@/assets/imgs/3.png" alt="">
                 </div>
                 <div class="mengceng"></div>
             </div>
@@ -113,7 +113,7 @@
                         <p class="detail">通过俄罗斯传统的线下和线上零售渠道购买的商品一般都要经过五层以上的环节才能到达消费者手里面，每个环节都要加上自己的利润，所以销售价格超高。shopvill社区新零售的模式，是删减掉所有的中间环节，将中国工厂直接对接消费者，没有任何中间商的成本，同样质量的商品，我们的价格可以做到全俄罗斯最低！</p>
                     </div>
                     <div class="img">
-                        <img src="@/assets/image/youyinhao.png" alt="">
+                        <img src="@/assets/imgs/youyinhao.png" alt="">
                     </div>
                 </div>
                 <div class="main-bottom">
@@ -169,17 +169,17 @@
                     
                 </div>
                 <div class="yuan1">
-                    <img src="@/assets/image/12.png" alt="">
+                    <img src="@/assets/imgs/12.png" alt="">
                 </div>
             </div>
         </div>
         <!-- 特权部分 -->
         <div class="contionter tequan" id="tequan">
             <div class="img">
-                <img src="@/assets/image/2.png" alt="">
+                <img src="@/assets/imgs/2.png" alt="">
             </div>
             <div class="yinhao-img">
-                <img src="@/assets/image/3.png" alt="">
+                <img src="@/assets/imgs/3.png" alt="">
             </div>
             <div class="detail">
                 <h2>Shopvill合伙人六大特权</h2>
@@ -219,10 +219,10 @@
                 </div>
             </div>
             <div class="icon">
-                <img src="@/assets/image/4.png" alt="">
+                <img src="@/assets/imgs/4.png" alt="">
             </div>
             <div class="bian">
-                <img src="@/assets/image/shopvill.png" alt="">
+                <img src="@/assets/imgs/shopvill.png" alt="">
             </div>
         </div>
         <!-- 合伙人招募 -->
@@ -362,7 +362,7 @@
                     </form> -->
                 </div>
                 <div class="welcome">
-                    <img src="@/assets/image/06.png" alt="">
+                    <img src="@/assets/imgs/06.png" alt="">
                 </div>
             </div>
             <div class="text">
@@ -376,7 +376,7 @@
         <div class="footer" id="footer">
             <h2>合作伙伴</h2>
             <div class="friend">
-                <img src="@/assets/image/07.png" alt="">
+                <img src="@/assets/imgs/07.png" alt="">
             </div>
         </div>
         <div class="content">
@@ -411,9 +411,9 @@
 </template>
 
 <script>
-import { save as saveuser, dbreq } from '@/api/user'
-import '@/assets/css/base.css'
-import '@/assets/css/index.css'
+// import { save as saveuser } from '@/api/user'
+import '@/assets/css/shopvill.css'
+import '@/assets/css/shopVillindex.css'
 
 export default {
   name: 'register',
@@ -569,7 +569,7 @@ export default {
         console.log(this.parentId);
 
           
-          saveuser(temp).then((res) => {
+          this.$request.save(temp).then((res) => {
             if (res.code == 0) {
               this.$message({
                 message: 'Вы успешно зарегистрировались',

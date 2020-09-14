@@ -145,10 +145,8 @@ export default {
     login(loginForm) {
       this.$refs[loginForm].validate((valid) => {
         if (valid) {
-          // alert("loginForm!");
           this.userLogin();
         } else {
-          // console.log("error loginForm!!");
           return false;
         }
       });
@@ -162,7 +160,6 @@ export default {
             this.$store.commit("setToken", res.data.token);
             this.$store.dispatch("syncUpdateUserInfo");
             this.loadCartList()
-            //this.$store.dispatch("loadCartList");
             this.$message({
               message: this.$t('message.登录成功'),
               type: 'success'
@@ -180,20 +177,16 @@ export default {
         });
     },
     register(registerForm) {
-      // console.log(this.registerForm);
       this.$refs[registerForm].validate((valid) => {
         if (valid) {
-          
-          // alert("registerForm!");
           this.onRegister();
         } else {
-          // console.log("error registerForm!!");
           return false;
         }
       });
     },
     // 注册
-    onRegister() {
+    onRegister() {   
       this.$request
         .register({ username: this.registerForm.regName, password: this.registerForm.regPass,tel: this.registerForm.regtel,roles:["c"],integral:0})
         .then(res => {
@@ -212,7 +205,6 @@ export default {
               message: this.$t('message.该账号已注册') ,
               type: "warning",
             });
-           
           }
         });
     }

@@ -131,7 +131,6 @@ export default {
           // alert("submit!");
           this.onClickRight();
         } else {
-          // console.log("error submit!!");
           return false;
         }
       });
@@ -142,9 +141,6 @@ export default {
         nickname: this.nickname,
       };
       userinfo.password = this.ruleForm.pass;
-      // if (this.isDisabled != true) {
-      //   userinfo.password = this.ruleForm.pass;
-      // }
       this.$request.userSave(userinfo).then((res) => {
         if (res.code == 0) {
           localStorage.removeItem("token");
