@@ -331,7 +331,7 @@
                             </div>
 
                             <el-form-item label="Телефон" prop="tel">
-                            <el-input v-model="temp.tel" type="number" />
+                            <el-input v-model="temp.tel" type="text" />
                             </el-form-item>
                             <el-form-item label="Пароль" prop="password">
                             <el-input v-model="temp.password" type="password" />

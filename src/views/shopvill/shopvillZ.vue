@@ -266,7 +266,7 @@
                             </div>
 
                             <el-form-item label="电话" prop="tel">
-                            <el-input v-model="temp.tel" type="number" />
+                            <el-input v-model="temp.tel" type="text" />
                             </el-form-item>
                             <el-form-item label="密码" prop="password">
                             <el-input v-model="temp.password" type="password" />
