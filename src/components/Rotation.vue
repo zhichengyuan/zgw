@@ -27,7 +27,7 @@ export default {
     }
   },
   created(){
-    // console.log(this.swiperList);
+   
   }
 }
 </script>
@@ -53,11 +53,4 @@ export default {
     margin: 0;
   }
 
-  // .el-carousel__item:nth-child(2n) {
-  //    background-color: #99a9bf;
-  // }
-  
-  // .el-carousel__item:nth-child(2n+1) {
-  //    background-color: #d3dce6;
-  // }
 </style>

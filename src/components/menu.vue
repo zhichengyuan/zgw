@@ -33,11 +33,7 @@ export default {
         this.getMenu();
     },
     created(){
-        //获取左侧导航数据
-        // api.getMenuList().then( res => {
-        //     this.menuList = res.data.data;
-        //     // console.log(JSON.stringify(this.menuList));
-        // })
+       
     },
     methods: {
      //跳转分类页面
@@ -60,29 +56,20 @@ export default {
                 query: { listtype: "category", code: cat.id,title:cat.name },
             });
         }
-        //  this.$router.push({
-        //     path: '/listPage',
-        //     query: { type: "category", code: codes.join(",") },
-            
-        // })
-
-        //  this.$router.push({name:"listPage", params:{id:1}})
+        
      },
      // 获取分类数据
     getMenu() {
       this.$request.getClassify().then((res) => {
-        console.log('恒大大大大',res);
+       
         if (res.code == 0) {
         //   console.log('分类',res);
           if(res.data.items.length !=0){
             this.menuList = res.data.items;
             this.menuList.reverse();
-            // let obj = {};
-            // obj.code=res.data.items[this.activeKey].id;
-            // obj.listtype="category";
-            // this.comodity = obj;
+            
           }
-            //   this.goods = res.data.items[this.activeKey].items;
+            
         }
       })
     },

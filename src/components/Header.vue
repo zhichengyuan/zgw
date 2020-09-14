@@ -76,9 +76,10 @@ export default {
   },
   mounted() {},
   created(){
-    // this.getProductNumber();
+   
   },
   methods: {
+    //填写搜索词进入商品搜索页面
     searchChange(v){
       console.log(v);
       if(v == '') {
@@ -100,7 +101,7 @@ export default {
       
       // this.$router.push({ name: command });
     },
-    
+    //tab页面跳转
     bindTabbar(name) {
       // console.log(this.$store.state.token);
       if(name == 'orderList' || name == 'myInfo') {
@@ -124,6 +125,7 @@ export default {
     },
     //退出登录
     logout() {
+      //清除购物车以及token
       localStorage.removeItem("token");
       this.$store.commit("removeCart", this.$store.state.cartList);
       localStorage.removeItem("cartlist");
@@ -146,11 +148,7 @@ export default {
       // });
       //location.reload();
     },
-    getProductNumber(){
-      this.$store.state.cartList.forEach((item,index) => {
-        this.productNumber += item.productNumber;
-      })
-    }
+    
   },
 };
 </script>

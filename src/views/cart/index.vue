@@ -153,21 +153,7 @@ export default {
     // this.onClickRight()
   },
   computed: {
-    // calcTotalPrice() {
-    //   //每次遍历商品之前对总金额进行清零
-    //   let isCheckAll = true;
-    //   this.sumPrice = 0;
-    //   this.$store.state.cartList.forEach((item, index) => {
-    //     if (item.isChecked == true) {
-    //       this.sumPrice += item.skuprice * item.productNumber;
-    //     } else {
-    //       isCheckAll = false;
-    //     }
-    //   });
-    //   this.isCheckAll = isCheckAll;
-    //   console.log(this.sumPrice);
-    //   return this.sumPrice;
-    // }
+   
   },
   mounted(){
     this.calcTotalPrice()

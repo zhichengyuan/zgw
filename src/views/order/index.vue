@@ -260,7 +260,7 @@ export default {
   inject: ["loadCartList"],
 
   methods: {
-    //轮询查询
+    //轮询查询,含有家具的订单是否更改完运费
     lanXun() {
       let that = this;
       console.log("进来了", this.orderBuffer);
@@ -270,13 +270,13 @@ export default {
       this.orderBuffer.isOk = true;
 
       data.id.push(this.furnitureOrder._id);
-      console.log("dara", data);
+     
       that.timer = setInterval(() => {
-        console.log(data, "data");
+       
         that.$request.ordercheck(data).then((res) => {
-          console.log(res, "rrrr");
+        
           if (res.code == 0) {
-            console.log("轮询1111", res);
+            
             that.orderBuffer.isOk = false;
             that.isOk = false;
             this.furnitureOrder = res.data[0];
@@ -300,7 +300,7 @@ export default {
         });
       }, 5000);
     },
-    // 改变积分
+    // 改变积分，要往订单内增加积分字段，然后算出使用积分后的订单金额
     change(data) {
       console.log(data);
       if (data == true) {
@@ -375,13 +375,7 @@ export default {
             this.selectPay();
           });
       } else {
-        const newOrderBuffer = {
-          totalPrice: this.newPrice.toFixed(2),
-          productPrice: this.newPrice.toFixed(2),
-          transPrice: this.transPrice,
-          productList: this.orderBuffer.productList,
-          payment: this.value,
-        };
+        
         //除家具外的商品订单
         const otherOrderBuffer = {
           totalPrice: this.orderBuffer.other.totalPrice.toFixed(2),

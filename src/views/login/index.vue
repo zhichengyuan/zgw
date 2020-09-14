@@ -153,6 +153,7 @@ export default {
         }
       });
     },
+    //用户登录
     userLogin(){
       this.$request
         .login({ username: this.loginForm.loginName, password: this.loginForm.loginPass })
@@ -193,19 +194,9 @@ export default {
     },
     // 注册
     onRegister() {
-      // if (this.passwordRegister != this.passnewReg) {
-      //   this.$toast({
-      //     message: `${this.$lang["两次输入密码不同"] +
-      //       "，" +
-      //       this.$lang["请重新输"]}`
-      //   });
-      //   return;
-      // }
-      
       this.$request
         .register({ username: this.registerForm.regName, password: this.registerForm.regPass,tel: this.registerForm.regtel,roles:["c"],integral:0})
         .then(res => {
-          
           if (res.code == 0) {
             this.loginForm.loginName = this.registerForm.regName;
             this.loginForm.loginPass = this.registerForm.regPass;
@@ -214,20 +205,14 @@ export default {
               message: this.$t('message.注册成功'),
               type: "success",
             });
-            // this.$toast({
-            //   message: `${this.$lang["注册成功"]}`
-            // });
             this.userLogin();
-            // this.login();
           }
           if (res.code == 1) {
             this.$message({
               message: this.$t('message.该账号已注册') ,
               type: "warning",
             });
-            // this.$toast({
-            //   message: `${this.$lang["该账号已注册"]}`
-            // });
+           
           }
         });
     }

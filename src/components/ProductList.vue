@@ -59,16 +59,8 @@ export default {
   },
   watch: {
     commodity(newV,oldV) {
-      // console.log('我vvvvv')
-      // console.log(this.$route.query.title);
-      // this.title = this.$route.query.title
         this.onRefresh();
       } ,
-      // commodity(newV,oldV) {
-      //   this.commodity = newV;
-      //   console.log('新条件',this.commodity)
-      // } 
-     
     },
     
   methods:{
