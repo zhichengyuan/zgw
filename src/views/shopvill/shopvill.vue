@@ -674,21 +674,21 @@ export default {
     padding-bottom: 0;
 }
 
-.header .menu1 a:nth-child(1){
+.header1 .menu1 a:nth-child(1){
     width: 15%;
 }
-.header .menu1 a:nth-child(2){
+.header1 .menu1 a:nth-child(2){
     width: 15%;
 }
-.header .menu1 a:nth-child(3){
+.header1 .menu1 a:nth-child(3){
         width: 20%;
 }
-.header .menu1 a:nth-child(4){
+.header1 .menu1 a:nth-child(4){
     width: 20%;
     line-height: 31px;
     font-size: 16px;
 }
-.header .menu1 a:nth-child(5){
+.header1 .menu1 a:nth-child(5){
     width: 18%;
 }
 .partner .partner-top .partner-form{
@@ -696,7 +696,7 @@ export default {
      font-family: PingFangSC-Medium, PingFang SC;
 }
 
-.header .menu1 a {
+.header1 .menu1 a {
     line-height: 66px;
     
     /* flex: 1; */
