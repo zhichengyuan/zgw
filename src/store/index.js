@@ -129,13 +129,16 @@ export default new Vuex.Store({
 
         setSid(state, payload) {
             let old = localStorage.getItem("sid")
+            // console.log('sssssssdfsdfsdfsdf')
             if (payload == "") {
                 if (old == undefined || old == "") {
                     // this.$router.replace({path:'/shopvill'}) 
                     payload = "shopvill"
+                    localStorage.setItem("sid", payload);
                 }
             } else {
                 state.sid = payload
+                localStorage.setItem("sid", payload);
             }
             if (payload != "")
                 localStorage.setItem("sid", payload);

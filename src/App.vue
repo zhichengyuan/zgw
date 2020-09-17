@@ -125,22 +125,29 @@ export default {
         hostname == "127.0.0.1" ||
         hostname == "localhost"
       ) {
+       
         newsid = this.getQueryVariable("sid");
+        //  console.log('wowowowowowo',newsid)
       } else {
+        console.log('ddddd',)
         newsid = hostname.split(".")[0];
       }
+     
       if(newsid == '') {
+        //  console.log('dddddsssss',newsid)
+        // this.$store.commit("setSid", 'shopvill');
         this.$router.replace({path:'/shopvill'}) 
       }
-      if((newsid == '' && oldsid == 'shopvill') || oldsid == null) {
-        this.$router.replace({path:'/shopvill'}) 
-      }
+      // if((newsid == '' && oldsid == 'shopvill') || oldsid == null) {
+      //   this.$router.replace({path:'/shopvill'}) 
+      // }
       this.$store.commit("setSid", newsid);
       if (newsid != "" && newsid != oldsid) {
-        console.log('什么鬼',newsid,oldsid);
+        this.$router.replace({path:'/'})
+        // console.log('什么鬼',newsid,oldsid);
         
         //待查询参数的 跳转一下 清除路径中的查询参数
-        window.location.href = "/";
+        // window.location.href = "/";
       }
       // console.log('什么鬼1',newsid)
       // console.log('什么鬼',newsid,oldsid)
