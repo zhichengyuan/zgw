@@ -157,7 +157,7 @@ export default {
       if(localStorage.getItem("sid") == 'shopvill' || localStorage.getItem('sid') == ''){
         window.location.href = "index.html";
       }else {
-        window.location.href = "/sid=" + localStorage.getItem("sid");
+        window.location.href = "/?sid=" + localStorage.getItem("sid");
       }
       
       return
