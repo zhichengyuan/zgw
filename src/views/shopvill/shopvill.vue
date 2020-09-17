@@ -620,6 +620,7 @@ export default {
 
 <style lang="scss" scoped>
 // @import "@/assets/css/shopvill.scss";
+
 .el-button {
   width: 100%;
 }

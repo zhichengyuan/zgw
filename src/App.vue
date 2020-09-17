@@ -115,7 +115,7 @@ export default {
       let url = window.location.href; //获取当前url
       let hostname = window.location.hostname;
       let newsid = "";
-
+      console.log(url,hostname,newsid);
       let oldsid = localStorage.getItem("sid");
       let hostisip = hostname.split(".").length > 3;
 
@@ -126,17 +126,21 @@ export default {
         hostname == "localhost"
       ) {
         newsid = this.getQueryVariable("sid");
+       
+        ;
       } else {
         newsid = hostname.split(".")[0];
       }
-     
+      if(newsid == '') {
+        this.$router.replace({path:'/shopvill'}) 
+      }
       if((newsid == '' && oldsid == 'shopvill') || oldsid == null) {
-        
         this.$router.replace({path:'/shopvill'}) 
       }
       this.$store.commit("setSid", newsid);
       if (newsid != "" && newsid != oldsid) {
-        console.log('什么鬼',newsid,oldsid)
+        console.log('什么鬼',newsid,oldsid);
+        
         //待查询参数的 跳转一下 清除路径中的查询参数
         window.location.href = "/";
       }
@@ -145,7 +149,7 @@ export default {
 
       document.title =
         localStorage.getItem("sid") + " " + '高级商城';
-      this.updateStoreInf();
+        this.updateStoreInf();
     }
   },
   mounted() {
