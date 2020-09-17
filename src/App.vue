@@ -154,7 +154,7 @@ export default {
     let flag = this._isMobile()
     this.getSid();
     if (flag != null) {
-      window.location.href = "index.html";
+      window.location.href = "index.html?sid=" + localStorage.getItem("sid");
       return
     }
     
