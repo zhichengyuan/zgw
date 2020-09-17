@@ -154,7 +154,12 @@ export default {
     let flag = this._isMobile()
     this.getSid();
     if (flag != null) {
-      window.location.href = "index.html?sid=" + localStorage.getItem("sid");
+      if(localStorage.getItem("sid") == 'shopvill' || localStorage.getItem('sid') == ''){
+        window.location.href = "index.html";
+      }else {
+        window.location.href = "/sid=" + localStorage.getItem("sid");
+      }
+      
       return
     }
     
