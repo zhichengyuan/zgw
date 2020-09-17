@@ -126,8 +126,6 @@ export default {
         hostname == "localhost"
       ) {
         newsid = this.getQueryVariable("sid");
-       
-        ;
       } else {
         newsid = hostname.split(".")[0];
       }

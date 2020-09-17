@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper1">
         <div class="header1">
             <div class="logo">
                 <h2><a href="#index"></a></h2>
