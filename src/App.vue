@@ -156,8 +156,11 @@ export default {
       // console.log('什么鬼1',newsid)
       // console.log('什么鬼',newsid,oldsid)
 
-      document.title =
-        localStorage.getItem("sid") + " " + '高级商城';
+      if(localStorage.getItem('sid') == null) {
+        document.title = this.$lang["高级商城"];
+      }else {
+        document.title = localStorage.getItem("sid") + " " + this.$lang["高级商城"];
+      }
         this.updateStoreInf();
     }
   },
@@ -165,8 +168,13 @@ export default {
     let flag = this._isMobile()
     this.getSid();
     if (flag != null) {
-      window.location.href = "index.html";
+      if(localStorage.getItem("sid") == 'shopvill' || localStorage.getItem("sid")== '' || localStorage.getItem("sid") == null){
+        window.location.href = "index.html";
+        return
+      }
+      window.location.href = "index.html?sid=" + localStorage.getItem("sid");
       return
+      
     }
     
     
