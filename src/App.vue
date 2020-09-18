@@ -169,14 +169,11 @@ export default {
     this.getSid();
     if (flag != null) {
       if(localStorage.getItem("sid") == 'shopvill' || localStorage.getItem("sid")== '' || localStorage.getItem("sid") == null){
-        window.location.href = "index.html";
+        window.location.href = "/";
         return
       }
-      window.location.href = "index.html?sid=" + localStorage.getItem("sid");
+      window.location.href = "/?sid=" + localStorage.getItem("sid");
       return
-      
-
-      
     }
     
     
