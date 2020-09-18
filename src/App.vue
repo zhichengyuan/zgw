@@ -175,6 +175,8 @@ export default {
       window.location.href = "index.html?sid=" + localStorage.getItem("sid");
       return
       
+
+      
     }
     
     
