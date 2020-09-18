@@ -1,6 +1,7 @@
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN' //引入element语言包
 const zh_CN = {
     message: {
+        "高级商城":"高级商城",
         "请输入电话":"请输入电话",
         "号码格式不正确":"号码格式不正确",
         "电话":"电话",

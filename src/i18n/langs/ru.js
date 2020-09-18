@@ -1,7 +1,7 @@
 import ruLocale from 'element-ui/lib/locale/lang/ru-RU' //引入element语言包
 const ru_RU = {
     message: {
-        
+        "高级商城":"Премиум Молл",
         "待处理订单":"Отложенный ордер",
         "请输入电话":"Пожалуйста, введите телефон",
         "号码格式不正确":"Неверный формат числа",

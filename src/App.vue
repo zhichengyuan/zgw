@@ -157,9 +157,9 @@ export default {
       // console.log('什么鬼',newsid,oldsid)
 
       if(localStorage.getItem('sid') == null) {
-        document.title = this.$lang["高级商城"];
+        document.title = this.$t('message.高级商城');
       }else {
-        document.title = localStorage.getItem("sid") + " " + this.$lang["高级商城"];
+        document.title = localStorage.getItem("sid") + " " + this.$t('message.高级商城');
       }
         this.updateStoreInf();
     }
