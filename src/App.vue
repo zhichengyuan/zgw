@@ -129,6 +129,7 @@ export default {
       ) {
         console.log("没传空")
         newsid = this.getQueryVariable("sid");
+        //  console.log('wowowowowowo',newsid)
       } else {
         console.log("传空")
         newsid = hostname.split(".")[0];
@@ -146,7 +147,8 @@ export default {
       console.log(newsid,"nnnnn")
       
       if (newsid != "" && newsid != oldsid) {
-        console.log('什么鬼',newsid,oldsid);
+        this.$router.replace({path:'/'})
+        // console.log('什么鬼',newsid,oldsid);
         
         // //待查询参数的 跳转一下 清除路径中的查询参数
         // window.location.href = "/";
