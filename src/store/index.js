@@ -132,12 +132,12 @@ export default new Vuex.Store({
             console.log(payload,"pppp")
             if (payload == "") {
                 // if (old == undefined || old == "") {
-                    console.log("走到了")
-                    // this.$router.replace({path:'/shopvill'}) 
-                    // payload = "shopvill"
-                    if(localStorage.getItem("sid")){
-                        localStorage.removeItem("sid")
-                    }
+                    // console.log("走到了")
+                    // // this.$router.replace({path:'/shopvill'}) 
+                    // // payload = "shopvill"
+                    // if(localStorage.getItem("sid")){
+                    //     localStorage.removeItem("sid")
+                    // }
                     
                 // }
             } else {
