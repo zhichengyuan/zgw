@@ -129,16 +129,23 @@ export default new Vuex.Store({
 
         setSid(state, payload) {
             let old = localStorage.getItem("sid")
+            console.log(payload,"pppp")
             if (payload == "") {
-                if (old == undefined || old == "") {
+                // if (old == undefined || old == "") {
+                    console.log("走到了")
                     // this.$router.replace({path:'/shopvill'}) 
-                    payload = "shopvill"
-                }
+                    // payload = "shopvill"
+                    if(localStorage.getItem("sid")){
+                        localStorage.removeItem("sid")
+                    }
+                    
+                // }
             } else {
-                state.sid = payload
-            }
-            if (payload != "")
                 localStorage.setItem("sid", payload);
+            }
+            // if (payload != "")
+            // console.log("第一次不走这")
+               
         },
         setStoreInfo(state, payload) {
             state.activitys = []

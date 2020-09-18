@@ -68,9 +68,10 @@ export default {
     },
    
     getQueryVariable(variable) {
+      console.log(variable,"vvvv")
       var query = window.location.search.substring(1);
       var vars = query.split("&");
-
+      console.log(query,vars,"hhhh")
       for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split("=");
         if (pair[0] == variable) {
@@ -115,32 +116,40 @@ export default {
       let url = window.location.href; //获取当前url
       let hostname = window.location.hostname;
       let newsid = "";
-      console.log(url,hostname,newsid);
+      console.log(url,hostname);
       let oldsid = localStorage.getItem("sid");
       let hostisip = hostname.split(".").length > 3;
-
+      console.log("bbb",oldsid)
+      console.log("host",hostisip)
       if (
         hostisip ||
         hostname.substring(0, 3) == "www" ||
         hostname == "127.0.0.1" ||
         hostname == "localhost"
       ) {
+        console.log("没传空")
         newsid = this.getQueryVariable("sid");
       } else {
+        console.log("传空")
         newsid = hostname.split(".")[0];
       }
-      if(newsid == '') {
-        this.$router.replace({path:'/shopvill'}) 
-      }
-      if((newsid == '' && oldsid == 'shopvill') || oldsid == null) {
-        this.$router.replace({path:'/shopvill'}) 
-      }
+      console.log("new",newsid)
       this.$store.commit("setSid", newsid);
+      if(newsid == '') {
+        console.log("走到这第一个")
+        this.$router.replace({path:'/shopvill'}) 
+      }
+      // if((newsid == '' && oldsid == 'shopvill') || oldsid == null) {
+      //   console.log("走到这第二个")
+      //   this.$router.replace({path:'/shopvill'}) 
+      // }
+      console.log(newsid,"nnnnn")
+      
       if (newsid != "" && newsid != oldsid) {
         console.log('什么鬼',newsid,oldsid);
         
-        //待查询参数的 跳转一下 清除路径中的查询参数
-        window.location.href = "/";
+        // //待查询参数的 跳转一下 清除路径中的查询参数
+        // window.location.href = "/";
       }
       // console.log('什么鬼1',newsid)
       // console.log('什么鬼',newsid,oldsid)
@@ -154,12 +163,7 @@ export default {
     let flag = this._isMobile()
     this.getSid();
     if (flag != null) {
-      if(localStorage.getItem("sid") == 'shopvill' || localStorage.getItem('sid') == ''){
-        window.location.href = "index.html";
-      }else {
-        window.location.href = "/?sid=" + localStorage.getItem("sid");
-      }
-      
+      window.location.href = "index.html";
       return
     }
     
