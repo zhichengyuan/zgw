@@ -144,7 +144,7 @@ export default {
       //   console.log("走到这第二个")
       //   this.$router.replace({path:'/shopvill'}) 
       // }
-      console.log(newsid,"nnnnn")
+      console.log(newsid,"nnnnn","aaaaa")
       
       if (newsid != "" && newsid != oldsid) {
         this.$router.replace({path:'/'})
