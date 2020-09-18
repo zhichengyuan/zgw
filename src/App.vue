@@ -131,7 +131,7 @@ export default {
         newsid = this.getQueryVariable("sid");
         //  console.log('wowowowowowo',newsid)
       } else {
-        console.log("传空")
+        console.log("传空测试")
         newsid = hostname.split(".")[0];
       }
       console.log("new",newsid)
