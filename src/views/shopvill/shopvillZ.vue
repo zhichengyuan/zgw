@@ -9,6 +9,7 @@
                 <a href="#about">关于</a>
                 <a href="#tequan">特权</a>
                 <a href="#opportunities">合伙人招募</a>
+                <a href="#dianpu">精品店铺</a>
                 <a href="#footer">合作伙伴</a>
             </div>
         </div>
@@ -372,11 +373,68 @@
                 </div>
             </div>
         </div>
+        <!-- 精品店铺 -->
+        <div class="footer dianpu" id="dianpu">
+            <h2><a href="http://vip.shopvill.com/indexpc.html?sid=vip#/home" target="_blank">小baby孕婴店</a></h2>
+            <div class="introduce">
+                <p>
+                    小baby孕婴店，是shopvill的优质加盟店铺。XX店铺自建立伊始，始终高度重视顾客的购买体验。在商品选择方面，XX店铺进行了大量的对比和严格的筛选，最终确定了稳定优质的货源；在物流运输方面，xx店铺依托shopvill现有的物流体系，形成了对俄罗斯不同地区、不同货物、不同运输方式的解决方案。同时XX店铺也拥有专业的售前和售后服务团队，对每一位顾客的每一次购物认真负责，赢得了客户的广泛好评。
+                </p>
+            </div>
+            <p class="come">
+                <a href="http://vip.shopvill.com/indexpc.html?sid=vip#/home" target="_blank">进入店铺 </a>
+            </p>
+            
+        </div>
+        <div class="footer dianpu">
+            <h2><a href="http://furniture.shopvill.com/indexpc.html?sid=furniture#/home"  target="_blank">FNC</a></h2>
+            <div class="introduce">
+               <p>
+                   FNC店，是一家主营各类室内和户外家具的店铺。作为shopvill的优质加盟店铺。他们一直在为客户提供着优质的商品和全面的服务。FNC与众多家具厂家有良好的长期合作关系，既能保证商品质量，又能消除所有的中间成本，尽最大可能为消费者提供家全面、专业、周到的服务。物流运输方面，FNC凭借shopvill完整的物流体系，实现了运输、仓储、配送的全面服务。
+               </p>
+            </div>
+            <p class="come">
+                <a href="http://furniture.shopvill.com/indexpc.html?sid=furniture#/home"  target="_blank">进入店铺 </a>
+            </p>
+            
+        </div>
         <!-- 页面尾部 -->
         <div class="footer" id="footer">
             <h2>合作伙伴</h2>
             <div class="friend">
-                <img src="@/assets/imgs/07.png" alt="">
+                
+                <a href="https://www.alibaba.com/" target="_blank">
+                    <img src="@/assets/imgs/9.1.png" alt="">
+                </a>
+                <a href="https://www.aliexpress.com/" target="_blank">
+                    <img src="@/assets/imgs/10.1.png" alt="">
+                </a>
+                <a href="https://qiwi.com/" target="_blank">
+                    <img src="@/assets/imgs/11.1.png" alt="">
+                </a>
+                <a href="https://www.visa.com.cn/" target="_blank">
+                    <img src="@/assets/imgs/12.1.png" alt="">
+                </a>
+                <a href="https://www.mastercard.com" target="_blank">
+                    <img src="@/assets/imgs/13.1.png" alt="">
+                </a>
+                <a href="https://www.whatsapp.com" target="_blank">
+                    <img src="@/assets/imgs/4.1.png" alt="">
+                </a>
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="@/assets/imgs/5.1.png" alt="">
+                </a>
+                <a href="https://www.vk.com" target="_blank">
+                    <img src="@/assets/imgs/6.1.png" alt="">
+                </a>
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="@/assets/imgs/7.1.png" alt="">
+                </a>
+                <a href="https://www.yandex.ru" target="_blank">
+                    <img src="@/assets/imgs/8.1.png" alt="">
+                </a>
+                
+                
             </div>
         </div>
         <div class="content">
@@ -617,4 +675,43 @@ export default {
 .el-form-item {
     margin-bottom: 20px;
 }
+.friend{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 20px 30px;
+    background: #fff;
+}
+
+.friend a{
+    width: 20%;
+    height: 96px;
+    background: red;
+     
+}
+.partner {
+    height: auto;
+    margin-bottom: 30px;
+}
+.dianpu{
+    padding-bottom:50px ;
+    background: #fff;
+}
+.dianpu p{
+    text-indent:2em;
+    font-size: 20px;
+    line-height: 30px;
+    font-family: PingFangSC-Medium, PingFang SC;
+}
+.dianpu .come{
+    text-align: right;
+    box-sizing: border-box;
+    padding-right: 20%;
+    margin-top: 10px;
+}
+.dianpu .come a{
+    color: rgb(255, 115, 39);
+}
+
 </style>

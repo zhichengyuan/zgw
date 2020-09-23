@@ -51,18 +51,18 @@ body,html{
     left: 5%;
     width: 90%;
     margin: 0 auto;
-    height: 66px;
+    height: 60px;
     background: #FFFFFF;
     box-sizing: border-box;
     padding: 0 30px;
     display: flex;
     justify-content:space-between;
     z-index: 9999;
-    opacity: 0.77;
+    /* opacity: 0.77; */
 }
 
 .header1 h2 {
-    line-height: 66px;
+    line-height: 60px;
     font-size: 48px;
     cursor: pointer;
     
@@ -87,7 +87,7 @@ body,html{
     justify-content: flex-end;
 }
 .header1 .menu a{
-    line-height: 66px;
+    line-height: 60px;
     /* flex:1;  */
     width: 25%;
     text-align: center;
@@ -105,7 +105,7 @@ body,html{
     position: absolute;
     width: 1000px;
     /* height: 250px; */
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%,-50%);
     margin-top: -50px;

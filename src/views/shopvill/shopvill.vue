@@ -9,6 +9,7 @@
                 <a href="#about">О Нас</a>
                 <a href="#tequan">Привилегия</a>
                 <a href="#opportunities">Вербование компаньона</a>
+                <a href="#dianpu">Mастерская </a>
                 <a href="#footer">Партнеры</a>
             </div>
             
@@ -353,25 +354,6 @@
                         </div>
                     </div>
 
-
-                    <!-- <form action="">
-                        <div class="item">
-                            <input type="text" placeholder="姓名">
-                        </div>
-                        <div class="item">
-                            <input type="text" placeholder="电话">
-                        </div>
-                        <div class="item">
-                            <input type="text" placeholder="邮箱">
-                        </div>
-                        <div class="item">
-                            <textarea name="" id="" cols="20" rows="10" placeholder="内容"></textarea>
-                        </div>
-                        <div class="item">
-                            <button>提交</button>
-                        </div>
-                        
-                    </form> -->
                 </div>
                 <div class="welcome">
                     <img src="@/assets/imgs/061.png" alt="">
@@ -384,13 +366,77 @@
                 </div>
             </div>
         </div>
+        <!-- 精品店铺 -->
+        <div class="footer dianpu" id="dianpu">
+            <h2><a href="http://vip.shopvill.com/indexpc.html?sid=vip#/home" target="_blank">детский сад baby </a></h2>
+            <div class="introduce">
+                <p>
+                 маленькая баби магазин для беременных детей, это магазин для хороших партнеров shopvill.  ХХ магазин с момента его создания всегда придавал большое значение покупательной способности клиента.  в области выбора товаров, магазин хх провел широкий контраст и строгий скрининг, в результате чего был определен стабильный и качественный источник товаров, в области логистики, магазин xx, опираясь на shopvill существующей системы логистики, формирование решений для различных регионов россии, различных товаров, различных видов транспорта.  В то же время, магазин "хх" имеет специализированную предпродажную и послепродажную сервисную команду, которая несет ответственность за каждый покупки каждого клиента, чтобы получить широкое признание клиентов.    
+                </p>
+            </div>
+            <p class="come">
+                <a href="http://vip.shopvill.com/indexpc.html?sid=vip#/home" target="_blank">входить в магазин </a>
+            </p>
+            
+        </div>
+        <div class="footer dianpu">
+            <h2><a href="http://furniture.shopvill.com/indexpc.html?sid=furniture#/home"  target="_blank">FNC</a></h2>
+            <div class="introduce">
+               <p>
+                   FNC - это главная контора, занимающаяся всеми видами внутренней и внешней мебели.  как в супермаркетах.  Они предоставляют клиентам высококачественные товары и услуги.  FNC имеет хорошие долгосрочные отношения сотрудничества со многими производителями мебели, которые гарантируют качество товаров и устраняют все промежуточные издержки, а также обеспечивают полный, профессиональный и качественный сервис для потребителей в максимально возможной степени.  в области логистики FNC, опираясь на полную логистическую систему shopvill, обеспечивает комплексное обслуживание перевозок, складирования и распределения. 
+               </p>
+            </div>
+            <p class="come">
+                <a href="http://furniture.shopvill.com/indexpc.html?sid=furniture#/home"  target="_blank">входить в магазин </a>
+            </p>
+            
+        </div>
         <!-- 页面尾部 -->
         <div class="footer" id="footer">
             <h2>Наши партнеры</h2>
-            <div class="friend">
+            <!-- <div class="friend">
+                
                 <img src="@/assets/imgs/07.png" alt="">
+            </div> -->
+            <div class="friend">
+                
+                <a href="https://www.alibaba.com/" target="_blank">
+                    <img src="@/assets/imgs/9.1.png" alt="">
+                </a>
+                <a href="https://www.aliexpress.com/" target="_blank">
+                    <img src="@/assets/imgs/10.1.png" alt="">
+                </a>
+                <a href="https://qiwi.com/" target="_blank">
+                    <img src="@/assets/imgs/11.1.png" alt="">
+                </a>
+                <a href="https://www.visa.com.cn/" target="_blank">
+                    <img src="@/assets/imgs/12.1.png" alt="">
+                </a>
+                <a href="https://www.mastercard.com" target="_blank">
+                    <img src="@/assets/imgs/13.1.png" alt="">
+                </a>
+                <a href="https://www.whatsapp.com" target="_blank">
+                    <img src="@/assets/imgs/4.1.png" alt="">
+                </a>
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="@/assets/imgs/5.1.png" alt="">
+                </a>
+                <a href="https://www.vk.com" target="_blank">
+                    <img src="@/assets/imgs/6.1.png" alt="">
+                </a>
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="@/assets/imgs/7.1.png" alt="">
+                </a>
+                <a href="https://www.yandex.ru" target="_blank">
+                    <img src="@/assets/imgs/8.1.png" alt="">
+                </a>
+                
+                
             </div>
         </div>
+        
+        
+        <!-- 弹窗 -->
         <div class="content">
             <div class="reg-sign">
                 <el-row :gutter="10">
@@ -703,5 +749,43 @@ export default {
     /* flex: 1; */
     text-align: center;
     font-family: PingFangSC-Medium, PingFang SC;
+}
+.friend{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 20px 30px;
+    background: #fff;
+}
+
+.friend a{
+    width: 20%;
+    height: 96px;
+    background: red;
+     
+}
+.partner {
+    height: auto;
+    margin-bottom: 30px;
+}
+.dianpu{
+    padding-bottom:50px ;
+    background: #fff;
+}
+.dianpu p{
+    text-indent:2em;
+    font-size: 20px;
+    line-height: 30px;
+    font-family: PingFangSC-Medium, PingFang SC;
+}
+.dianpu .come{
+    text-align: right;
+    box-sizing: border-box;
+    padding-right: 20%;
+    margin-top: 10px;
+}
+.dianpu .come a{
+    color: rgb(255, 115, 39);
 }
 </style>

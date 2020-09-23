@@ -187,8 +187,14 @@ export default {
     },
     // 注册
     onRegister() {   
+      let emid;
+      if(localStorage.getItem("emid") == '') {
+        emid = ''
+      }else {
+        emid = localStorage.getItem('emid')
+      }
       this.$request
-        .register({ username: this.registerForm.regName, password: this.registerForm.regPass,tel: this.registerForm.regtel,roles:["c"],integral:0})
+        .register({ username: this.registerForm.regName, password: this.registerForm.regPass,tel: this.registerForm.regtel,roles:["c"],integral:0,emid:emid})
         .then(res => {
           if (res.code == 0) {
             this.loginForm.loginName = this.registerForm.regName;

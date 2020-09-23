@@ -208,7 +208,8 @@ export default {
         var obj={
           productList:selectedList,
           uname:this.$store.state.username,
-          payment:"0"
+          payment:"0",
+          emid:this.$store.state.emid
         }
       this.$request.orderBreak(obj).then((res) => {
         if (res.code == 0) {
