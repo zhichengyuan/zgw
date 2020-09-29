@@ -12,10 +12,10 @@ if(apptype = "Netscape"){
 }else{
     curlang = navigator.userLanguage
 }
-if (curlang != "zh-cn" && curlang != "zh-CN") {
+if (curlang != "zh-cn") {
     curlang = "ru"
 }
-locale1 = curlang
+locale1 = 'ru' //curlang
 console.log(locale1)
 let i18n = new VueI18n({
     locale:  locale1 == "ru"?"ru":"cn",
