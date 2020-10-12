@@ -5,12 +5,12 @@
                 <h2><a href="#index"></a></h2>
             </div>
             <div class="menu menu1">
-                <a href="#index">Главная</a>
-                <a href="#about">О Нас</a>
-                <a href="#tequan">Преимущества работы с нами</a>
-                <!-- <a href="#opportunities">Вербование компаньона</a> -->
-                <a href="#dianpu">Магазины</a>
-                <a href="#footer">Партнеры</a>
+                <a href="#index" class="a1">Главная</a>
+                <a href="#about" class="a2">О Нас</a>
+                <a href="#tequan" class="a3">Преимущества работы с нами</a>
+                <a href="#opportunities" class="a4" v-if="$store.state.domain !== 'tm'">Вербование компаньона</a>
+                <a href="#dianpu" class="a5">Магазины</a>
+                <a href="#footer" class="a6">Партнеры</a>
             </div>
             
         </div>
@@ -721,23 +721,26 @@ export default {
     padding-bottom: 0;
 }
 
-.header1 .menu1 a:nth-child(1){
+.header1 .menu1 .a1{
     width: 15%;
 }
-.header1 .menu1 a:nth-child(2){
+.header1 .menu1 .a2{
     width: 15%;
 }
-.header1 .menu1 a:nth-child(3){
+.header1 .menu1 .a3{
         width: 20%;
     line-height: 31px;
     font-size: 16px;
 }
-// .header1 .menu1 a:nth-child(4){
-//     width: 20%;
-//     line-height: 31px;
-//     font-size: 16px;
-// }
-.header1 .menu1 a:nth-child(5){
+.header1 .menu1 .a4{
+    width: 20%;
+    line-height: 31px;
+    font-size: 16px;
+}
+.header1 .menu1 .a5{
+    width: 18%;
+}
+.header1 .menu1 .a6{
     width: 18%;
 }
 .partner .partner-top .partner-form{

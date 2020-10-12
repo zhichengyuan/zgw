@@ -112,6 +112,21 @@ export default {
       let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
       return flag;
     },
+    //获取域名后缀
+    getDomain(){
+      //获取域名
+      let  host = window.location.host;
+      let host2=document.domain;
+      // let host3 = 'http://www.shopvill.tm';
+      //获取页面完整地址
+      let url = window.location.href;
+      var array = host2.split(".");
+      let domain = '';
+      if(array[2]) {
+        domain = array[2]
+      }
+      this.$store.dispatch("setDomain",domain);
+    },
     getSid() { 
       let url = window.location.href; //获取当前url
       let hostname = window.location.hostname;
@@ -166,6 +181,7 @@ export default {
   },
   mounted() {
     let flag = this._isMobile()
+    this.getDomain();
     this.getSid();
     if (flag != null) {
       if(localStorage.getItem("sid") == 'shopvill' || localStorage.getItem("sid")== '' || localStorage.getItem("sid") == null){

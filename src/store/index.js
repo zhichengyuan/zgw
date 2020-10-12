@@ -25,6 +25,7 @@ export default new Vuex.Store({
         swiperList: [],
         // getAddress:JSON.parse(localStorage.getItem('setAddress'))||null,
         sid: localStorage.getItem("sid"),
+        domain:'',
         odList: [
             { label: "全部", value: "-1" },
             {
@@ -70,6 +71,9 @@ export default new Vuex.Store({
                     state.cartList.splice(index,1) 
                 }
             })
+        },
+        setDomain(state,payload) {
+            state.domain = payload
         },
         setIntegral(state, payload) {
             state.integral = payload
@@ -195,7 +199,9 @@ export default new Vuex.Store({
                 }
             });
         },
-
+        setDomain({commit},payload) {
+            commit("setDomain", payload);
+        },
         addCart({ commit, state }, cart) {
             let buffItem = null
                 //寻找原有列表 有的话增加数量
