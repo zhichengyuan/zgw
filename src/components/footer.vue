@@ -43,16 +43,16 @@
           </div> -->
           <div>
             <span>
-              <a href="/">INTELLECTUAL PROPERTY RIGHTSсроки</a>
+              <router-link to="/ipr">INTELLECTUAL PROPERTY RIGHTSсроки</router-link>
             </span>
             <span>
-              <a href="/">T&Cсроки</a>
+              <router-link to="/tc">T&Cсроки</router-link>
             </span>
             <span>
-              <a href="/">Транспортная политика</a>
+              <router-link to="/trans">Транспортная политика</router-link>
             </span>
             <span>
-              <a href="/">Политика возврата</a>
+              <router-link to="/refundPolicy">Политика возврата</router-link>
             </span>
             <span>
               <router-link to="/contact">Связаться с нами</router-link>

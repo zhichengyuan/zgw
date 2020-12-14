@@ -1,5 +1,5 @@
 <template>
-  <div class="privacy">
+  <div class="contact">
     <div class="content">
       <div class="part">
         <h1>CONTACT US</h1>
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.privacy {
+.contact {
   position: relative;
   background-color: #fff;
   .content {
