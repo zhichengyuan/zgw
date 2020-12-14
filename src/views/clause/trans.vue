@@ -37,7 +37,7 @@ export default {
     max-width: 1500px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 40px 30px 0;
+    padding: 40px 30px;
     margin: 0 auto;
     .part {
       h1 {
