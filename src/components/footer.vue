@@ -62,7 +62,7 @@
             </span>
           </div>
         </div>
-        <div class="about">
+        <div class="footer-about">
           <img src="../assets/imgs/about.png" alt="" />
         </div>
         <!-- 商店 -->
@@ -148,7 +148,7 @@ export default {
           }
         }
       }
-      .about {
+      .footer-about {
         margin: 0 auto 25px;
         width: 1020px;
         height: 65px;
