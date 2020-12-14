@@ -21,7 +21,7 @@
         </div>
         <!-- 合作 -->
         <div class="cooperation">
-          <div>
+          <!-- <div>
             <span>
               <a href="/">о нас</a>
             </span>
@@ -40,25 +40,25 @@
             <span>
               <a href="/">юридическое заявление</a>
             </span>
-          </div>
+          </div> -->
           <div>
             <span>
-              <a href="/">INTELLECTUAL PROPERTY RIGHTS条款</a>
+              <a href="/">INTELLECTUAL PROPERTY RIGHTSсроки</a>
             </span>
             <span>
-              <a href="/">T&C条款</a>
+              <a href="/">T&Cсроки</a>
             </span>
             <span>
-              <a href="/">运输政策</a>
+              <a href="/">Транспортная политика</a>
             </span>
             <span>
-              <a href="/">退款政策</a>
+              <a href="/">Политика возврата</a>
             </span>
             <span>
-              <a href="/">联系我们</a>
+              <a href="/">Связаться с нами</a>
             </span>
             <span>
-              <a href="/">隐私政策</a>
+              <a href="/">политика уединения</a>
             </span>
           </div>
         </div>
