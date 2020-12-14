@@ -41,6 +41,26 @@
               <a href="/">юридическое заявление</a>
             </span>
           </div>
+          <div>
+            <span>
+              <a href="/">INTELLECTUAL PROPERTY RIGHTS条款</a>
+            </span>
+            <span>
+              <a href="/">T&C条款</a>
+            </span>
+            <span>
+              <a href="/">运输政策</a>
+            </span>
+            <span>
+              <a href="/">退款政策</a>
+            </span>
+            <span>
+              <a href="/">联系我们</a>
+            </span>
+            <span>
+              <a href="/">隐私政策</a>
+            </span>
+          </div>
         </div>
         <!-- 商店 -->
         <div class="shop">2020-2021 мебель, обувь и одежда матери и ребенка онлайн платформа</div>
