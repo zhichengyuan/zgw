@@ -55,10 +55,10 @@
               <a href="/">Политика возврата</a>
             </span>
             <span>
-              <a href="/">Связаться с нами</a>
+              <router-link to="/contact">Связаться с нами</router-link>
             </span>
             <span>
-              <a href="/">политика уединения</a>
+              <router-link to="/privacy">политика уединения</router-link>
             </span>
           </div>
         </div>
