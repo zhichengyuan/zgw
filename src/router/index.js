@@ -84,6 +84,43 @@ const router = new VueRouter({
           component: () =>
             import("@/views/tempOrder/index.vue")
         },
+
+        {
+          path: "/contact",
+          name:"contact",
+          component: () =>
+            import("@/views/clause/contact")
+        },
+        {
+          path: "/ipr",
+          name:"ipr",
+          component: () =>
+            import("@/views/clause/ipr")
+        },
+        {
+          path: "/privacy",
+          name:"privacy",
+          component: () =>
+            import("@/views/clause/privacy")
+        },
+        {
+          path: "/refundPolicy",
+          name:"refundPolicy",
+          component: () =>
+            import("@/views/clause/refundPolicy")
+        },
+        {
+          path: "/tc",
+          name:"tc",
+          component: () =>
+            import("@/views/clause/tc")
+        },
+        {
+          path: "/trans",
+          name:"trans",
+          component: () =>
+            import("@/views/clause/trans")
+        },
       ]
     },
     {
@@ -92,42 +129,7 @@ const router = new VueRouter({
       component: () =>
         import("@/views/shopvill/shopvill")
     },
-    {
-      path: "/contact",
-      name:"contact",
-      component: () =>
-        import("@/views/clause/contact")
-    },
-    {
-      path: "/ipr",
-      name:"ipr",
-      component: () =>
-        import("@/views/clause/ipr")
-    },
-    {
-      path: "/privacy",
-      name:"privacy",
-      component: () =>
-        import("@/views/clause/privacy")
-    },
-    {
-      path: "/refundPolicy",
-      name:"refundPolicy",
-      component: () =>
-        import("@/views/clause/refundPolicy")
-    },
-    {
-      path: "/tc",
-      name:"tc",
-      component: () =>
-        import("@/views/clause/tc")
-    },
-    {
-      path: "/trans",
-      name:"trans",
-      component: () =>
-        import("@/views/clause/trans")
-    },
+    
     
   ],
 
