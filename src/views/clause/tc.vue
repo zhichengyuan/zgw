@@ -1,7 +1,11 @@
 <template>
   <div class="tc">
-      tc
-      <h1>https://www.9-bill.com/index/img</h1>
+    <div class="content">
+      <div class="part">
+        <h1>tc</h1>
+        <h2>https://www.9-bill.com/index/legal</h2>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -9,7 +13,7 @@
 
 
 export default {
-  name: 'tc',
+  name: 'ipr',
   data(){
     return{
     }
@@ -19,10 +23,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.rotaton-wrapper{
-  margin-top: 20px;
-}
-.activity-wrapper{
-  margin-top:15px;
+.tc{
+  position: relative;
+  background-color: #fff;
+  .content {
+    min-height: calc(100vh - 578px - 208px + 5px);
+    width: 100%;
+    max-width: 1500px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 40px 30px 0;
+    margin: 0 auto;
+    .part {
+      h1 {
+        font-weight: 700;
+        margin: 10px 0 10px;
+      }
+      span {
+        font-size: 18px;
+        text-align: center;
+      }
+    }
+  }
 }
 </style>

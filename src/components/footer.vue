@@ -43,27 +43,22 @@
           </div> -->
           <div>
             <span>
-              
-              <router-link :to="'trans'">INTELLECTUAL PROPERTY RIGHTSсроки</router-link>
+              <router-link to="/ipr">INTELLECTUAL PROPERTY RIGHTSсроки</router-link>
             </span>
             <span>
-              <a href="/">T&Cсроки</a>
+              <router-link to="/tc">T&Cсроки</router-link>
             </span>
             <span>
-              <router-link :to="'trans'">Транспортная политика</router-link>
-              <!-- <a href="/trans"></a> -->
+              <router-link to="/trans">Транспортная политика</router-link>
             </span>
             <span>
-              <router-link :to="'refundPolicy'">Политика возврата</router-link>
-              <!-- <a href="/refundPolicy">Политика возврата</a> -->
+              <router-link to="/refundPolicy">Политика возврата</router-link>
             </span>
             <span>
-              <router-link :to="'contact'">Связаться с нами</router-link>
-              <!-- <a href="/">Связаться с нами</a> -->
+              <router-link to="/contact">Связаться с нами</router-link>
             </span>
             <span>
-              <router-link :to="'privacy'">Связаться с нами</router-link>
-              <!-- <a href="/">политика уединения</a> -->
+              <router-link to="/privacy">политика уединения</router-link>
             </span>
           </div>
         </div>
