@@ -1,5 +1,5 @@
 <template>
-  <div  class="footer">
+  <div class="footer">
     <div class="wrapper-fo">
       <div class="content">
         <!-- 网站特色 -->
@@ -62,8 +62,13 @@
             </span>
           </div>
         </div>
+        <div class="about">
+          <img src="../assets/imgs/about.png" alt="" />
+        </div>
         <!-- 商店 -->
-        <div class="shop">2020-2021 мебель, обувь и одежда матери и ребенка онлайн платформа</div>
+        <div class="shop">
+          2020-2021 мебель, обувь и одежда матери и ребенка онлайн платформа
+        </div>
         <!-- logo -->
         <div class="logo">shopvill</div>
       </div>
@@ -141,6 +146,15 @@ export default {
             height: 48px;
             font-weight: 600;
           }
+        }
+      }
+      .about {
+        margin: 0 auto 25px;
+        width: 1020px;
+        height: 65px;
+        img{
+          width: 100%;
+          height: 100%;
         }
       }
       .shop {
