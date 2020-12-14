@@ -119,6 +119,7 @@ export default {
       let host2=document.domain;
       // let host3 = 'http://www.shopvill.tm';
       //获取页面完整地址
+      console.log("aaa")
       let url = window.location.href;
       var array = host2.split(".");
       let domain = '';
