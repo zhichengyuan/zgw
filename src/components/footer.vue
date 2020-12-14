@@ -86,6 +86,7 @@ export default {
 .footer {
   margin-top: 50px;
   background-color: #ff9000;
+  padding:0px;
   .wrapper-fo {
     min-width: 978px;
     width: 100%;

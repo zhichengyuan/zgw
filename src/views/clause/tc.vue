@@ -3,7 +3,8 @@
     <div class="content">
       <div class="part">
         <h1>tc</h1>
-        <h2>https://www.9-bill.com/index/legal</h2>
+        <!-- <h2>https://www.9-bill.com/index/img</h2> -->
+        <img src="https://www.9-bill.com/index/img" alt="">
       </div>
     </div>
   </div>

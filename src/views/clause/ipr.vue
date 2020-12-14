@@ -3,7 +3,8 @@
     <div class="content">
       <div class="part">
         <h1>INTELLECTUAL PROPERTY RIGHTS</h1>
-        <h2>https://www.9-bill.com/index/legal</h2>
+        <!-- <h2>https://www.9-bill.com/index/legal</h2> -->
+        <img src="https://www.9-bill.com/index/legal" alt="">
       </div>
     </div>
   </div>

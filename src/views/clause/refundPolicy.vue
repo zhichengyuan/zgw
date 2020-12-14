@@ -28,7 +28,7 @@ No restocking fee to be charged to the consumers for the return of a product.;</
 Then contact your credit card company, it may take some time before your refund is officially posted. Next contact your bank. There is often some processing time before a refund is posted. If you’ve done all of this and you still have not received your refund, please contact us at 域名相对应邮箱.
 Please contact our Customer service at 域名相对应邮箱 to get the return address.</span
         >
-        <span>【备注：银行规定，允许消费者在产品交付后的14天内进行退款】</span>
+        <!-- <span>【备注：银行规定，允许消费者在产品交付后的14天内进行退款】</span> -->
         
       </div>
     </div>
