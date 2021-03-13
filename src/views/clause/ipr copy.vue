@@ -1,10 +1,10 @@
 <template>
-  <div class="tc">
+  <div class="ipr">
     <div class="content">
       <div class="part">
-        <h1>условия и условия</h1>
-        <!-- <h2>https://www.9-bill.com/index/img</h2> -->
-        <img src="https://www.9-bill.com/index/img" alt="">
+        <h1>требования к интеллектуальной собственности</h1>
+        <!-- <h2>https://www.9-bill.com/index/legal</h2> -->
+        <img src="https://www.9-bill.com/index/legal" alt="">
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tc{
+.ipr{
   position: relative;
   background-color: #fff;
   .content {

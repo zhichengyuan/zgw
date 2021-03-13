@@ -24,7 +24,7 @@
     <div class="cart-part" v-else>
       <div class="cart-content">
         <el-row class="cart-basket" :gutter="20">
-          <el-col :span="16">
+          <el-col :span="18">
             <div class="grid-content bg-purple">
               <!-- 左侧商品内容 -->
               <div class="left-product">
@@ -76,7 +76,7 @@
               </div>
             </div>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <div class="grid-content bg-purple-light">
               <!-- 右侧去结账 -->
               <div class="right-price">
@@ -93,10 +93,12 @@
                   <span>0₽</span>
                 </p> -->
                 <div>
-                  <el-checkbox v-model="isCheckAll" @change="checkAll(true)">{{$t('message.全选')}}</el-checkbox>
-                  <el-button  type="danger" round @click="onClickRight">{{$t('message.删除')}}</el-button>
+                  <div class="box-b">
+                    <el-checkbox v-model="isCheckAll" @change="checkAll(true)">{{$t('message.全选')}}</el-checkbox>
+                    <el-button  type="danger" size="mini" round @click="onClickRight">{{$t('message.删除')}}</el-button>
+                  </div>
 
-                  <el-button type="primary" round @click="onSubmit" >{{$t('message.提交订单')}}</el-button>
+                  <el-button type="primary" size="mini" round @click="onSubmit" >{{$t('message.提交订单')}}</el-button>
                 </div>
               </div>
             </div>
@@ -358,8 +360,18 @@ export default {
           justify-content: space-between;
           margin-bottom: 20px;
         }
-        div {
+        &>div {
           text-align: center;
+          .box-b{
+            // display: flex;
+            width: 100%;
+            height: 40px;
+            .el-button{
+              float: right;
+              margin-top: 6px;
+            }
+          }
+          // text-align: center;
         }
       }
     }

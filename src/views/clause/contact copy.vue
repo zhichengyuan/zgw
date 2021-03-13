@@ -1,30 +1,32 @@
 <template>
-  <div class="tc">
+  <div class="contact">
     <div class="content">
       <div class="part">
-        <h1>условия и условия</h1>
-        <!-- <h2>https://www.9-bill.com/index/img</h2> -->
-        <img src="https://www.9-bill.com/index/img" alt="">
+        <h1>связаться с нами</h1>
+        <span>
+          если у вас есть какие - либо вопросы или сомнения, пожалуйста, свяжитесь с нами в любое время.
+
+очень рады получить от вас письмо, обратившись к нам
+
+электронная почта:域名相对应的邮箱
+        </span>
+        
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
-
 export default {
-  name: 'ipr',
-  data(){
-    return{
-    }
-  }
-  
-}
+  name: "privacy",
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.tc{
+.contact {
   position: relative;
   background-color: #fff;
   .content {

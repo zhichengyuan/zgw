@@ -145,7 +145,8 @@ export default {
         hostname == "localhost"
       ) {
         
-        newsid = this.getQueryVariable("sid");
+        // newsid = this.getQueryVariable("sid"); //根据sid获取商铺信息
+        newsid = 'furniture';
         //  console.log('wowowowowowo',newsid)
       } else {
         

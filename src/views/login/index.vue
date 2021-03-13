@@ -187,6 +187,7 @@ export default {
     },
     // 注册
     onRegister() {   
+      console.log('注册');
       let emid;
       if(localStorage.getItem("emid") == '') {
         emid = ''
