@@ -26,248 +26,29 @@ export default new Vuex.Store({
         // getAddress:JSON.parse(localStorage.getItem('setAddress'))||null,
         sid: localStorage.getItem("sid"),
         domain:'',
-        odList: [
-            { label: "全部", value: "-1" },
-            {
-                label: '待支付',
-                value: "0"
-            },
-            {
-                label: '待发货',
-                value: "1"
-            },
-            {
-                label: '待收货',
-                value: "2"
-            },
-            {
-                label: '已完成',
-                value: "3"
-            },
-            {
-                label: '已取消',
-                value: "4"
-            }
-        ],
+      
     },
     mutations: {
-        clear(state) {
-            state.orderBuffer = {}
-            state.token = ""
-                //购物车数据储存
-            state.cartList = []
-            state.username = ""
-            state.nickname = ""
-            state.userId = ""
-            state.getrole = []
-            state.userInfo = {}
-            state.integral = 0
-            state.emid = ''
-        },
-        //同步本地和数据库的购物车的商品，相同的去除
-        clearCart(state,cart){
-            state.cartList.map((item,index) => {
-                if(item.skucode == cart.skucode) {
-                    state.cartList.splice(index,1) 
-                }
-            })
-        },
+   
+    
         setDomain(state,payload) {
             state.domain = payload
         },
-        setIntegral(state, payload) {
-            state.integral = payload
-        },
-        setToken(state, token) {
-            state.token = token
-            localStorage.setItem("token", token);
-        },
-        setUserName(state, payload) {
-            state.username = payload
-        },
-        setEmid(state,payload){
-            state.emid = payload
-        },
-        setUserId(state, payload) {
-            state.userId = payload
-        },
-        setNickName(state, payload) {
-            state.nickname = payload
-        },
-        setRole(state, payload) {
-            state.getrole = payload
-        },
-
-        loadCartList(state, list) {
-            state.cartList = list
-        },
-
-        addCart(state, cart) {
-
-            state.cartList.unshift(cart)
-        }, 
-
-        removeCart(state, carts) {
-            for (var i in carts) {
-                for (var j in state.cartList) {
-                    if (carts[i].skucode == state.cartList[j].skucode) {
-                        state.cartList.splice(j, 1)
-                        break
-                    }
-                }
-            }
-        },
+      
+       
+      
 
 
-
-        // 数据缓存
-        orderBuffer(state, payload) {
-            state.orderBuffer = payload
-            localStorage.setItem('orderBuffer', JSON.stringify(payload))
-        },
-
-
-        getUserInfo(state, payload) {
-            state.userInfo = payload
-        },
-
-        getUserName(state, payload) {
-            state.username = payload
-            localStorage.setItem('username', JSON.stringify(payload))
-        },
-
-        setSid(state, payload) {
-            let old = localStorage.getItem("sid")
-            console.log(payload,"pppp")
-            if (payload == "") {
-                // if (old == undefined || old == "") {
-                    console.log("走到了")
-                    // this.$router.replace({path:'/shopvill'}) 
-                    // payload = "shopvill"
-                    if(localStorage.getItem("sid")){
-                        localStorage.removeItem("sid")
-                    }
-                    
-                // }
-            } else {
-                localStorage.setItem("sid", payload);
-            }
-            // if (payload != "")
-            // console.log("第一次不走这")
-               
-        },
-        setStoreInfo(state, payload) {
-            state.activitys = []
-            for (var i in payload.activitys) {
-                if (payload.activitys[i] != "")
-                    state.activitys.push(state.activitys[i])
-            }
-            state.storeinfo = payload
-            localStorage.setItem('storeInfo',JSON.stringify(payload))
-        },
-
-        setActivitys(state, payload) {
-            state.activitys = []
-            if(payload) {
-                payload.forEach(function(active) {
-                    if (active != "") {
-                        state.activitys.push(active)
-                    }
-                });
-            }
-            
-        },
-        setSwiperList(state, payload) {
-            state.swiperList = payload
-        },
     },
     getters: {},
 
     actions: {
 
-        syncUpdateUserInfo({ commit }) {
-            api.getUser().then(res => {
-                if (res.code == 0) {
-                    commit("setUserName", res.data.username);
-                    commit("setUserId", res.data._id);
-                    commit("setNickName", res.data.nickname);
-                    commit("setRole", res.data.roles);
-                    commit("setIntegral", res.data.integral);
-                    if(res.data.emid) {
-                        commit("setEmid", res.data.emid);
-                    }
-                }
-            });
-        },
         setDomain({commit},payload) {
             commit("setDomain", payload);
         },
-        addCart({ commit, state }, cart) {
-            let buffItem = null
-                //寻找原有列表 有的话增加数量
-            if (state != null) {
-                
-                state.cartList.forEach(item => {
-                    if (item.skucode == cart.skucode) {
-                        item.productNumber += cart.productNumber
-                        buffItem = item
-                    }
-                    
-
-                })
-            }
-            //如果已登陆 保存增加数量的购物车元素或新的到服务器 
-            if (localStorage.getItem('token')) {
-                if (buffItem != null) { //原有的
-                    buffItem.userId = state.userId;
-                    api.saveCart(buffItem).then(res => {
-                        if (res.code == 0) {
-
-                        }
-                    })
-                } else { //新的
-                    // cart.roductNumber=1
-                    cart.userId = state.userId;
-                    api.saveCart(cart).then(res => {
-                        if (res.code == 0) {
-                            commit("addCart", res.data)
-                        }
-                    })
-                }
-            } //否则保存到本地存储 如果是新增的则加一个元素
-            else {
-                if (buffItem == null) {
-                    commit("addCart", cart)
-                }
-                localStorage.setItem("cartlist", JSON.stringify(state.cartList))
-            }
-        },
-        removeCart({ commit }, carts) {
-            if (localStorage.getItem('token')) {
-                let ids = []
-                carts.forEach(cart => {
-                    ids.push(cart._id)
-                })
-                api.deleteCart(ids.join(",")).then(res => {
-                    if (res.code == 0) {
-                        commit("removeCart", carts)
-                    }
-                })
-            } else {
-                commit("removeCart", carts)
-            }
-        },
-
-        updateCart({ commit, state }, cart) {
-            if (localStorage.getItem('token')) {
-                api.saveCart(cart).then(res => {
-                    if (res.code == 0) {
-                    }
-                })
-            } else {
-                localStorage.setItem("cartlist", JSON.stringify(state.cartList))
-            }
-        },
+        
+        
 
     },
     modules: {}
